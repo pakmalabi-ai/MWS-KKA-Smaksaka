@@ -18,13 +18,13 @@ import {
   Users, 
   GitMerge, 
   MessageSquare,
-  Wrench,
-  Utensils,
-  Calculator,
-  Palette,
-  Car,
-  Hammer,
-  Factory
+  Wrench, 
+  Utensils, 
+  Calculator, 
+  Palette, 
+  Car, 
+  Hammer, 
+  Factory 
 } from 'lucide-react';
 
 // --- SUB-COMPONENTS ---
@@ -276,7 +276,7 @@ function MateriSection() {
                  <h4 className="font-bold text-white text-sm">AI Chatbot (Generative AI)</h4>
                  <p className="text-xs text-slate-400 mt-1">
                    Jika data "Resep & Bahan" (M:N) rapi, Chatbot bisa menjawab:
-                   <br/><span className="text-emerald-400 italic">"Saya punya sisa Telur dan Tepung, bisa masak apa?" -> AI mencari relasi resep yang cocok.</span>
+                   <br/><span className="text-emerald-400 italic">"Saya punya sisa Telur dan Tepung, bisa masak apa?" -&gt; AI mencari relasi resep yang cocok.</span>
                  </p>
                </div>
             </div>

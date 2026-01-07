@@ -15,16 +15,16 @@ import {
   Layers,
   AlertTriangle,
   ScanFace,
-  Database,
-  RefreshCw,
-  Hammer,
-  Car,
-  Utensils,
-  Calculator,
-  Palette,
-  ScanLine,
-  Factory,
-  Camera
+  Database, 
+  RefreshCw, 
+  Hammer, 
+  Car, 
+  Utensils, 
+  Calculator, 
+  Palette, 
+  ScanLine, 
+  Factory, 
+  Camera 
 } from 'lucide-react';
 
 // --- DATA & CONSTANTS ---
@@ -178,7 +178,7 @@ const MateriSection = ({ setPage }: { setPage: (p: string) => void }) => {
                     <h4 className="font-bold text-blue-400 mb-2">Pemrograman Tradisional</h4>
                     <p className="text-slate-300 text-sm mb-4">Manusia menulis aturan (Rules) secara detail.</p>
                     <div className="bg-black/30 p-3 rounded text-xs font-mono text-slate-400">
-                        "Jika pixel tengah berwarna merah DAN bentuk bulat -> MAKA Apel."
+                        "Jika pixel tengah berwarna merah DAN bentuk bulat -&gt; MAKA Apel."
                     </div>
                     <p className="mt-3 text-xs text-slate-500">Kelemahan: Susah mendeteksi Apel yang warnanya agak hijau atau tertutup daun.</p>
                 </div>
