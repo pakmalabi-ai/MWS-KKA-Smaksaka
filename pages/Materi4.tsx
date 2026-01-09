@@ -15,16 +15,8 @@ import {
   Layers,
   AlertTriangle,
   ScanFace,
-  Database, 
-  RefreshCw, 
-  Hammer, 
-  Car, 
-  Utensils, 
-  Calculator, 
-  Palette, 
-  ScanLine, 
-  Factory, 
-  Camera 
+  Database,
+  RefreshCw
 } from 'lucide-react';
 
 // --- DATA & CONSTANTS ---
@@ -51,20 +43,20 @@ const QUIZ_DATA = [
         correct: 1
     },
     {
-        q: "Dalam dunia industri (misal: Pabrik Otomotif), Computer Vision digunakan untuk...",
+        q: "Apa yang terjadi jika data latih AI tidak seimbang (misal: 1000 foto pria, 10 foto wanita)?",
         options: [
-            "Membuat mobil terbang.",
-            "Mendeteksi cacat/goresan pada cat mobil secara otomatis (Quality Control).",
-            "Mengganti oli mesin.",
-            "Menghitung gaji karyawan."
+            "AI menjadi sangat pintar.",
+            "AI akan mengalami Bias Data (Tidak adil).",
+            "AI akan bekerja lebih cepat.",
+            "Tidak berpengaruh apa-apa."
         ],
         correct: 1
     },
     {
-        q: "Istilah 'Garbage In, Garbage Out' dalam melatih AI berarti...",
+        q: "Istilah 'Garbage In, Garbage Out' dalam AI berarti...",
         options: [
             "AI bisa membersihkan sampah digital.",
-            "Jika data latih jelek/sedikit, maka hasil deteksi AI juga akan jelek/salah.",
+            "Jika data input jelek/bias, maka hasil output AI juga akan jelek/bias.",
             "Komputer harus dibuang jika sudah tua.",
             "Input data tidak penting dalam ML."
         ],
@@ -93,7 +85,7 @@ const ModuleNav = ({ activePage, setPage }: { activePage: string, setPage: (p: s
           { id: 'home', label: 'Beranda', icon: Activity },
           { id: 'materi', label: 'Materi', icon: BookOpen },
           { id: 'simulasi', label: 'Lab Pixel', icon: Grid },
-          { id: 'vocational', label: 'AI Inspektor', icon: Factory },
+          { id: 'training', label: 'Lab Training', icon: Database },
           { id: 'kuis', label: 'Kuis', icon: CheckCircle },
         ].map((item) => (
           <button
@@ -119,14 +111,15 @@ const HomeSection = ({ setPage, openMindfulness }: { setPage: (p: string) => voi
   <section className="animate-[fadeIn_0.5s]">
     <div className="flex flex-col md:flex-row items-center justify-between gap-10 min-h-[60vh]">
         <div className="md:w-1/2">
-            <span className="bg-indigo-900/50 text-indigo-300 border border-indigo-500/30 text-xs font-semibold px-3 py-1 rounded uppercase tracking-wide">Informatika SMK Kelas X</span>
-            <h2 className="text-4xl md:text-6xl font-bold text-white mt-4 mb-4 leading-tight">Mata Digital <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Dunia Industri</span></h2>
+            <span className="bg-indigo-900/50 text-indigo-300 border border-indigo-500/30 text-xs font-semibold px-3 py-1 rounded uppercase tracking-wide">Machine Learning</span>
+            <h2 className="text-4xl md:text-6xl font-bold text-white mt-4 mb-4 leading-tight">Menyingkap Cara Mesin <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">"Melihat"</span></h2>
             <div className="text-slate-400 mb-8 text-lg leading-relaxed space-y-4">
                 <p>
-                  Bagaimana mesin sortir di pabrik tahu mana buah yang busuk? Bagaimana kamera tilang elektronik membaca plat nomor yang ngebut?
+                  Pernahkah kalian berpikir, bagaimana <strong>Face Unlock</strong> tahu itu wajah kalian meski pakai kacamata? 
+                  Atau bagaimana <strong>Filter TikTok</strong> bisa pas menempelkan telinga kucing di kepala kalian?
                 </p>
                 <p className="text-sm border-l-4 border-indigo-500 pl-4 italic">
-                  Itu adalah <strong>Computer Vision</strong>. Mari belajar melatih komputer untuk "melihat" layaknya seorang ahli di jurusanmu.
+                  "Apakah ada orang kecil di dalam HP? Tentu tidak. Itu adalah keajaiban Computer Vision."
                 </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -145,7 +138,7 @@ const HomeSection = ({ setPage, openMindfulness }: { setPage: (p: string) => voi
                 <div className="bg-slate-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl relative z-10 border border-slate-700/50 text-center">
                     <ScanFace size={80} className="mx-auto text-indigo-400 mb-6 animate-pulse"/>
                     <h3 className="font-bold text-xl mb-2 text-white">Computer Vision</h3>
-                    <p className="text-slate-400 text-sm">Teknologi yang memungkinkan mesin melihat, mengenali, dan menganalisis gambar atau video.</p>
+                    <p className="text-slate-400 text-sm">Membongkar "kotak hitam" cara kerja AI memproses input visual.</p>
                 </div>
             </div>
         </div>
@@ -154,127 +147,110 @@ const HomeSection = ({ setPage, openMindfulness }: { setPage: (p: string) => voi
 );
 
 // 2. MATERI SECTION
-const MateriSection = ({ setPage }: { setPage: (p: string) => void }) => {
-  const [activeTab, setActiveTab] = useState('konsep');
-
-  return (
-    <section className="animate-[fadeIn_0.5s] max-w-5xl mx-auto py-8">
-      
-      {/* Tabs Materi */}
-      <div className="flex flex-wrap gap-2 justify-center mb-8">
-        <button onClick={() => setActiveTab('konsep')} className={`px-4 py-2 rounded-full text-sm font-bold transition ${activeTab === 'konsep' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400'}`}>1. Konsep Dasar</button>
-        <button onClick={() => setActiveTab('pixel')} className={`px-4 py-2 rounded-full text-sm font-bold transition ${activeTab === 'pixel' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400'}`}>2. Matrix Pixel</button>
-        <button onClick={() => setActiveTab('jurusan')} className={`px-4 py-2 rounded-full text-sm font-bold transition ${activeTab === 'jurusan' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400'}`}>3. Penerapan di Jurusan</button>
-      </div>
-
-      {activeTab === 'konsep' && (
-        <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-            <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-indigo-500/20 rounded-lg text-indigo-400"><Bot size={24}/></div>
-                <h3 className="text-2xl font-bold text-white">Koding Biasa vs Machine Learning</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-slate-900/50 p-6 rounded-xl border-l-4 border-blue-500">
-                    <h4 className="font-bold text-blue-400 mb-2">Pemrograman Tradisional</h4>
-                    <p className="text-slate-300 text-sm mb-4">Manusia menulis aturan (Rules) secara detail.</p>
-                    <div className="bg-black/30 p-3 rounded text-xs font-mono text-slate-400">
-                        "Jika pixel tengah berwarna merah DAN bentuk bulat -&gt; MAKA Apel."
-                    </div>
-                    <p className="mt-3 text-xs text-slate-500">Kelemahan: Susah mendeteksi Apel yang warnanya agak hijau atau tertutup daun.</p>
+const MateriSection = ({ setPage }: { setPage: (p: string) => void }) => (
+  <section className="animate-[fadeIn_0.5s] max-w-5xl mx-auto py-8 space-y-12">
+    
+    {/* Topic 1: Tradisional vs ML */}
+    <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+        <div className="flex items-center gap-3 mb-6">
+            <div className="p-3 bg-indigo-500/20 rounded-lg text-indigo-400"><Bot size={24}/></div>
+            <h3 className="text-2xl font-bold text-white">1. Koding Biasa vs Machine Learning</h3>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-slate-900/50 p-6 rounded-xl border-l-4 border-blue-500">
+                <h4 className="font-bold text-blue-400 mb-2">Pemrograman Tradisional</h4>
+                <p className="text-slate-300 text-sm mb-4">Manusia menulis aturan (Rules) secara detail.</p>
+                <div className="bg-black/30 p-3 rounded text-xs font-mono text-slate-400">
+                    "Jika ada segitiga di atas & kumis di tengah -> MAKA Kucing."
                 </div>
-                <div className="bg-slate-900/50 p-6 rounded-xl border-l-4 border-emerald-500">
-                    <h4 className="font-bold text-emerald-400 mb-2">Machine Learning (ML)</h4>
-                    <p className="text-slate-300 text-sm mb-4">Manusia memberikan CONTOH GAMBAR. Mesin mencari pola sendiri.</p>
-                    <div className="bg-black/30 p-3 rounded text-xs font-mono text-slate-400">
-                        Input: 1000 Foto Apel & 1000 Foto Jeruk.<br/>
-                        Mesin: "Oke, saya sudah paham beda tekstur kulitnya."
-                    </div>
-                    <p className="mt-3 text-xs text-slate-500">Kelebihan: Bisa mengenali Apel dalam berbagai kondisi cahaya dan posisi.</p>
+                <p className="mt-3 text-xs text-slate-500">Analogi: Seperti mengikuti <strong>Resep Kue</strong> yang kaku. Salah takaran sedikit, gagal.</p>
+            </div>
+            <div className="bg-slate-900/50 p-6 rounded-xl border-l-4 border-emerald-500">
+                <h4 className="font-bold text-emerald-400 mb-2">Machine Learning (ML)</h4>
+                <p className="text-slate-300 text-sm mb-4">Manusia memberikan DATA dan JAWABAN. Mesin mencari pola sendiri.</p>
+                <div className="bg-black/30 p-3 rounded text-xs font-mono text-slate-400">
+                    Input: 1000 Foto Kucing & 1000 Foto Anjing.<br/>
+                    Mesin: "Oke, saya temukan pola bedanya sendiri."
+                </div>
+                <p className="mt-3 text-xs text-slate-500">Analogi: Seperti <strong>Koki Mencicipi</strong> masakan. Kurang asin? Tambah garam. Belajar dari pengalaman.</p>
+            </div>
+        </div>
+    </div>
+
+    {/* Topic 2: How Machines See */}
+    <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+        <div className="flex items-center gap-3 mb-6">
+            <div className="p-3 bg-purple-500/20 rounded-lg text-purple-400"><Eye size={24}/></div>
+            <h3 className="text-2xl font-bold text-white">2. Bagaimana Mesin "Melihat"?</h3>
+        </div>
+        <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="flex-1">
+                <p className="text-slate-300 mb-4 leading-relaxed">
+                    Manusia melihat dengan mata dan otak. Komputer hanya mengerti angka 0 dan 1.
+                    Bagi komputer, gambar adalah <strong>Grid / Matrix Angka</strong>.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-400 list-disc list-inside">
+                    <li><strong className="text-white">Pixel:</strong> Titik terkecil dalam gambar.</li>
+                    <li><strong className="text-white">Kode Warna:</strong> Setiap pixel punya nilai angka.</li>
+                    <li>Hitam = 0, Putih = 255 (pada gambar Grayscale).</li>
+                </ul>
+                <div className="mt-6">
+                    <button onClick={() => setPage('simulasi')} className="text-sm bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
+                        Coba Simulasi Pixel Vision <ArrowRight size={14}/>
+                    </button>
+                </div>
+            </div>
+            <div className="w-full md:w-1/3 aspect-square bg-slate-900 rounded-xl flex items-center justify-center p-4 border border-slate-600 relative overflow-hidden group">
+                <div className="grid grid-cols-5 gap-1 w-full max-w-[200px]">
+                    {[0,0,1,0,0, 0,1,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 0,1,1,1,0].map((v, i) => (
+                        <div key={i} className={`aspect-square rounded-sm flex items-center justify-center text-[10px] font-mono text-slate-900 transition-all ${v ? 'bg-white' : 'bg-slate-800 text-slate-700'}`}>
+                            {v}
+                        </div>
+                    ))}
+                </div>
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-white font-bold">Pola Angka "1"</p>
                 </div>
             </div>
         </div>
-      )}
+    </div>
 
-      {activeTab === 'pixel' && (
-        <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-            <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-purple-500/20 rounded-lg text-purple-400"><Eye size={24}/></div>
-                <h3 className="text-2xl font-bold text-white">Bagaimana Mesin "Melihat"?</h3>
-            </div>
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="flex-1">
-                    <p className="text-slate-300 mb-4 leading-relaxed">
-                        Komputer tidak punya mata. Ia "melihat" gambar sebagai sekumpulan angka dalam tabel raksasa (Matrix).
+    {/* Topic 3: Ethics */}
+    <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+        <div className="flex items-center gap-3 mb-6">
+            <div className="p-3 bg-rose-500/20 rounded-lg text-rose-400"><AlertTriangle size={24}/></div>
+            <h3 className="text-2xl font-bold text-white">3. Etika & Bias Data</h3>
+        </div>
+        <div className="bg-rose-900/10 border border-rose-500/30 p-6 rounded-xl mb-6">
+            <h4 className="text-xl font-bold text-rose-400 mb-2">Garbage In, Garbage Out</h4>
+            <p className="text-slate-300 text-sm">
+                "Sampah Masuk, Sampah Keluar". Jika data yang kita gunakan untuk melatih AI itu "kotor" atau bias, 
+                maka AI akan menjadi tidak adil.
+            </p>
+        </div>
+        <div className="space-y-4">
+            <h4 className="font-bold text-white text-sm uppercase tracking-wide">Studi Kasus Nyata:</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                    <p className="text-sm text-slate-400">
+                        Sebuah perusahaan besar membuat AI perekrutan. Ternyata, AI menolak lamaran wanita karena data 10 tahun terakhir didominasi pria.
                     </p>
-                    <ul className="space-y-2 text-sm text-slate-400 list-disc list-inside">
-                        <li><strong className="text-white">Pixel:</strong> Kotak-kotak kecil penyusun gambar.</li>
-                        <li><strong className="text-white">Nilai Warna:</strong> 0 (Hitam) sampai 255 (Putih).</li>
-                        <li><strong className="text-white">RGB:</strong> Red, Green, Blue channel untuk gambar berwarna.</li>
-                    </ul>
-                    <div className="mt-6">
-                        <button onClick={() => setPage('simulasi')} className="text-sm bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
-                            Coba Simulasi Pixel Vision <ArrowRight size={14}/>
-                        </button>
-                    </div>
                 </div>
-                <div className="w-full md:w-1/3 aspect-square bg-slate-900 rounded-xl flex items-center justify-center p-4 border border-slate-600 relative overflow-hidden group">
-                    <div className="grid grid-cols-5 gap-1 w-full max-w-[200px]">
-                        {[0,0,1,0,0, 0,1,1,0,0, 0,0,1,0,0, 0,0,1,0,0, 0,1,1,1,0].map((v, i) => (
-                            <div key={i} className={`aspect-square rounded-sm flex items-center justify-center text-[10px] font-mono text-slate-900 transition-all ${v ? 'bg-white' : 'bg-slate-800 text-slate-700'}`}>
-                                {v}
-                            </div>
-                        ))}
-                    </div>
+                <div className="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                    <p className="text-sm text-slate-400">
+                        Filter wajah yang tidak mengenali kulit berwarna gelap karena data latihnya kebanyakan orang berkulit terang.
+                    </p>
                 </div>
             </div>
         </div>
-      )}
+    </div>
 
-      {activeTab === 'jurusan' && (
-        <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-            <h3 className="text-2xl font-bold text-white mb-6 text-center">Computer Vision di Jurusanmu</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 hover:border-blue-500 transition-colors">
-                 <div className="flex items-center gap-2 mb-3 text-blue-400 font-bold"><Hammer size={20}/> Teknik Mesin & Las</div>
-                 <p className="text-xs text-slate-300 mb-2"><strong>Smart Welding Inspection:</strong></p>
-                 <p className="text-xs text-slate-400">Kamera AI mendeteksi keretakan mikro atau gelembung udara pada hasil las yang tidak terlihat mata telanjang.</p>
-              </div>
+  </section>
+);
 
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 hover:border-red-500 transition-colors">
-                 <div className="flex items-center gap-2 mb-3 text-red-400 font-bold"><Car size={20}/> Otomotif (TKR/TSM)</div>
-                 <p className="text-xs text-slate-300 mb-2"><strong>Quality Control Cat & Body:</strong></p>
-                 <p className="text-xs text-slate-400">Robot kamera mendeteksi goresan halus pada cat mobil baru sebelum keluar dari pabrik.</p>
-              </div>
-
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 hover:border-emerald-500 transition-colors">
-                 <div className="flex items-center gap-2 mb-3 text-emerald-400 font-bold"><Calculator size={20}/> Akuntansi</div>
-                 <p className="text-xs text-slate-300 mb-2"><strong>OCR Otomatis:</strong></p>
-                 <p className="text-xs text-slate-400">Scan ribuan struk belanja/faktur, AI otomatis membaca nominal uang dan memasukkannya ke Excel/MYOB.</p>
-              </div>
-
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
-                 <div className="flex items-center gap-2 mb-3 text-purple-400 font-bold"><Palette size={20}/> DKV & Grafika</div>
-                 <p className="text-xs text-slate-300 mb-2"><strong>Auto-Tagging & Restoration:</strong></p>
-                 <p className="text-xs text-slate-400">AI memperbaiki foto lama yang rusak, atau otomatis memberi label (tag) pada ribuan stok foto.</p>
-              </div>
-
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 hover:border-orange-500 transition-colors">
-                 <div className="flex items-center gap-2 mb-3 text-orange-400 font-bold"><Utensils size={20}/> Kuliner</div>
-                 <p className="text-xs text-slate-300 mb-2"><strong>Smart Sorting:</strong></p>
-                 <p className="text-xs text-slate-400">Mesin sortir otomatis memisahkan buah/sayur yang busuk berdasarkan perubahan warna kulitnya.</p>
-              </div>
-
-            </div>
-        </div>
-      )}
-
-    </section>
-  );
-};
-
-// 3. SIMULASI PIXEL LAB (Basics)
+// 3. SIMULASI PIXEL LAB (Meaningful Vision)
 const PixelLabSection = () => {
+  // Pattern for number "1"
   const defaultGrid = [
       0, 0, 1, 0, 0,
       0, 1, 1, 0, 0,
@@ -340,200 +316,132 @@ const PixelLabSection = () => {
   );
 };
 
-// 4. SIMULASI VOCATIONAL VISION (Teachable Machine Context)
-const VocationalVisionLab = () => {
-    const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
-    const [goodSamples, setGoodSamples] = useState(0);
-    const [badSamples, setBadSamples] = useState(0);
-    const [modelStatus, setModelStatus] = useState<'idle' | 'training' | 'ready'>('idle');
-    const [testResult, setTestResult] = useState<string | null>(null);
+// 4. SIMULASI TRAINING LAB (Teachable Machine Logic)
+const TrainingLabSection = () => {
+    const [dataA, setDataA] = useState(0);
+    const [dataB, setDataB] = useState(0);
+    const [isTraining, setIsTraining] = useState(false);
+    const [modelStatus, setModelStatus] = useState<'idle' | 'trained'>('idle');
+    const [logs, setLogs] = useState<string[]>([]);
 
-    const vocationalCases: any = {
-        mesin: { 
-            name: "Teknik Mesin & Las", 
-            icon: Hammer, 
-            task: "Deteksi Kualitas Las",
-            good: "Las Matang & Rata", 
-            bad: "Las Keropos / Berlubang",
-            goodIcon: "✨", badIcon: "💥"
-        },
-        otomotif: { 
-            name: "Otomotif (TKR/TSM)", 
-            icon: Car, 
-            task: "Cek Kondisi Busi",
-            good: "Busi Bersih/Kering", 
-            bad: "Busi Hitam/Basah Oli",
-            goodIcon: "✅", badIcon: "⚫"
-        },
-        kuliner: { 
-            name: "Kuliner", 
-            icon: Utensils, 
-            task: "Sortir Buah Apel",
-            good: "Apel Merah Segar", 
-            bad: "Apel Memar/Busuk",
-            goodIcon: "🍎", badIcon: "🐛"
-        },
-        akuntansi: { 
-            name: "Akuntansi", 
-            icon: Calculator, 
-            task: "Validasi Struk Belanja",
-            good: "Struk Jelas & Lengkap", 
-            bad: "Struk Buram / Sobek",
-            goodIcon: "📄", badIcon: "🗑️"
-        },
-        dkv: { 
-            name: "DKV & Grafika", 
-            icon: Palette, 
-            task: "Cek Resolusi Gambar",
-            good: "High Res (300 DPI)", 
-            bad: "Pecah / Low Res",
-            goodIcon: "🖼️", badIcon: "👾"
-        },
-    };
-
-    const addSample = (type: 'good' | 'bad') => {
-        if (modelStatus === 'ready') resetModel();
-        if (type === 'good') setGoodSamples(s => s + 1);
-        else setBadSamples(s => s + 1);
+    const addData = (type: 'A' | 'B') => {
+        if (modelStatus === 'trained') {
+            setModelStatus('idle'); // Reset if adding new data
+            setLogs([]);
+        }
+        if (type === 'A') setDataA(prev => prev + 1);
+        else setDataB(prev => prev + 1);
     };
 
     const trainModel = () => {
-        if (goodSamples < 3 || badSamples < 3) {
-            alert("Data kurang! Masukkan minimal 3 sampel untuk Bagus dan 3 sampel untuk Buruk agar AI pintar.");
+        if (dataA === 0 && dataB === 0) {
+            alert("Belum ada data! Kumpulkan data dulu.");
             return;
         }
-        setModelStatus('training');
+        
+        setIsTraining(true);
+        setLogs([]);
+        
         setTimeout(() => {
-            setModelStatus('ready');
-        }, 2000);
+            setIsTraining(false);
+            setModelStatus('trained');
+            
+            // Logic for feedback based on data quantity/quality
+            const total = dataA + dataB;
+            if (total < 10) {
+                setLogs(prev => [...prev, "❌ Data terlalu sedikit (Underfitting). AI kurang pintar."]);
+            } else if (Math.abs(dataA - dataB) > total * 0.4) { // Bias check
+                const biasTo = dataA > dataB ? "Kelas A" : "Kelas B";
+                setLogs(prev => [...prev, `⚠️ Peringatan: Data Bias ke ${biasTo}.`, `AI akan cenderung menebak ${biasTo} terus.`]);
+            } else {
+                setLogs(prev => [...prev, "✅ Data cukup dan seimbang.", "Model AI siap digunakan dengan akurasi tinggi!"]);
+            }
+        }, 2000); // Fake training delay
     };
 
-    const runTest = () => {
-        // Simple logic simulation
-        const isBias = Math.abs(goodSamples - badSamples) > 5;
-        const total = goodSamples + badSamples;
-        
-        let resultMsg = "";
-        if (total < 10) resultMsg = "Akurasi Rendah (Data Latih Sedikit).";
-        else if (isBias) resultMsg = `Peringatan: Model Bias! Terlalu banyak data ${goodSamples > badSamples ? 'Bagus' : 'Buruk'}.`;
-        else resultMsg = "Model Optimal! Akurasi Tinggi.";
-        
-        // Random outcome for demo
-        const outcome = Math.random() > 0.5 ? "LOLOS QC (Good)" : "REJECT (Bad)";
-        setTestResult(`${outcome} - ${resultMsg}`);
-    };
-
-    const resetModel = () => {
-        setGoodSamples(0);
-        setBadSamples(0);
+    const reset = () => {
+        setDataA(0);
+        setDataB(0);
         setModelStatus('idle');
-        setTestResult(null);
-    };
-
-    const resetMajor = () => {
-        setSelectedMajor(null);
-        resetModel();
+        setLogs([]);
     };
 
     return (
         <section className="animate-[fadeIn_0.5s] max-w-4xl mx-auto py-8">
             <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-white mb-2">Lab 2: Smart Quality Inspector</h2>
-                <p className="text-slate-400">Simulasi melatih AI untuk melakukan inspeksi kualitas otomatis sesuai jurusanmu.</p>
+                <h2 className="text-2xl font-bold text-white mb-2">Lab 2: Training Simulator (Teachable Machine)</h2>
+                <p className="text-slate-400">Jadilah pelatih AI. Kumpulkan data, latih, dan lihat hasilnya. Hati-hati dengan Bias!</p>
             </div>
 
-            {!selectedMajor ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {Object.entries(vocationalCases).map(([key, val]: [string, any]) => (
-                        <button 
-                            key={key}
-                            onClick={() => setSelectedMajor(key)}
-                            className="bg-slate-800 hover:bg-slate-700 border border-slate-700 p-6 rounded-xl flex flex-col items-center gap-3 transition-all group"
-                        >
-                            <div className="p-3 bg-slate-900 rounded-full group-hover:bg-indigo-600 group-hover:text-white text-indigo-400 transition-colors">
-                                <val.icon size={24}/>
+            <div className="grid md:grid-cols-3 gap-6">
+                {/* INPUT SECTION */}
+                <div className="md:col-span-2 space-y-6">
+                    <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Layers size={18}/> 1. Gathering Data (Input)</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-slate-900/50 p-4 rounded-xl text-center border border-indigo-500/30 hover:border-indigo-500 transition cursor-pointer" onClick={() => addData('A')}>
+                                <div className="text-4xl mb-2">🍎</div>
+                                <div className="text-sm text-slate-300 font-bold">Kelas Apel</div>
+                                <div className="text-2xl font-mono text-white mt-2">{dataA} <span className="text-xs text-slate-500">samples</span></div>
+                                <button className="mt-2 text-xs bg-indigo-600 text-white px-3 py-1 rounded">+ Tambah Data</button>
                             </div>
-                            <span className="font-bold text-slate-300 group-hover:text-white text-sm text-center">{val.name}</span>
-                        </button>
-                    ))}
-                </div>
-            ) : (
-                <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8">
-                    <div className="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
-                        <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                             Pelatihan AI: {vocationalCases[selectedMajor].task}
-                        </h3>
-                        <button onClick={resetMajor} className="text-xs text-slate-400 hover:text-white underline">Ganti Jurusan</button>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-8 mb-8">
-                        {/* Class Good */}
-                        <div className="bg-slate-900/50 p-6 rounded-xl border border-emerald-500/30 text-center">
-                            <div className="text-4xl mb-2">{vocationalCases[selectedMajor].goodIcon}</div>
-                            <h4 className="font-bold text-emerald-400 mb-1">Kelas: BAGUS</h4>
-                            <p className="text-xs text-slate-400 mb-4">{vocationalCases[selectedMajor].good}</p>
-                            <div className="text-3xl font-mono text-white mb-4">{goodSamples} <span className="text-xs text-slate-500">sampel</span></div>
-                            <button 
-                                onClick={() => addSample('good')}
-                                className="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm w-full font-bold flex items-center justify-center gap-2"
-                            >
-                                <Camera size={16}/> Ambil Sampel
-                            </button>
-                        </div>
-
-                        {/* Class Bad */}
-                        <div className="bg-slate-900/50 p-6 rounded-xl border border-rose-500/30 text-center">
-                            <div className="text-4xl mb-2">{vocationalCases[selectedMajor].badIcon}</div>
-                            <h4 className="font-bold text-rose-400 mb-1">Kelas: BURUK</h4>
-                            <p className="text-xs text-slate-400 mb-4">{vocationalCases[selectedMajor].bad}</p>
-                            <div className="text-3xl font-mono text-white mb-4">{badSamples} <span className="text-xs text-slate-500">sampel</span></div>
-                            <button 
-                                onClick={() => addSample('bad')}
-                                className="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm w-full font-bold flex items-center justify-center gap-2"
-                            >
-                                <Camera size={16}/> Ambil Sampel
-                            </button>
+                            <div className="bg-slate-900/50 p-4 rounded-xl text-center border border-orange-500/30 hover:border-orange-500 transition cursor-pointer" onClick={() => addData('B')}>
+                                <div className="text-4xl mb-2">🍌</div>
+                                <div className="text-sm text-slate-300 font-bold">Kelas Pisang</div>
+                                <div className="text-2xl font-mono text-white mt-2">{dataB} <span className="text-xs text-slate-500">samples</span></div>
+                                <button className="mt-2 text-xs bg-orange-600 text-white px-3 py-1 rounded">+ Tambah Data</button>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Controls */}
-                    <div className="flex flex-col items-center gap-4">
-                        {modelStatus === 'idle' && (
+                    <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Cpu size={18}/> 2. Training Process</h3>
+                        <div className="flex items-center gap-4">
                             <button 
                                 onClick={trainModel}
-                                className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold shadow-lg transition-transform hover:scale-105"
+                                disabled={isTraining}
+                                className={`flex-1 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition ${isTraining ? 'bg-slate-600 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-500 text-white'}`}
                             >
-                                Latih Model AI (Training)
+                                {isTraining ? 'Sedang Melatih...' : 'Latih Model (Train)'}
                             </button>
-                        )}
-                        
-                        {modelStatus === 'training' && (
-                            <div className="w-full max-w-md">
-                                <div className="text-center text-xs text-indigo-300 mb-2">Sedang mempelajari pola pixel...</div>
-                                <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                                    <div className="h-full bg-indigo-500 animate-[progress_2s_ease-in-out_infinite]"></div>
+                            <button onClick={reset} className="p-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300"><RefreshCw size={20}/></button>
+                        </div>
+                        {isTraining && (
+                            <div className="mt-4">
+                                <div className="text-xs text-slate-400 mb-1">Epochs (Pengulangan Belajar)...</div>
+                                <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden">
+                                    <div className="h-full bg-emerald-500 animate-[progress_2s_ease-in-out_infinite]"></div>
                                 </div>
-                            </div>
-                        )}
-
-                        {modelStatus === 'ready' && (
-                            <div className="w-full bg-slate-900 p-6 rounded-xl border border-indigo-500 animate-[fadeIn_0.5s] text-center">
-                                <h4 className="text-indigo-400 font-bold mb-4 flex items-center justify-center gap-2"><CheckCircle size={18}/> Model AI Siap!</h4>
-                                <div className="flex justify-center gap-4 mb-4">
-                                    <button onClick={runTest} className="px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm border border-slate-500">
-                                        Test: Cek Barang Baru
-                                    </button>
-                                </div>
-                                {testResult && (
-                                    <div className="p-3 bg-black/40 rounded border border-slate-700 text-sm font-mono text-white animate-pulse">
-                                        Hasil Scan: {testResult}
-                                    </div>
-                                )}
                             </div>
                         )}
                     </div>
                 </div>
-            )}
+
+                {/* OUTPUT SECTION */}
+                <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-inner flex flex-col">
+                    <h3 className="text-indigo-400 font-bold mb-4 border-b border-slate-800 pb-2 flex items-center gap-2"><Activity size={18}/> 3. Analisis AI</h3>
+                    
+                    <div className="flex-1 overflow-y-auto space-y-3">
+                        {modelStatus === 'idle' && !isTraining && (
+                            <p className="text-sm text-slate-500 italic text-center mt-10">Menunggu model dilatih...</p>
+                        )}
+                        {logs.map((log, i) => (
+                            <div key={i} className={`p-3 rounded-lg text-sm border ${log.includes('❌') ? 'bg-red-900/20 border-red-500/50 text-red-200' : log.includes('⚠️') ? 'bg-amber-900/20 border-amber-500/50 text-amber-200' : 'bg-emerald-900/20 border-emerald-500/50 text-emerald-200'}`}>
+                                {log}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-4 p-3 bg-slate-800 rounded border border-slate-700 text-xs text-slate-400">
+                        <strong>Tips:</strong>
+                        <ul className="list-disc list-inside mt-1 space-y-1">
+                            <li>Coba masukkan sedikit data (misal 2 & 2).</li>
+                            <li>Coba buat data bias (misal 15 Apel & 1 Pisang).</li>
+                            <li>Coba buat data seimbang (15 & 15).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 };
@@ -570,7 +478,7 @@ const KuisSection = () => {
             <div className="text-6xl mb-6">{finalScore === 100 ? '🏆' : finalScore >= 75 ? '🎉' : '📚'}</div>
             <h3 className="text-3xl font-bold text-white mb-2">Skor Kamu: <span className="text-indigo-400">{finalScore}</span>/100</h3>
             <p className="text-slate-400 mb-8">
-              {finalScore === 100 ? "Sempurna! Anda siap menerapkan AI di jurusan." : finalScore >= 75 ? "Hebat! Pemahaman yang baik." : "Jangan menyerah, coba pelajari materi lagi."}
+              {finalScore === 100 ? "Sempurna! Anda memahami konsep Computer Vision dengan sangat baik." : finalScore >= 75 ? "Hebat! Pemahaman yang baik." : "Jangan menyerah, coba pelajari materi lagi."}
             </p>
             <button onClick={resetQuiz} className="bg-indigo-600 text-white px-8 py-3 rounded-full hover:bg-indigo-700 font-bold transition">Ulangi Kuis</button>
          </div>
@@ -584,7 +492,7 @@ const KuisSection = () => {
       <div className="bg-slate-800 p-8 rounded-2xl shadow-xl border-t-8 border-indigo-600 border-x border-b border-slate-700">
           <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-white">Kuis Pemahaman</h2>
-              <p className="text-slate-400 text-sm mt-1">Uji pengetahuanmu tentang Computer Vision di Industri</p>
+              <p className="text-slate-400 text-sm mt-1">Uji pengetahuanmu tentang Machine Learning & Computer Vision</p>
           </div>
 
           <div className="mb-4 text-sm text-indigo-400 font-bold">Pertanyaan {currentQuestion + 1}/{QUIZ_DATA.length}</div>
@@ -627,7 +535,7 @@ const Materi4: React.FC = () => {
         {activeTab === 'home' && <HomeSection setPage={setActiveTab} openMindfulness={() => setMindfulnessOpen(true)} />}
         {activeTab === 'materi' && <MateriSection setPage={setActiveTab} />}
         {activeTab === 'simulasi' && <PixelLabSection />}
-        {activeTab === 'vocational' && <VocationalVisionLab />}
+        {activeTab === 'training' && <TrainingLabSection />}
         {activeTab === 'kuis' && <KuisSection />}
 
         {/* Mindfulness Modal */}
@@ -638,8 +546,8 @@ const Materi4: React.FC = () => {
                         <Wind className="text-indigo-400 opacity-80" size={64} />
                     </div>
                     <h2 className="text-3xl font-bold mb-2">Tarik Napas...</h2>
-                    <p className="text-indigo-200 mb-8">Ambil napas sejenak, dan bayangkan:<br/><br/>
-                    "Jika matamu bisa melihat setajam mesin AI, apa yang ingin kamu perbaiki di dunia ini?"</p>
+                    <p className="text-indigo-200 mb-8">Ambil napas sejenak, dan jawablah pertanyaan ini dalam hati:<br/><br/>
+                    "Hari ini saya belajar bahwa mesin tidak benar-benar pintar,<br/>mereka hanya ahli matematika. Bagaimana perasaanmu?"</p>
                     <button onClick={() => setMindfulnessOpen(false)} className="border border-white/20 bg-white/10 px-8 py-3 rounded-full hover:bg-white hover:text-slate-900 transition font-medium backdrop-blur-md">
                         Saya Siap Belajar
                     </button>

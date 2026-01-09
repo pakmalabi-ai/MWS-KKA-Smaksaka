@@ -11,21 +11,12 @@ import {
   Award, 
   Activity,
   Briefcase,
-  TrendingUp,
-  Shield,
-  Map,
-  Zap,
-  BatteryWarning,
-  XCircle,
-  Wrench,
-  Utensils,
-  Palette,
-  Calculator,
-  Hammer,
   Car,
-  ScanLine,
-  Camera,
-  Search
+  Map,
+  Search,
+  BatteryCharging,
+  ShieldAlert,
+  GraduationCap
 } from 'lucide-react';
 
 // --- COMPONENTS ---
@@ -34,10 +25,10 @@ import {
 const ModuleNav = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTab: (t: string) => void }) => {
     const navItems = [
         { id: 'home', label: 'Beranda' },
-        { id: 'materi', label: 'AI di Industri' },
-        { id: 'roadmap', label: 'Skill Masa Depan' },
-        { id: 'simulasi', label: 'Studio Simulasi' },
-        { id: 'kuis', label: 'Evaluasi' },
+        { id: 'materi', label: 'Ekosistem Karir' },
+        { id: 'roadmap', label: 'Peta Jalan SMK' },
+        { id: 'simulasi', label: 'Studi Kasus' },
+        { id: 'kuis', label: 'Refleksi' },
     ];
 
     return (
@@ -49,7 +40,7 @@ const ModuleNav = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTa
                     </div>
                     <div>
                         <h1 className="text-sm font-bold text-slate-100 leading-tight">Modul 5</h1>
-                        <p className="text-[10px] text-indigo-400 font-medium hidden sm:block">Karir & Teknologi Masa Depan</p>
+                        <p className="text-[10px] text-indigo-400 font-medium hidden sm:block">Profesi & Etika AI</p>
                     </div>
                 </div>
 
@@ -83,19 +74,23 @@ const HomeSection = ({ onStart }: { onStart: () => void }) => (
 
         <div className="text-center max-w-4xl px-6 relative z-10">
             <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-slate-800/50 backdrop-blur-md text-indigo-300 text-sm font-medium border border-indigo-500/30">
-                Wawasan Karir & Teknologi SMK
+                Elemen: Literasi dan Etika KA
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-                Bukan Menggantikan, Tapi <br/>
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">Memperkuat Keahlianmu</span>
+                Dapur <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">Kecerdasan Artifisial</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Teknologi Kecerdasan Artifisial (AI) kini hadir di bengkel otomotif, dapur restoran, hingga studio desain. 
-                Mari pelajari bagaimana AI menjadi "Asisten Super" di jurusan kalian masing-masing.
+            <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Pernahkah kalian berpikir, bagaimana <strong>Netflix</strong> tahu film apa yang kalian sukai? 
+                Atau bagaimana filter <strong>TikTok</strong> menempel sempurna di wajah kalian?
             </p>
+            <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 max-w-2xl mx-auto mb-10">
+                <p className="text-slate-400 text-sm italic">
+                    "Di balik keajaiban itu, tidak ada sihir. Yang ada adalah sekumpulan kode, data, dan manusia hebat. Modul ini akan membawamu menjelajahi karir masa depan di dunia AI."
+                </p>
+            </div>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button onClick={onStart} className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 group">
-                    Eksplorasi Jurusan
+                    Jelajahi Profesi
                     <ChevronRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
             </div>
@@ -103,367 +98,268 @@ const HomeSection = ({ onStart }: { onStart: () => void }) => (
     </div>
 );
 
-// 2. Materi Section (Ekosistem Profesi & Jurusan)
+// 2. Materi Section (Ekosistem Profesi & Analogi)
 const MateriSection = () => {
-    const vocationalAI = [
+    const professions = [
         {
-            jurusan: "Teknik Otomotif (TKR/TSM)",
-            icon: <Car size={24} className="text-red-400"/>,
-            tech: "AI Diagnostic Tool",
-            desc: "Tidak lagi menebak kerusakan hanya dari suara. Mekanik masa depan menggunakan scanner AI untuk mendeteksi anomali mesin dalam hitungan detik."
+            title: "AI Engineer",
+            subtitle: "Sang Arsitek & Tukang Bangun",
+            analogy: "Mekanik Mobil Balap",
+            desc: "Merakit mesin, memasang roda, dan memastikan mobil melaju kencang tanpa mogok.",
+            icon: <Code size={32} className="text-blue-400" />,
+            task: "Coding Algoritma, Deployment ke Server.",
+            color: "border-blue-500/30 bg-blue-900/10"
         },
         {
-            jurusan: "Kuliner",
-            icon: <Utensils size={24} className="text-orange-400"/>,
-            tech: "Smart Inventory & Recipe Gen",
-            desc: "AI membantu chef menciptakan resep baru dari sisa bahan (Zero Waste) dan memprediksi stok bahan yang akan habis minggu depan."
+            title: "Data Scientist",
+            subtitle: "Sang Detektif Data",
+            analogy: "Analis Trek Balapan",
+            desc: "Mempelajari kondisi cuaca dan performa lawan untuk menentukan strategi menang.",
+            icon: <Search size={32} className="text-emerald-400" />,
+            task: "Data Cleaning, Visualisasi, Mencari Pola.",
+            color: "border-emerald-500/30 bg-emerald-900/10"
         },
         {
-            jurusan: "Akuntansi",
-            icon: <Calculator size={24} className="text-emerald-400"/>,
-            tech: "Automated Auditing",
-            desc: "AI mendeteksi kecurangan (fraud) atau kesalahan input dalam ribuan transaksi keuangan secara otomatis, jauh lebih teliti dari mata manusia."
-        },
-        {
-            jurusan: "DKV & Grafika",
-            icon: <Palette size={24} className="text-purple-400"/>,
-            tech: "Generative Art Assistant",
-            desc: "Desainer menggunakan AI untuk membuat moodboard, palet warna, dan aset kasar dalam hitungan menit, sehingga fokus pada konsep kreatif utama."
-        },
-        {
-            jurusan: "Teknik Mesin & Las",
-            icon: <Hammer size={24} className="text-blue-400"/>,
-            tech: "Computer Vision Inspector",
-            desc: "Kamera AI mendeteksi keretakan mikro pada hasil las atau potongan logam yang tidak presisi yang sulit dilihat mata telanjang."
+            title: "AI Ethicist",
+            subtitle: "Sang Penjaga Moral & Wasit",
+            analogy: "Wasit Keselamatan",
+            desc: "Memastikan mobil tidak menabrak penonton, tidak curang, dan aman dikendarai.",
+            icon: <Scale size={32} className="text-rose-400" />,
+            task: "Audit Bias, Menjaga Privasi, Aturan Etika.",
+            color: "border-rose-500/30 bg-rose-900/10"
         }
     ];
 
     return (
         <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-            
-            {/* INTRO: PROFESI UTAMA */}
-            <div className="mb-16">
-                <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold mb-4 text-white">Siapa di Balik Layar?</h2>
-                    <p className="text-slate-400">Sebelum masuk ke jurusanmu, kenali dulu 3 profesi utama pembuat AI.</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="p-3 bg-blue-900/30 rounded-lg text-blue-400"><Code/></div>
-                            <h3 className="font-bold text-white">AI Engineer</h3>
-                        </div>
-                        <p className="text-sm text-slate-300">Sang "Mekanik". Merakit kode program agar AI bisa berjalan.</p>
-                    </div>
-                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="p-3 bg-emerald-900/30 rounded-lg text-emerald-400"><TrendingUp/></div>
-                            <h3 className="font-bold text-white">Data Scientist</h3>
-                        </div>
-                        <p className="text-sm text-slate-300">Sang "Analis". Mengolah data mentah agar bisa dipelajari AI.</p>
-                    </div>
-                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="p-3 bg-rose-900/30 rounded-lg text-rose-400"><Scale/></div>
-                            <h3 className="font-bold text-white">AI Ethicist</h3>
-                        </div>
-                        <p className="text-sm text-slate-300">Sang "Wasit". Memastikan AI adil dan tidak berbahaya.</p>
-                    </div>
+            <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4 text-white">Bab 1: Ekosistem Profesi AI</h2>
+                <div className="inline-flex items-center gap-2 bg-indigo-900/30 px-4 py-2 rounded-lg border border-indigo-500/30">
+                    <Car size={20} className="text-indigo-400"/>
+                    <span className="text-indigo-200 text-sm">Analogi: Tim Balap Mobil F1</span>
                 </div>
             </div>
 
-            {/* AI DI JURUSAN (FOCUS) */}
-            <div>
-                <div className="text-center mb-10">
-                    <span className="text-indigo-400 font-bold uppercase tracking-wider text-sm">Relevansi Industri</span>
-                    <h2 className="text-3xl font-bold mb-4 text-white">Penerapan AI di Jurusanmu</h2>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {vocationalAI.map((item, idx) => (
-                        <div key={idx} className="bg-slate-900/50 border border-slate-700 p-6 rounded-2xl hover:border-indigo-500 transition-all hover:-translate-y-1 group">
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="p-3 bg-slate-800 rounded-full group-hover:bg-indigo-900/50 transition-colors">
-                                    {item.icon}
-                                </div>
-                                <span className="text-xs font-mono text-slate-500 uppercase">{item.jurusan}</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                {professions.map((prof, idx) => (
+                    <div key={idx} className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${prof.color}`}>
+                        <div className="mb-4 flex justify-between items-start">
+                            <div className="p-3 rounded-xl bg-slate-900/50 border border-slate-700/50">
+                                {prof.icon}
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">{item.tech}</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed">
-                                {item.desc}
-                            </p>
+                            <span className="text-xs font-bold uppercase tracking-wider opacity-60 text-white">{prof.analogy}</span>
                         </div>
-                    ))}
+                        <h3 className="text-2xl font-bold text-white">{prof.title}</h3>
+                        <p className="text-sm font-medium text-indigo-300 mb-4">{prof.subtitle}</p>
+                        <p className="text-slate-300 mb-6 text-sm leading-relaxed border-t border-slate-700/50 pt-4">
+                            "{prof.desc}"
+                        </p>
+                        <div className="bg-slate-900/50 p-3 rounded-lg">
+                            <p className="text-xs text-slate-400"><strong className="text-slate-200">Tugas:</strong> {prof.task}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <Briefcase className="text-amber-400"/> Bab 2: Kompetensi & Skill Set (Bekal Perang)
+                </h3>
+                <div className="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 className="font-bold text-indigo-400 mb-3 border-b border-slate-700 pb-2">Bahasa Pemrograman</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> Python (Wajib! Kunci Inggris-nya AI)</li>
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> SQL (Untuk Data)</li>
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> C++ / Java (Performa)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-pink-400 mb-3 border-b border-slate-700 pb-2">Matematika & Tools</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> Statistika & Probabilitas</li>
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> TensorFlow / PyTorch</li>
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> Excel (Advanced) / Tableau</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-amber-400 mb-3 border-b border-slate-700 pb-2">Soft Skill (Hati)</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> Problem Solving</li>
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> Storytelling (Bercerita dengan data)</li>
+                            <li className="flex items-center gap-2"><CheckCircle size={14} className="text-emerald-500"/> Empati & Kepekaan Sosial</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-// 3. Roadmap & Skills Section
-const RoadmapSection = () => {
-    return (
-        <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-            
-            {/* SKILL SET MATRIX */}
-            <div className="mb-16">
-                <h2 className="text-3xl font-bold mb-8 text-white text-center">Skill Wajib Era Digital</h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                    {/* Hard Skills */}
-                    <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                        <h3 className="text-xl font-bold text-indigo-400 mb-6 flex items-center gap-2">
-                            <Terminal size={20}/> Kemampuan Teknis (Hard Skills)
-                        </h3>
-                        <ul className="space-y-4">
-                            <li className="flex gap-4">
-                                <div className="mt-1"><CheckCircle size={16} className="text-emerald-500"/></div>
-                                <div>
-                                    <h4 className="text-white font-bold">Prompt Engineering</h4>
-                                    <p className="text-sm text-slate-400">Kemampuan memberi perintah yang tepat pada AI (ChatGPT, Midjourney) agar hasilnya sesuai keinginan.</p>
-                                </div>
-                            </li>
-                            <li className="flex gap-4">
-                                <div className="mt-1"><CheckCircle size={16} className="text-emerald-500"/></div>
-                                <div>
-                                    <h4 className="text-white font-bold">Data Literacy</h4>
-                                    <p className="text-sm text-slate-400">Mampu membaca grafik dan tren data. Contoh: Mekanik membaca grafik performa mesin dari scanner.</p>
-                                </div>
-                            </li>
-                            <li className="flex gap-4">
-                                <div className="mt-1"><CheckCircle size={16} className="text-emerald-500"/></div>
-                                <div>
-                                    <h4 className="text-white font-bold">Basic Logic / Coding</h4>
-                                    <p className="text-sm text-slate-400">Memahami logika "Jika-Maka" (If-Else) untuk troubleshooting masalah.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+// 3. Roadmap Section
+const RoadmapSection = () => (
+    <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
+        <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4 text-white flex items-center justify-center gap-2">
+                <Map className="text-emerald-400"/> Bab 4: Peta Jalan Karir dari SMK
+            </h2>
+            <p className="text-slate-400">Perjalanan masih panjang, cicil langkahmu dari sekarang.</p>
+        </div>
 
-                    {/* Soft Skills */}
-                    <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                        <h3 className="text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
-                            <Users size={20}/> Kemampuan Manusia (Soft Skills)
-                        </h3>
-                        <ul className="space-y-4">
-                            <li className="flex gap-4">
-                                <div className="mt-1"><CheckCircle size={16} className="text-purple-500"/></div>
-                                <div>
-                                    <h4 className="text-white font-bold">Critical Thinking</h4>
-                                    <p className="text-sm text-slate-400">AI bisa memberi jawaban, tapi kamulah yang menentukan apakah jawaban itu benar dan aman dipakai.</p>
-                                </div>
-                            </li>
-                            <li className="flex gap-4">
-                                <div className="mt-1"><CheckCircle size={16} className="text-purple-500"/></div>
-                                <div>
-                                    <h4 className="text-white font-bold">Creativity & Innovation</h4>
-                                    <p className="text-sm text-slate-400">AI hanya meniru data lama. Ide baru dan inovasi orisinal tetap datang dari manusia.</p>
-                                </div>
-                            </li>
-                            <li className="flex gap-4">
-                                <div className="mt-1"><CheckCircle size={16} className="text-purple-500"/></div>
-                                <div>
-                                    <h4 className="text-white font-bold">Empathy</h4>
-                                    <p className="text-sm text-slate-400">Mesin tidak punya perasaan. Pelayanan pelanggan di bengkel/resto tetap butuh sentuhan manusia.</p>
-                                </div>
-                            </li>
+        <div className="max-w-4xl mx-auto">
+            <div className="relative border-l-4 border-indigo-600 ml-6 md:ml-10 space-y-12">
+                {/* Kelas X */}
+                <div className="relative pl-8 md:pl-12">
+                    <div className="absolute -left-[14px] top-0 w-6 h-6 bg-indigo-600 rounded-full border-4 border-slate-900"></div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-indigo-500 transition-colors">
+                        <span className="text-xs font-bold bg-indigo-900/50 text-indigo-300 px-2 py-1 rounded mb-2 inline-block">KELAS X</span>
+                        <h3 className="text-xl font-bold text-white mb-2">Fase Eksplorasi</h3>
+                        <ul className="text-slate-300 text-sm space-y-2 list-disc list-inside">
+                            <li>Pelajari logika dasar pemrograman (Algoritma).</li>
+                            <li>Cobalah tools AI generatif (ChatGPT, Gemini, Canva AI) dan pelajari cara kerjanya.</li>
+                            <li>Tentukan minat: Lebih suka ngoding (Engineer), ngitung (Scientist), atau analisis sosial (Ethicist)?</li>
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            {/* ROADMAP */}
-            <div>
-                <h2 className="text-3xl font-bold mb-10 text-white text-center">Peta Jalan Siswa SMK</h2>
-                <div className="relative max-w-4xl mx-auto">
-                    {/* Line */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-slate-700 rounded-full"></div>
-                    
-                    {/* Step 1 */}
-                    <div className="relative flex items-center justify-between mb-12 group">
-                        <div className="w-5/12 text-right pr-8">
-                            <h3 className="text-xl font-bold text-white mb-1">Kelas X</h3>
-                            <p className="text-indigo-400 font-bold text-sm mb-2">ADAPTASI & EKSPLORASI</p>
-                            <p className="text-slate-400 text-sm">Mengenal tools AI dasar. Belajar menggunakan ChatGPT untuk membantu tugas (bukan menyontek) dan Canva/AI Design.</p>
-                        </div>
-                        <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-indigo-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-110 transition"></div>
-                        <div className="w-5/12 pl-8"></div>
+                {/* Kelas XI */}
+                <div className="relative pl-8 md:pl-12">
+                    <div className="absolute -left-[14px] top-0 w-6 h-6 bg-purple-600 rounded-full border-4 border-slate-900"></div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
+                        <span className="text-xs font-bold bg-purple-900/50 text-purple-300 px-2 py-1 rounded mb-2 inline-block">KELAS XI</span>
+                        <h3 className="text-xl font-bold text-white mb-2">Fase Pendalaman</h3>
+                        <ul className="text-slate-300 text-sm space-y-2 list-disc list-inside">
+                            <li>Ambil proyek sederhana (Misal: Chatbot sekolah).</li>
+                            <li>Ikuti kursus online gratis (Dicoding, Coursera, Google AI).</li>
+                            <li>Mulai pelajari Python lebih dalam.</li>
+                        </ul>
                     </div>
+                </div>
 
-                    {/* Step 2 */}
-                    <div className="relative flex items-center justify-between mb-12 group">
-                        <div className="w-5/12 text-right pr-8"></div>
-                        <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-purple-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-110 transition"></div>
-                        <div className="w-5/12 pl-8">
-                            <h3 className="text-xl font-bold text-white mb-1">Kelas XI</h3>
-                            <p className="text-purple-400 font-bold text-sm mb-2">INTEGRASI JURUSAN</p>
-                            <p className="text-slate-400 text-sm">Mulai menggunakan AI spesifik jurusan. Contoh: Simulator sirkuit (Electro), AI Resep (Kuliner), Diagnosa digital (Otomotif).</p>
-                        </div>
-                    </div>
-
-                    {/* Step 3 */}
-                    <div className="relative flex items-center justify-between group">
-                        <div className="w-5/12 text-right pr-8">
-                            <h3 className="text-xl font-bold text-white mb-1">Kelas XII</h3>
-                            <p className="text-emerald-400 font-bold text-sm mb-2">PROFESIONALISME</p>
-                            <p className="text-slate-400 text-sm">Siap kerja. Mampu mengoperasikan sistem industri modern yang berbasis data dan otomasi.</p>
-                        </div>
-                        <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-emerald-600 rounded-full border-4 border-slate-900 z-10 group-hover:scale-110 transition"></div>
-                        <div className="w-5/12 pl-8"></div>
+                {/* Kelas XII */}
+                <div className="relative pl-8 md:pl-12">
+                    <div className="absolute -left-[14px] top-0 w-6 h-6 bg-emerald-600 rounded-full border-4 border-slate-900"></div>
+                    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-colors">
+                        <span className="text-xs font-bold bg-emerald-900/50 text-emerald-300 px-2 py-1 rounded mb-2 inline-block">KELAS XII</span>
+                        <h3 className="text-xl font-bold text-white mb-2">Fase Spesialisasi</h3>
+                        <ul className="text-slate-300 text-sm space-y-2 list-disc list-inside">
+                            <li>Magang di perusahaan teknologi.</li>
+                            <li>Siapkan portofolio (kumpulan karya).</li>
+                            <li>Siap kerja atau lanjut kuliah.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    );
-}
+    </div>
+);
 
-// 4. Simulasi (Interactive Vocational Case Study)
+// 4. Simulasi (Studi Kasus Pinjol)
 const SimulasiSection = () => {
-    const [selectedJurusan, setSelectedJurusan] = useState<string | null>(null);
-    const [step, setStep] = useState(0); // 0: Select, 1: Case, 2: Solusi, 3: Result
+    const [step, setStep] = useState(0);
+    const [logs, setLogs] = useState<string[]>([]);
 
-    const cases: any = {
-        otomotif: {
-            title: "Teknik Otomotif (TKR/TSM)",
-            icon: <Car size={32}/>,
-            problem: "Pelanggan datang dengan keluhan mesin bunyi 'tek tek' aneh. Anda kesulitan mencari sumber bunyinya secara manual.",
-            solutionA: { text: "Bongkar mesin total satu per satu.", result: "Waktu terbuang 5 jam. Pelanggan marah karena lama.", correct: false },
-            solutionB: { text: "Gunakan 'Sound Diagnostic AI' untuk analisis frekuensi suara.", result: "AI mendeteksi masalah pada 'Valve Lifter' dalam 2 menit. Perbaikan tepat sasaran.", correct: true }
-        },
-        kuliner: {
-            title: "Kuliner",
-            icon: <Utensils size={32}/>,
-            problem: "Ada banyak sisa bahan: Bayam, Keju, dan Roti Tawar yang akan kadaluarsa besok. Harus dimasak apa agar tidak rugi?",
-            solutionA: { text: "Buang saja bahan sisa tersebut.", result: "Rugi biaya bahan (Food Waste). Profit harian turun.", correct: false },
-            solutionB: { text: "Tanya AI Generator Resep: 'Buat menu dari Bayam+Keju+Roti'.", result: "AI menyarankan 'Spinach Grilled Cheese Sandwich'. Jadi menu spesial hari ini & Laris!", correct: true }
-        },
-        dkv: {
-            title: "DKV & Grafika",
-            icon: <Palette size={32}/>,
-            problem: "Klien minta 5 alternatif logo 'Kopi Kekinian' dalam waktu 1 jam. Anda baru punya 1 ide.",
-            solutionA: { text: "Bilang ke klien tidak sanggup.", result: "Klien kecewa dan pindah ke desainer lain.", correct: false },
-            solutionB: { text: "Gunakan AI Image Gen untuk brainstorming sketsa awal.", result: "Dapat 20 variasi konsep dalam 10 menit. Anda tinggal memoles (finishing) yang terbaik.", correct: true }
-        },
-        akuntansi: {
-            title: "Akuntansi",
-            icon: <Calculator size={32}/>,
-            problem: "Bos minta laporan rekap dari 500 lembar kuitansi fisik hari ini juga.",
-            solutionA: { text: "Ketik manual satu per satu ke Excel.", result: "Lembur sampai malam, mata lelah, dan banyak typo angka.", correct: false },
-            solutionB: { text: "Foto kuitansi pakai fitur OCR (Scan to Excel).", result: "Data masuk ke Excel otomatis dalam 15 menit. Anda tinggal cek validasi akhir.", correct: true }
-        },
-        mesin: {
-            title: "Teknik Mesin & Las",
-            icon: <Hammer size={32}/>,
-            problem: "Anda harus memeriksa kualitas hasil las pada pipa gas bertekanan tinggi. Mata manusia mungkin melewatkan retak mikro.",
-            solutionA: { text: "Cek visual pakai mata telanjang saja.", result: "Risiko kebocoran pipa di kemudian hari. Sangat berbahaya.", correct: false },
-            solutionB: { text: "Gunakan Scanner Ultrasonic/Vision AI.", result: "AI mendeteksi porositas mikro di bagian dalam. Anda melakukan las ulang di titik itu. Aman.", correct: true }
+    const addLog = (msg: string) => setLogs(prev => [...prev, msg]);
+
+    const handleAction = (action: string) => {
+        if (action === 'analyze') {
+            addLog("🕵️ Data Scientist: Mengumpulkan data 10.000 pengguna...");
+            addLog("📊 Analisis: Ditemukan korelasi aneh!");
+            addLog("💡 Pola: Pengguna dengan Baterai HP < 20% sering telat bayar.");
+            setStep(1);
+        } else if (action === 'deploy') {
+            addLog("🛠️ AI Engineer: Menulis kode Python...");
+            addLog("⚙️ Sistem: Mengintegrasikan pembacaan level baterai otomatis.");
+            addLog("🚀 Deploy: Aplikasi 'Pinjol Cerdas' siap diluncurkan!");
+            setStep(2);
+        } else if (action === 'audit') {
+            addLog("⚖️ AI Ethicist: Tunggu! Mari kita audit sistem ini.");
+            addLog("⚠️ Temuan: Orang dengan baterai rendah seringkali adalah pekerja lapangan/kasar yang susah cari colokan.");
+            addLog("🚫 Keputusan: Menolak pinjaman berdasarkan baterai adalah DISKRIMINASI kelas sosial.");
+            addLog("✅ Solusi: Fitur Baterai DIHAPUS demi keadilan.");
+            setStep(3);
         }
     };
 
-    const handleSelect = (key: string) => {
-        setSelectedJurusan(key);
-        setStep(1);
-    };
-
-    const handleSolution = (isCorrect: boolean) => {
-        setStep(isCorrect ? 3 : 4); // 3 Success, 4 Fail
-    };
-
     const reset = () => {
-        setSelectedJurusan(null);
         setStep(0);
-    };
+        setLogs([]);
+    }
 
     return (
         <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-            <div className="max-w-4xl mx-auto text-center mb-8">
-                <h2 className="text-3xl font-bold mb-2 text-white">Laboratorium Solusi Cerdas</h2>
-                <p className="text-slate-400">Pilih jurusanmu dan selesaikan masalah industri dengan teknologi.</p>
-            </div>
+            <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-10">
+                    <h2 className="text-3xl font-bold mb-2 text-white">Bab 3: Studi Kasus Dunia Nyata</h2>
+                    <p className="text-slate-400">Kasus: "Aplikasi Pinjaman Online Cerdas"</p>
+                </div>
 
-            <div className="max-w-4xl mx-auto bg-slate-800/50 backdrop-blur rounded-2xl border border-slate-700 overflow-hidden shadow-2xl min-h-[400px] flex flex-col">
-                
-                {/* STEP 0: SELECT JURUSAN */}
-                {step === 0 && (
-                    <div className="p-8 grid grid-cols-2 md:grid-cols-3 gap-4 flex-grow place-content-center">
-                        {Object.entries(cases).map(([key, val]: [string, any]) => (
-                            <button 
-                                key={key}
-                                onClick={() => handleSelect(key)}
-                                className="bg-slate-900 border border-slate-700 hover:border-indigo-500 hover:bg-slate-800 p-6 rounded-xl flex flex-col items-center gap-3 transition-all group"
-                            >
-                                <div className="p-3 bg-slate-800 rounded-full text-slate-300 group-hover:text-indigo-400 group-hover:bg-indigo-900/30 transition-colors">
-                                    {val.icon}
+                <div className="grid md:grid-cols-2 gap-8">
+                    {/* Visual Area */}
+                    <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6 flex flex-col justify-between min-h-[400px]">
+                        <div>
+                            <h3 className="font-bold text-white mb-4 border-b border-slate-700 pb-2">Status Proyek</h3>
+                            
+                            {step === 0 && (
+                                <div className="text-center py-10">
+                                    <Search size={64} className="mx-auto text-emerald-400 mb-4 animate-bounce"/>
+                                    <p className="text-slate-300">Startup Pinjol ingin AI menyetujui pinjaman dalam 5 detik. <br/>Peran: <strong>Data Scientist</strong></p>
+                                    <button onClick={() => handleAction('analyze')} className="mt-4 bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-500 font-bold">
+                                        Cari Pola Data
+                                    </button>
                                 </div>
-                                <span className="font-bold text-slate-200 text-sm">{val.title}</span>
-                            </button>
-                        ))}
-                    </div>
-                )}
+                            )}
 
-                {/* STEP 1: THE PROBLEM */}
-                {step === 1 && selectedJurusan && (
-                    <div className="p-10 flex flex-col items-center text-center animate-[fadeIn_0.5s]">
-                        <div className="mb-6 p-4 bg-red-900/20 text-red-400 rounded-full animate-pulse border border-red-500/30">
-                            <AlertTriangle size={48}/>
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-4">Masalah Terdeteksi!</h3>
-                        <p className="text-lg text-slate-300 mb-8 max-w-xl bg-slate-900 p-6 rounded-xl border border-slate-700">
-                            "{cases[selectedJurusan].problem}"
-                        </p>
-                        <button onClick={() => setStep(2)} className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full font-bold transition flex items-center gap-2">
-                            Cari Solusi <ChevronRight/>
-                        </button>
-                    </div>
-                )}
+                            {step === 1 && (
+                                <div className="text-center py-10">
+                                    <Code size={64} className="mx-auto text-blue-400 mb-4 animate-pulse"/>
+                                    <p className="text-slate-300">Pola ditemukan: "Baterai Lowbat = Risiko Tinggi". <br/>Peran: <strong>AI Engineer</strong></p>
+                                    <button onClick={() => handleAction('deploy')} className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-500 font-bold">
+                                        Bangun Sistem AI
+                                    </button>
+                                </div>
+                            )}
 
-                {/* STEP 2: CHOOSE SOLUTION */}
-                {step === 2 && selectedJurusan && (
-                    <div className="p-8 flex flex-col items-center animate-[fadeIn_0.5s]">
-                        <h3 className="text-xl font-bold text-white mb-8">Bagaimana kamu akan menyelesaikannya?</h3>
-                        <div className="grid md:grid-cols-2 gap-6 w-full">
-                            <button 
-                                onClick={() => handleSolution(cases[selectedJurusan].solutionA.correct)}
-                                className="p-6 bg-slate-900 border border-slate-600 hover:border-red-400 rounded-xl text-left transition hover:bg-slate-800 group"
-                            >
-                                <span className="text-xs font-bold text-slate-500 uppercase mb-2 block">Cara A (Konvensional)</span>
-                                <p className="text-slate-200 group-hover:text-white font-medium">{cases[selectedJurusan].solutionA.text}</p>
-                            </button>
-                            <button 
-                                onClick={() => handleSolution(cases[selectedJurusan].solutionB.correct)}
-                                className="p-6 bg-slate-900 border border-indigo-500 hover:bg-indigo-900/20 rounded-xl text-left transition group relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] px-2 py-1 rounded-bl">AI Powered</div>
-                                <span className="text-xs font-bold text-indigo-400 uppercase mb-2 block">Cara B (Modern)</span>
-                                <p className="text-slate-200 group-hover:text-white font-bold">{cases[selectedJurusan].solutionB.text}</p>
-                            </button>
+                            {step === 2 && (
+                                <div className="text-center py-10">
+                                    <ShieldAlert size={64} className="mx-auto text-rose-400 mb-4 animate-pulse"/>
+                                    <p className="text-slate-300">Sistem berjalan. Tapi apakah adil? <br/>Peran: <strong>AI Ethicist</strong></p>
+                                    <button onClick={() => handleAction('audit')} className="mt-4 bg-rose-600 text-white px-6 py-2 rounded-full hover:bg-rose-500 font-bold">
+                                        Audit Etika
+                                    </button>
+                                </div>
+                            )}
+
+                            {step === 3 && (
+                                <div className="text-center py-10">
+                                    <CheckCircle size={64} className="mx-auto text-green-400 mb-4"/>
+                                    <p className="text-slate-300">Sistem diperbaiki agar adil dan manusiawi.</p>
+                                    <p className="text-xs text-slate-500 mt-2">Pelajaran: Data akurat belum tentu adil secara etika.</p>
+                                    <button onClick={reset} className="mt-4 border border-slate-500 text-slate-400 px-6 py-2 rounded-full hover:bg-slate-700 font-bold">
+                                        Ulangi Kasus
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
-                )}
 
-                {/* STEP 3/4: RESULT */}
-                {(step === 3 || step === 4) && selectedJurusan && (
-                    <div className="p-10 flex flex-col items-center text-center animate-[fadeIn_0.5s]">
-                        <div className={`mb-6 p-4 rounded-full border-4 ${step === 3 ? 'bg-emerald-900/30 border-emerald-500/30 text-emerald-400' : 'bg-red-900/30 border-red-500/30 text-red-400'}`}>
-                            {step === 3 ? <Award size={64}/> : <XCircle size={64}/>}
+                    {/* Log Console */}
+                    <div className="bg-black/80 rounded-2xl border border-slate-700 p-6 font-mono text-sm overflow-hidden flex flex-col">
+                        <div className="flex items-center gap-2 mb-4 text-slate-500 border-b border-slate-800 pb-2">
+                            <Terminal size={14}/> 
+                            <span>System Log & Team Chat</span>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">
-                            {step === 3 ? "Solusi Cerdas!" : "Kurang Efektif"}
-                        </h3>
-                        <p className="text-slate-300 mb-8 max-w-lg">
-                            {step === 3 ? cases[selectedJurusan].solutionB.result : cases[selectedJurusan].solutionA.result}
-                        </p>
-                        
-                        {step === 3 && (
-                            <div className="bg-indigo-900/20 border border-indigo-500/30 p-4 rounded-lg mb-6 text-sm text-indigo-200">
-                                💡 <strong>Insight:</strong> Menggunakan teknologi bukan berarti malas, tapi bekerja lebih cerdas (Work Smarter) agar hasil lebih presisi dan efisien.
-                            </div>
-                        )}
-
-                        <button onClick={reset} className="px-6 py-2 border border-slate-600 text-slate-400 rounded-lg hover:text-white hover:bg-slate-800 transition">
-                            Coba Jurusan Lain
-                        </button>
+                        <div className="flex-1 overflow-y-auto space-y-3 custom-scrollbar">
+                            {logs.length === 0 && <span className="text-slate-600 italic">Menunggu inisialisasi tim...</span>}
+                            {logs.map((log, i) => (
+                                <div key={i} className="animate-[fadeIn_0.3s]">
+                                    <span className="text-indigo-400 mr-2">{'>'}</span>
+                                    <span className="text-slate-300">{log}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                )}
-
+                </div>
             </div>
         </div>
     );
@@ -478,46 +374,25 @@ const QuizSection = () => {
     const questions = [
         {
             id: 1,
-            q: "Apa peran 'AI Engineer' dalam pengembangan teknologi?",
-            opts: [
-                "Menganalisis data pasar.",
-                "Merakit kode program agar AI berjalan.",
-                "Menjaga etika penggunaan AI.",
-                "Memperbaiki hardware komputer."
-            ],
-            correct: 1 
+            q: "Dalam analogi mobil balap, siapa yang berperan sebagai 'Mekanik' yang merakit mesin?",
+            opts: ["AI Ethicist", "AI Engineer", "Data Scientist", "Pembalap"],
+            correct: 1
         },
         {
             id: 2,
-            q: "Di jurusan Otomotif, teknologi AI manakah yang paling membantu diagnosa mesin?",
+            q: "Pada kasus Pinjol, mengapa AI Ethicist menolak fitur deteksi baterai?",
             opts: [
-                "Generative Art",
-                "Chatbot Customer Service",
-                "Sound/Vibration Analysis AI",
-                "Automated Email"
+                "Karena baterai tidak akurat.",
+                "Karena diskriminatif terhadap pekerja lapangan (Bias).",
+                "Karena server penuh.",
+                "Karena coding-nya salah."
             ],
-            correct: 2
+            correct: 1
         },
         {
             id: 3,
-            q: "Mengapa kemampuan 'Data Literacy' (Literasi Data) penting bagi siswa SMK?",
-            opts: [
-                "Agar bisa membaca grafik dan tren dari alat kerja digital.",
-                "Agar bisa membuat robot.",
-                "Supaya nilai matematikanya bagus.",
-                "Agar bisa meretas akun medsos."
-            ],
-            correct: 0
-        },
-        {
-            id: 4,
-            q: "Apa manfaat AI Generatif bagi jurusan DKV/Desain?",
-            opts: [
-                "Menggantikan desainer sepenuhnya.",
-                "Mempercepat proses brainstorming ide dan sketsa awal.",
-                "Mencetak banner otomatis.",
-                "Memperbaiki printer rusak."
-            ],
+            q: "Apa 'Kunci Inggris' (Skill Wajib) untuk masuk ke dunia AI bagi siswa SMK?",
+            opts: ["Adobe Photoshop", "Python", "Microsoft Word", "HTML"],
             correct: 1
         }
     ];
@@ -538,14 +413,19 @@ const QuizSection = () => {
     return (
         <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
             <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold mb-2 text-white">Evaluasi Pemahaman</h2>
-                    <p className="text-slate-400">Seberapa siap kamu menghadapi teknologi masa depan?</p>
+                <div className="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 mb-8">
+                    <h2 className="text-2xl font-bold mb-4 text-white flex items-center gap-2">
+                        <GraduationCap className="text-indigo-400"/> Lembar Refleksi (Mindfulness)
+                    </h2>
+                    <p className="text-slate-300 italic mb-4">
+                        "Ambil napas sejenak. Tanyakan pada dirimu: Dari ketiga profesi di atas (Engineer, Scientist, Ethicist), mana yang 'Gue Banget'? Kenapa?"
+                    </p>
+                    <textarea className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-slate-300 focus:outline-none focus:border-indigo-500" rows={3} placeholder="Tulis refleksi singkatmu di sini..."></textarea>
                 </div>
 
                 <div className="space-y-6">
                     {questions.map((q, idx) => (
-                        <div key={q.id} className="bg-slate-800/50 backdrop-blur p-6 rounded-xl border border-slate-700">
+                        <div key={q.id} className="bg-slate-900 p-6 rounded-xl border border-slate-700">
                             <h4 className="text-lg font-semibold mb-4 text-white"><span className="text-indigo-400 mr-2">{idx + 1}.</span> {q.q}</h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {q.opts.map((opt, oIdx) => (
@@ -583,16 +463,11 @@ const QuizSection = () => {
                     <div className="mt-8 p-6 bg-slate-800/50 border border-indigo-500/50 rounded-xl text-center animate-bounce-in">
                         <h3 className="text-2xl font-bold mb-2 text-white">Hasil Evaluasi</h3>
                         <p className="text-lg text-slate-300">Kamu menjawab benar <span className="text-emerald-400 font-bold">{score}</span> dari {questions.length} soal.</p>
-                        
-                        <div className="mt-6 border-t border-slate-700 pt-6">
-                            <h4 className="text-white font-bold mb-2 flex items-center justify-center gap-2"><Brain size={18} className="text-purple-400"/> Refleksi (Mindfulness)</h4>
-                            <p className="text-slate-400 italic text-sm max-w-lg mx-auto">
-                                "Teknologi akan terus berkembang. Kunci utamanya bukan menghafal tools, tapi memiliki pola pikir terbuka untuk terus belajar (Lifelong Learning)."
-                            </p>
+                        <div className="mt-4">
+                            {score === questions.length 
+                                ? <span className="inline-block px-4 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-sm">Sempurna! Kamu siap jadi ahli AI.</span> 
+                                : <span className="inline-block px-4 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm">Coba pelajari materi lagi ya.</span>}
                         </div>
-                        <button onClick={() => { setSubmitted(false); setAnswers({}); setScore(0); }} className="mt-4 text-sm text-indigo-400 hover:text-indigo-300 underline">
-                            Ulangi Kuis
-                        </button>
                     </div>
                 )}
             </div>

@@ -11,28 +11,26 @@ import {
   Activity,
   FileText,
   HelpCircle,
-  Play,
-  ChefHat,
-  Thermometer,
-  Layers,
-  Wrench,
-  Palette,
-  Calculator,
-  Utensils,
-  Hammer,
-  Repeat,
-  Lightbulb,
-  ArrowRight
+  Play
 } from 'lucide-react';
 
+// --- ICONS MAPPING ---
+// Using Lucide icons directly in components.
+
 // --- DATA ---
+const materials = [
+    { title: "Role (Peran)", icon: "🎭", desc: "Berikan identitas pada AI.", example: "'Bertindaklah sebagai Ahli Gizi...'" },
+    { title: "Context (Konteks)", icon: "🌍", desc: "Jelaskan latar belakang masalah.", example: "'Saya sedang diet rendah gula...'" },
+    { title: "Task (Tugas)", icon: "⚡", desc: "Instruksi spesifik yang harus dilakukan.", example: "'Buatkan menu makan malam...'" },
+    { title: "Format (Bentuk)", icon: "📝", desc: "Bagaimana output ditampilkan.", example: "'Sajikan dalam bentuk tabel...'" },
+];
 
 const quizQuestions = [
-    { q: "Apa analogi terbaik untuk menjelaskan cara kerja AI (LLM) menurut modul ini?", options: ["Mesin Pencari Fakta (Google)", "Koki Buta di Perpustakaan Raksasa", "Otak Manusia Sungguhan", "Ensiklopedia Digital"], ans: 1 },
-    { q: "Dalam rumus RCTF, apa fungsi dari 'Context'?", options: ["Memberikan identitas pada AI", "Menentukan format tabel/teks", "Memberikan latar belakang dan batasan masalah", "Menyuruh AI berhenti"], ans: 2 },
-    { q: "Jika kita ingin AI menjawab soal matematika yang rumit agar tidak salah hitung, teknik apa yang dipakai?", options: ["Few-Shot Prompting", "Chain of Thought (Jelaskan langkah demi langkah)", "Reverse Prompting", "Zero-Shot Prompting"], ans: 1 },
-    { q: "Apa yang terjadi jika kita mengatur 'Temperature' AI menjadi tinggi (misal 0.9)?", options: ["AI menjadi sangat kaku dan logis", "AI menjadi lebih kreatif dan imajinatif (kadang halusinasi)", "AI berhenti bekerja", "AI menjadi lebih cepat"], ans: 1 },
-    { q: "Mengapa kita perlu melakukan 'Reverse Prompting' (Menyuruh AI bertanya balik)?", options: ["Saat kita bingung harus mulai dari mana", "Agar AI pusing", "Untuk menghemat kuota", "Agar terlihat keren"], ans: 0 },
+    { q: "Apa kepanjangan dari RCTF dalam struktur prompt?", options: ["Role, Context, Task, Format", "Run, Code, Test, Fix", "Read, Create, Think, Fast", "Role, Chat, Text, File"], ans: 0 },
+    { q: "Manakah contoh 'Role' yang baik?", options: ["Buatkan saya puisi.", "Saya lapar.", "Bertindaklah sebagai Chef profesional.", "Tuliskan resep."], ans: 2 },
+    { q: "Mengapa kita perlu memberikan 'Context' pada AI?", options: ["Agar AI bingung.", "Agar jawaban lebih spesifik dan relevan.", "Agar AI bekerja lebih lambat.", "Tidak perlu, itu buang waktu."], ans: 1 },
+    { q: "Instruksi: 'Sajikan dalam bentuk tabel'. Ini termasuk elemen?", options: ["Role", "Context", "Task", "Format"], ans: 3 },
+    { q: "Sikap 'Mindful' saat menggunakan AI berarti...", options: ["Mengcopy paste tanpa membaca.", "Sadar penuh, cek fakta, dan beretika.", "Menggunakan AI untuk mencontek.", "Marah pada AI jika salah."], ans: 1 },
 ];
 
 // --- COMPONENTS ---
@@ -52,10 +50,9 @@ const ModuleNav = ({ activePage, setPage }: { activePage: string, setPage: (p: s
       <nav className="flex gap-1 md:gap-2 overflow-x-auto no-scrollbar">
         {[
             { id: 'home', label: 'Beranda', icon: Brain },
-            { id: 'konsep', label: 'Konsep AI', icon: ChefHat },
-            { id: 'rctf', label: 'Teknik RCTF', icon: Layers },
-            { id: 'lanjutan', label: 'Teknik Ninja', icon: Lightbulb },
-            { id: 'lab', label: 'Studio Jurusan', icon: Terminal },
+            { id: 'materi', label: 'Materi', icon: BookOpen },
+            { id: 'lab', label: 'Lab', icon: Terminal },
+            { id: 'lkpd', label: 'LKPD', icon: FileText },
             { id: 'kuis', label: 'Kuis', icon: HelpCircle },
         ].map((item) => (
             <button 
@@ -79,430 +76,264 @@ const HomeSection = ({ setPage }: { setPage: (p: string) => void }) => (
         
         <div className="relative z-10 max-w-4xl mx-auto">
             <span className="inline-block px-3 py-1 rounded-full bg-indigo-900/50 border border-indigo-500/30 text-indigo-300 text-sm mb-4">
-                Mastering Prompt Engineering
+                Pertemuan 10 & 11 • Fase E
             </span>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-                Dari Pengguna Menjadi <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Pengendali AI</span>
+                Koding & <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Kecerdasan Artifisial</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-                Buku ini disusun bukan untuk menjadikan kalian robot yang bergantung pada AI, melainkan manusia yang mampu memimpin AI. 
-                Di SMK Negeri 1 Kaligondang, kita percaya teknologi di tangan yang tepat adalah keajaiban.
+                Selamat datang di era baru. Pelajari cara berkomunikasi dengan mesin melalui pendekatan <span className="text-white font-semibold">Deep Learning</span>: Mindful, Meaningful, & Joyful.
             </p>
             <div className="flex gap-4 justify-center">
-                <button onClick={() => setPage('konsep')} className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2">
-                    Mulai Belajar <ArrowRight size={18}/>
+                <button onClick={() => setPage('materi')} className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold transition-all shadow-lg shadow-indigo-500/20">
+                    Mulai Belajar
+                </button>
+                <button onClick={() => setPage('lab')} className="px-8 py-3 bg-slate-800/50 backdrop-blur hover:bg-slate-800 rounded-full font-bold transition-all border border-slate-600 text-white">
+                    Coba Simulator
                 </button>
             </div>
             
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-                <div className="bg-slate-800/50 backdrop-blur p-4 rounded-xl border border-slate-700">
-                    <h3 className="text-emerald-400 font-bold mb-1 flex items-center gap-2"><Brain size={16}/> Mindful</h3>
-                    <p className="text-xs text-slate-300">Paham cara kerja mesin statistik agar tidak tertipu halusinasi.</p>
-                </div>
-                <div className="bg-slate-800/50 backdrop-blur p-4 rounded-xl border border-slate-700">
-                    <h3 className="text-amber-400 font-bold mb-1 flex items-center gap-2"><Layers size={16}/> Meaningful</h3>
-                    <p className="text-xs text-slate-300">Teknik RCTF untuk membuat prompt yang berbobot dan presisi.</p>
-                </div>
-                <div className="bg-slate-800/50 backdrop-blur p-4 rounded-xl border border-slate-700">
-                    <h3 className="text-purple-400 font-bold mb-1 flex items-center gap-2"><Wrench size={16}/> Vocational</h3>
-                    <p className="text-xs text-slate-300">Implementasi spesifik untuk jurusan Teknik, DKV, Akuntansi, dll.</p>
-                </div>
+            <div className="mt-16 p-6 bg-slate-800/50 backdrop-blur rounded-xl border border-emerald-500/20 max-w-lg mx-auto">
+                <h3 className="text-emerald-400 font-bold mb-2 flex items-center justify-center gap-2">
+                    <Activity size={18} /> Teknik STOP (Mindfulness)
+                </h3>
+                <p className="text-sm text-slate-300">
+                    Sebelum mulai: <b>S</b>top sejenak, <b>T</b>ake a breath (tarik napas), <b>O</b>bserve (amati perasaanmu), <b>P</b>roceed (lanjutkan). Siapkan pikiranmu untuk menyerap ilmu baru.
+                </p>
             </div>
         </div>
     </div>
 );
 
-// --- TAB 1: KONSEP DASAR (Mindful) ---
-const KonsepSection = () => {
-    const [temperature, setTemperature] = useState(0.2);
+const MateriSection = () => (
+    <div className="container mx-auto px-4 animate-[fadeIn_0.5s]">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-2 text-white">Struktur Prompt Engineering</h2>
+            <p className="text-slate-400">Rumus rahasia agar AI patuh padamu: <span className="text-indigo-400 font-bold">RCTF</span></p>
+        </div>
 
-    return (
-        <div className="container mx-auto px-4 animate-[fadeIn_0.5s] space-y-12">
-            {/* Analogi Koki */}
-            <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                <div className="flex items-center gap-4 mb-6">
-                    <div className="bg-indigo-900/50 p-4 rounded-full text-indigo-400"><ChefHat size={32}/></div>
-                    <h2 className="text-2xl font-bold text-white">Analogi: Koki Buta di Perpustakaan</h2>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <p className="text-slate-300 leading-relaxed mb-4">
-                            Bayangkan ChatGPT/Gemini bukan sebagai "Google Pencari Fakta", melainkan:
-                        </p>
-                        <ul className="space-y-4 text-slate-400 text-sm">
-                            <li className="flex gap-3">
-                                <span className="font-bold text-white bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs">1</span>
-                                <span><b>Pelatihan (Training):</b> Koki ini telah mencicipi miliaran resep (teks internet). Dia tahu setelah kata "Nasi", biasanya muncul kata "Goreng" (90%).</span>
-                            </li>
-                            <li className="flex gap-3">
-                                <span className="font-bold text-white bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs">2</span>
-                                <span><b>Prediksi (Prediction):</b> Saat kamu memesan masakan, dia tidak melihat bahan aslinya. Dia hanya <i>menebak rasa</i> berdasarkan ingatan resepnya.</span>
-                            </li>
-                            <li className="flex gap-3">
-                                <span className="font-bold text-white bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs">3</span>
-                                <span><b>Halusinasi:</b> Karena dia menebak, kadang dia mengarang menu aneh (fakta palsu) dengan sangat percaya diri.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="bg-indigo-950/30 rounded-xl p-6 border border-indigo-500/20 flex flex-col justify-center items-center text-center">
-                        <p className="text-lg font-mono text-indigo-300 mb-2">"Next Token Prediction"</p>
-                        <div className="flex gap-2 mb-4">
-                            <span className="px-3 py-1 bg-slate-800 rounded text-slate-400">Ibu</span>
-                            <span className="px-3 py-1 bg-slate-800 rounded text-slate-400">Kota</span>
-                            <span className="px-3 py-1 bg-slate-800 rounded text-slate-400">Indonesia</span>
-                            <span className="px-3 py-1 bg-emerald-600 text-white rounded animate-pulse">...?</span>
-                        </div>
-                        <p className="text-xs text-slate-500">AI menghitung probabilitas kata selanjutnya. Jakarta (90%), Nusantara (5%), Bandung (1%).</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {materials.map((item, idx) => (
+                <div key={idx} className="bg-slate-800/50 backdrop-blur p-6 rounded-2xl hover:bg-slate-800 transition-all group border-t-4 border-t-indigo-500 border border-slate-700/50">
+                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                    <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+                    <p className="text-slate-400 text-sm mb-4">{item.desc}</p>
+                    <div className="bg-slate-900/50 p-3 rounded border border-dashed border-slate-700">
+                        <span className="text-xs text-indigo-400 font-mono">Contoh:</span>
+                        <p className="text-sm italic text-slate-300">"{item.example}"</p>
                     </div>
                 </div>
+            ))}
+        </div>
+
+        <div className="mt-12 bg-slate-800/50 backdrop-blur p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 border border-slate-700">
+            <div className="flex-1">
+                <h3 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Meaningful Learning</h3>
+                <p className="text-slate-300 leading-relaxed mb-4">
+                    Kecerdasan Artifisial hanyalah "Kalkulator Kata". Kualitas jawaban yang kamu dapatkan (Output) sangat bergantung pada kualitas pertanyaan yang kamu berikan (Input). Inilah yang disebut prinsip <b className="text-white">Garbage In, Garbage Out</b>.
+                </p>
+                <p className="text-slate-300 leading-relaxed">
+                    Di dunia kerja, kemampuan menyusun prompt (Prompt Engineering) adalah skill komunikasi abad 21 yang sangat mahal harganya.
+                </p>
             </div>
-
-            {/* Temperature Simulator */}
-            <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                <div className="flex items-center gap-4 mb-6">
-                    <div className="bg-rose-900/50 p-4 rounded-full text-rose-400"><Thermometer size={32}/></div>
-                    <h2 className="text-2xl font-bold text-white">Suhu Kreativitas (Temperature)</h2>
-                </div>
-                <p className="text-slate-400 mb-8">Geser slider untuk melihat bagaimana "suhu" mempengaruhi output AI.</p>
-                
-                <div className="max-w-2xl mx-auto">
-                    <input 
-                        type="range" min="0" max="1" step="0.1" 
-                        value={temperature} onChange={(e) => setTemperature(parseFloat(e.target.value))}
-                        className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-indigo-500 mb-4"
-                    />
-                    <div className="flex justify-between text-xs text-slate-500 font-mono mb-8">
-                        <span>0.0 (Kaku/Logis)</span>
-                        <span>0.5 (Seimbang)</span>
-                        <span>1.0 (Kreatif/Liar)</span>
-                    </div>
-
-                    <div className="bg-black/30 p-6 rounded-xl border border-slate-600 transition-all">
-                        <div className="flex justify-between mb-4 border-b border-slate-700 pb-2">
-                            <span className="text-slate-400 text-xs uppercase font-bold">Setting: Temperature {temperature}</span>
-                            <span className={`text-xs font-bold ${temperature < 0.4 ? 'text-blue-400' : temperature > 0.7 ? 'text-rose-400' : 'text-emerald-400'}`}>
-                                {temperature < 0.4 ? "Cocok untuk: Koding, Matematika, Fakta" : temperature > 0.7 ? "Cocok untuk: Puisi, Cerpen, Ideasi" : "Cocok untuk: Artikel, Chatting"}
-                            </span>
-                        </div>
-                        <p className="text-sm text-slate-300 font-mono">
-                            <span className="text-indigo-400">User:</span> Buat satu kalimat tentang Kucing.<br/><br/>
-                            <span className="text-emerald-400">AI:</span> 
-                            {temperature < 0.4 ? " Kucing adalah mamalia karnivora dari keluarga Felidae." : 
-                             temperature > 0.7 ? " Kucing itu menari balet di atas pelangi sambil memakan donat stardust." : 
-                             " Kucing adalah hewan peliharaan yang lucu dan suka bermain benang."}
-                        </p>
-                    </div>
-                </div>
+            <div className="w-full md:w-1/3 bg-slate-900 p-4 rounded-xl border border-slate-700">
+                <code className="text-xs text-emerald-400 font-mono block">
+                    // Bad Prompt<br/>
+                    Input: "Buatin surat."<br/>
+                    Output: [Surat apa? Untuk siapa? Bahasa apa?]<br/><br/>
+                    // Good Prompt (RCTF)<br/>
+                    Input: "Sebagai HRD (R), buat surat penolakan lamaran (T) untuk pelamar magang (C) dengan nada sopan & menyemangati (F)."
+                </code>
             </div>
         </div>
-    );
-};
+    </div>
+);
 
-// --- TAB 2: TEKNIK RCTF (Meaningful) ---
-const RCTFSection = () => {
-    return (
-        <div className="container mx-auto px-4 animate-[fadeIn_0.5s]">
-            <div className="text-center mb-10">
-                <h2 className="text-3xl font-bold text-white mb-2">Anatomi Prompt Sempurna (RCTF)</h2>
-                <p className="text-slate-400">Jangan biarkan AI menebak. Berikan instruksi lengkap dengan rumus ini.</p>
-            </div>
+const LabSection = () => {
+    const [input, setInput] = useState("");
+    const [messages, setMessages] = useState([
+        { sender: "ai", text: "Halo! Saya AI Simulator MWS. Silakan masukkan prompt untuk saya uji kualitasnya." }
+    ]);
+    const [analysis, setAnalysis] = useState<{score: number, hasRole: boolean, hasContext: boolean, hasTask: boolean, hasFormat: boolean, feedback: string} | null>(null);
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-                {[
-                    { l: 'R', t: 'Role (Peran)', d: 'Topi siapa yang dipakai AI?', ex: 'Guru Fisika, Mekanik Senior, HRD', c: 'text-blue-400', bg: 'bg-blue-900/20' },
-                    { l: 'C', t: 'Context (Konteks)', d: 'Latar belakang & audiens.', ex: 'Untuk anak TK, Klien marah, Audiens awam', c: 'text-emerald-400', bg: 'bg-emerald-900/20' },
-                    { l: 'T', t: 'Task (Tugas)', d: 'Perintah kerja spesifik.', ex: 'Buat, Ringkas, Analisis, Debug', c: 'text-amber-400', bg: 'bg-amber-900/20' },
-                    { l: 'F', t: 'Format (Bentuk)', d: 'Tampilan luaran.', ex: 'Tabel, Kode Python, Surat Resmi', c: 'text-purple-400', bg: 'bg-purple-900/20' },
-                ].map((item, idx) => (
-                    <div key={idx} className={`p-6 rounded-2xl border border-slate-700 ${item.bg} hover:scale-105 transition-transform duration-300`}>
-                        <div className={`text-4xl font-black ${item.c} mb-2`}>{item.l}</div>
-                        <h3 className="text-lg font-bold text-white mb-2">{item.t}</h3>
-                        <p className="text-xs text-slate-300 mb-3">{item.d}</p>
-                        <div className="bg-black/20 p-2 rounded text-[10px] text-slate-400 font-mono">
-                            Contoh: {item.ex}
-                        </div>
-                    </div>
-                ))}
-            </div>
+    const checkPrompt = () => {
+        if (!input.trim()) return;
 
-            <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2"><Edit className="text-rose-400"/> Bedah Prompt: Sampah vs Emas</h3>
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div className="bg-red-900/10 border border-red-500/30 p-6 rounded-xl relative">
-                        <div className="absolute top-0 right-0 bg-red-600 text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold">SAMPAH</div>
-                        <p className="font-mono text-slate-300 mb-4">"Buatin surat lamaran kerja."</p>
-                        <ul className="text-xs text-red-300 space-y-1">
-                            <li>❌ Tidak ada Peran (Siapa yang melamar?)</li>
-                            <li>❌ Tidak ada Konteks (Lamar jadi apa? Ke mana?)</li>
-                            <li>❌ Format tidak jelas (Formal? Santai?)</li>
-                        </ul>
-                    </div>
-                    <div className="bg-emerald-900/10 border border-emerald-500/30 p-6 rounded-xl relative">
-                        <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold">EMAS (RCTF)</div>
-                        <p className="font-mono text-slate-300 mb-4 text-sm">
-                            "<span className="text-blue-400">Bertindak sebagai lulusan SMK Otomotif (R)</span>. 
-                            Buat surat lamaran untuk <span className="text-emerald-400">posisi Mekanik Junior di Bengkel Honda AHASS (C)</span>. 
-                            <span className="text-amber-400">Tulis dengan nada sopan, sebutkan skill servis injeksi (T)</span>. 
-                            <span className="text-purple-400">Format surat resmi standar Indonesia (F)</span>."
-                        </p>
-                        <div className="flex gap-2 mt-4 text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-                            <span className="text-blue-400">● Role</span>
-                            <span className="text-emerald-400">● Context</span>
-                            <span className="text-amber-400">● Task</span>
-                            <span className="text-purple-400">● Format</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+        // Simple keyword analysis logic (Simulasi)
+        const lower = input.toLowerCase();
+        const hasRole = lower.includes("sebagai") || lower.includes("bertindak") || lower.includes("peran");
+        const hasContext = lower.includes("karena") || lower.includes("untuk") || lower.includes("sedang") || lower.includes("latar");
+        const hasTask = lower.includes("buat") || lower.includes("tulis") || lower.includes("jelaskan") || lower.includes("susun");
+        const hasFormat = lower.includes("tabel") || lower.includes("daftar") || lower.includes("poin") || lower.includes("surat") || lower.includes("paragraf");
 
-// --- TAB 3: TEKNIK LANJUTAN (Joyful) ---
-const AdvancedSection = () => {
-    const [technique, setTechnique] = useState<'fewshot' | 'cot' | 'reverse'>('fewshot');
+        const score = [hasRole, hasContext, hasTask, hasFormat].filter(Boolean).length;
+        
+        let feedback = "";
+        let aiResponse = "";
 
-    const content = {
-        fewshot: {
-            title: "Few-Shot Prompting (Memberi Contoh)",
-            desc: "AI belajar dari pola. Berikan contoh input-output agar AI paham format yang aneh sekalipun.",
-            code: `Prompt:
-"Ubah kalimat keluhan menjadi respon CS yang empati.
-User: 'Internet mati mulu!' -> CS: 'Mohon maaf atas ketidaknyamanannya, Kak. Mari kami cek jaringannya ya.'
-User: 'Barang pecah!' -> CS: 'Aduh, kami sangat menyesal. Boleh kirimkan fotonya untuk klaim garansi?'
-User: 'Aplikasi lemot banget!' -> CS: ..." (AI akan melengkapi pola ini)`
-        },
-        cot: {
-            title: "Chain of Thought (Berpikir Lambat)",
-            desc: "AI sering salah di logika/matematika. Paksa dia berpikir langkah demi langkah.",
-            code: `Prompt Biasa: 
-"Ibu punya 3 apel, beli 2 lagi, dimakan ayah 1. Berapa sisa?" (AI kadang buru-buru menjawab salah).
-
-Prompt CoT:
-"Ibu punya 3 apel, beli 2 lagi, dimakan ayah 1. Berapa sisa? Jelaskan langkah berpikirmu step-by-step sebelum menjawab."`
-        },
-        reverse: {
-            title: "Reverse Prompting (Metode Socrates)",
-            desc: "Bingung mau nulis prompt? Suruh AI yang bertanya padamu!",
-            code: `Prompt:
-"Saya ingin membuat Rencana Bisnis Wirausaha Kopi, tapi bingung mulainya. 
-Bertindaklah sebagai Konsultan Bisnis. 
-Jangan berikan rencana dulu. Sebaliknya, ajukan saya serangkaian pertanyaan tentang modal, target pasar, dan lokasi. 
-Setelah saya jawab, baru buatkan rencananya."`
+        if (score <= 1) {
+            feedback = "Prompt terlalu sederhana. Coba tambahkan Peran (Role) dan Format yang jelas.";
+            aiResponse = "Maaf, saya kurang paham konteksnya. Bisa diperjelas permintaan Anda?";
+        } else if (score <= 3) {
+            feedback = "Sudah cukup baik, tapi bisa lebih spesifik lagi agar hasilnya sempurna.";
+            aiResponse = "Oke, saya mengerti sebagian instruksi Anda. Ini draf kasarnya...";
+        } else {
+            feedback = "Sempurna! Struktur RCTF terpenuhi.";
+            aiResponse = "Tentu! Berikut adalah hasil lengkap sesuai permintaan spesifik Anda dengan gaya bahasa yang diminta.";
         }
+
+        const newMsgUser = { sender: "user", text: input };
+        const newMsgAi = { sender: "ai", text: aiResponse };
+
+        setMessages(prev => [...prev, newMsgUser, newMsgAi]);
+        setAnalysis({ score, hasRole, hasContext, hasTask, hasFormat, feedback });
+        setInput("");
     };
 
     return (
-        <div className="container mx-auto px-4 animate-[fadeIn_0.5s]">
-            <div className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col md:flex-row min-h-[500px]">
-                {/* Sidebar */}
-                <div className="md:w-1/3 bg-slate-900 border-r border-slate-700 p-6 space-y-4">
-                    <h3 className="text-white font-bold mb-6 flex items-center gap-2"><Lightbulb className="text-amber-400"/> Teknik Ninja</h3>
-                    <button onClick={() => setTechnique('fewshot')} className={`w-full text-left p-4 rounded-xl border transition-all ${technique === 'fewshot' ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700'}`}>
-                        <div className="font-bold">1. Few-Shot</div>
-                        <div className="text-xs opacity-70">Don't tell, show.</div>
-                    </button>
-                    <button onClick={() => setTechnique('cot')} className={`w-full text-left p-4 rounded-xl border transition-all ${technique === 'cot' ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700'}`}>
-                        <div className="font-bold">2. Chain of Thought</div>
-                        <div className="text-xs opacity-70">Let's think step by step.</div>
-                    </button>
-                    <button onClick={() => setTechnique('reverse')} className={`w-full text-left p-4 rounded-xl border transition-all ${technique === 'reverse' ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700'}`}>
-                        <div className="font-bold">3. Reverse Prompting</div>
-                        <div className="text-xs opacity-70">AI yang bertanya.</div>
-                    </button>
-                </div>
-
-                {/* Content */}
-                <div className="md:w-2/3 p-8 flex flex-col justify-center">
-                    <h2 className="text-2xl font-bold text-white mb-4">{content[technique].title}</h2>
-                    <p className="text-slate-300 mb-6">{content[technique].desc}</p>
-                    <div className="bg-black/40 p-6 rounded-xl border border-slate-600 font-mono text-sm text-emerald-300 whitespace-pre-wrap shadow-inner">
-                        {content[technique].code}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-// --- TAB 4: LABORATORIUM JURUSAN (Vocational) ---
-const VocationalLab = () => {
-    const [jurusan, setJurusan] = useState('otomotif');
-    const [rctf, setRctf] = useState({ r: '', c: '', t: '', f: '' });
-    const [generatedOutput, setGeneratedOutput] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    const presets: Record<string, any> = {
-        otomotif: {
-            label: "Teknik Otomotif (TKR/TSM)",
-            icon: <Wrench size={18}/>,
-            hintR: "Kepala Mekanik, Service Advisor",
-            hintC: "Pelanggan awam komplain bunyi 'tek tek' di mesin",
-            hintT: "Jelaskan kemungkinan penyebab dan estimasi biaya",
-            hintF: "Poin-poin sederhana bahasa manusia",
-            mockOutput: "Baik, Pak. Berdasarkan bunyi 'tek tek', ada 3 kemungkinan:\n1. Klep Kendor: Perlu stel klep (Biaya ~Rp 50rb).\n2. Rantai Keteng Mulur: Perlu ganti (Biaya ~Rp 150rb).\n3. Stang Seher Kena: Ini berat, harus turun mesin.\nSaran saya: Kita cek nomor 1 & 2 dulu yang murah."
-        },
-        dkv: {
-            label: "DKV & Grafika",
-            icon: <Palette size={18}/>,
-            hintR: "Creative Director, UX Designer",
-            hintC: "Klien UMKM Keripik Tempe ingin rebranding modern",
-            hintT: "Berikan 3 ide nama brand & filosofi logo",
-            hintF: "Daftar dengan penjelasan psikologi warna",
-            mockOutput: "1. Nama: 'TempeZen'. Logo: Daun pisang minimalis membentuk huruf T. Warna: Hijau (Alami) & Emas (Premium).\n2. Nama: 'KriukHub'. Logo: Ikon sinyal wifi dari remah tempe. Warna: Oranye (Semangat/Lapar).\n3. Nama: 'JavaChip'. Logo: Wayang style pixel art. Warna: Coklat & Hitam (Tradisional Modern)."
-        },
-        akuntansi: {
-            label: "Akuntansi (AKL)",
-            icon: <Calculator size={18}/>,
-            hintR: "Auditor Senior, Ahli Excel",
-            hintC: "Data penjualan berantakan, nama barang campur kode",
-            hintT: "Buatkan rumus Excel untuk memisahkan Kode & Nama",
-            hintF: "Rumus Excel siap copas",
-            mockOutput: "Untuk memisahkan 'A001-Buku' (Kode di kiri, pemisah strip):\n\n1. Ambil Kode:\n=LEFT(A1, FIND(\"-\",A1)-1)\n\n2. Ambil Nama Barang:\n=RIGHT(A1, LEN(A1)-FIND(\"-\",A1))\n\nPastikan sel A1 berisi teks yang mau dipisah ya."
-        },
-        kuliner: {
-            label: "Kuliner",
-            icon: <Utensils size={18}/>,
-            hintR: "Chef Bintang 5, Ahli Gizi",
-            hintC: "Sisa bahan di kulkas: Telur, Roti tawar, Susu kental manis",
-            hintT: "Buatkan resep dessert mewah tapi mudah",
-            hintF: "Langkah memasak bullet points",
-            mockOutput: "Resep: 'Bread Pudding Ala Anak Kos Mewah'\n1. Potong roti dadu, tata di mangkuk tahan panas.\n2. Kocok telur + susu kental manis + air sedikit, tuang ke roti.\n3. Kukus 15 menit.\n4. Sajikan hangat. Teksturnya lembut seperti pudding hotel!"
-        },
-        mesin: {
-            label: "Teknik Mesin & Las",
-            icon: <Hammer size={18}/>,
-            hintR: "Safety Officer, Welder Profesional",
-            hintC: "Adik kelas baru belajar Las Listrik (SMAW)",
-            hintT: "Buatkan SOP keselamatan kerja (K3) yang tegas",
-            hintF: "Checklist K3",
-            mockOutput: "SOP PENGELASAN SMAW:\n[ ] APD Wajib: Topeng las, Apron kulit, Sarung tangan kulit, Sepatu safety.\n[ ] Cek Kabel: Pastikan tidak ada kabel terkelupas (Bahaya setrum!).\n[ ] Ventilasi: Pastikan asap las bisa keluar (Bahaya paru-paru).\n[ ] APAR: Siapkan pemadam api ringan di dekat lokasi."
-        }
-    };
-
-    const handleGenerate = () => {
-        if (!rctf.r || !rctf.t) {
-            alert("Isi minimal Role dan Task!");
-            return;
-        }
-        setLoading(true);
-        setTimeout(() => {
-            setGeneratedOutput(presets[jurusan].mockOutput); // In real app, call API
-            setLoading(false);
-        }, 1500);
-    };
-
-    return (
-        <div className="container mx-auto px-4 animate-[fadeIn_0.5s] pb-12">
-            <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-white mb-2">Studio Prompt Vokasional</h2>
-                <p className="text-slate-400">Pilih jurusanmu, rakit promptnya, dan lihat hasilnya.</p>
+        <div className="container mx-auto px-4 animate-[fadeIn_0.5s] h-[calc(100vh-200px)] flex flex-col">
+            <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Laboratorium Prompt Engineering</h2>
+                <p className="text-sm text-slate-400">Latih skill-mu di sini (Joyful Learning)</p>
             </div>
 
-            <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6 max-w-5xl mx-auto shadow-2xl">
-                {/* 1. Pilih Jurusan */}
-                <div className="mb-8">
-                    <label className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-3 block">1. Pilih Jurusan / Keahlian</label>
-                    <div className="flex flex-wrap gap-3">
-                        {Object.entries(presets).map(([key, val]) => (
-                            <button 
-                                key={key}
-                                onClick={() => { setJurusan(key); setRctf({r:'',c:'',t:'',f:''}); setGeneratedOutput(''); }}
-                                className={`px-4 py-2 rounded-full border flex items-center gap-2 text-sm transition-all ${jurusan === key ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg' : 'bg-slate-900 border-slate-600 text-slate-400 hover:bg-slate-700'}`}
-                            >
-                                {val.icon} {val.label}
-                            </button>
+            <div className="flex-1 flex flex-col md:flex-row gap-6 overflow-hidden min-h-0">
+                {/* Chat Area */}
+                <div className="flex-1 bg-slate-800/50 backdrop-blur rounded-2xl flex flex-col overflow-hidden border border-slate-700">
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                        {messages.map((msg, idx) => (
+                            <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.sender === 'user' ? 'bg-indigo-600 text-white rounded-br-none' : 'bg-slate-700 text-slate-200 rounded-bl-none'}`}>
+                                    <strong>{msg.sender === 'user' ? 'Kamu' : 'AI'}:</strong> {msg.text}
+                                </div>
+                            </div>
                         ))}
                     </div>
+                    <div className="p-4 bg-slate-900 border-t border-slate-700 flex gap-2">
+                        <input 
+                            type="text" 
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && checkPrompt()}
+                            placeholder="Ketik prompt di sini (misal: Bertindaklah sebagai...)"
+                            className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                        />
+                        <button onClick={checkPrompt} className="bg-indigo-600 hover:bg-indigo-700 p-2 rounded-lg transition-colors text-white">
+                            <Send size={20}/>
+                        </button>
+                    </div>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-8">
-                    {/* 2. Builder RCTF */}
-                    <div className="space-y-4">
-                        <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                            <h4 className="text-indigo-400 font-bold mb-4 flex items-center gap-2"><Layers size={18}/> Prompt Builder</h4>
+                {/* Analysis Panel */}
+                <div className="w-full md:w-80 bg-slate-800/50 backdrop-blur rounded-2xl p-6 border-l-4 border-indigo-500 overflow-y-auto h-full">
+                    <h3 className="font-bold mb-4 flex items-center gap-2 text-white"> <Terminal size={18}/> Analisis Prompt</h3>
+                    {analysis ? (
+                        <div className="space-y-4">
+                            <div className="text-center">
+                                <div className={`text-4xl font-bold ${analysis.score === 4 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                    {analysis.score}/4
+                                </div>
+                                <p className="text-xs text-slate-400 mt-1">Skor RCTF</p>
+                            </div>
                             
-                            <div className="space-y-3">
-                                <div>
-                                    <label className="text-xs text-blue-400 font-bold">ROLE (Peran)</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-sm text-white focus:border-blue-500 outline-none"
-                                        placeholder={`Contoh: ${presets[jurusan].hintR}`}
-                                        value={rctf.r} onChange={e => setRctf({...rctf, r: e.target.value})}
-                                    />
+                            <div className="space-y-2 text-sm">
+                                <div className={`flex justify-between p-2 rounded ${analysis.hasRole ? 'bg-emerald-900/30 text-emerald-400' : 'bg-red-900/30 text-red-400'}`}>
+                                    <span>Role</span> <span>{analysis.hasRole ? '✔' : '✘'}</span>
                                 </div>
-                                <div>
-                                    <label className="text-xs text-emerald-400 font-bold">CONTEXT (Konteks)</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-sm text-white focus:border-emerald-500 outline-none"
-                                        placeholder={`Contoh: ${presets[jurusan].hintC}`}
-                                        value={rctf.c} onChange={e => setRctf({...rctf, c: e.target.value})}
-                                    />
+                                <div className={`flex justify-between p-2 rounded ${analysis.hasContext ? 'bg-emerald-900/30 text-emerald-400' : 'bg-red-900/30 text-red-400'}`}>
+                                    <span>Context</span> <span>{analysis.hasContext ? '✔' : '✘'}</span>
                                 </div>
-                                <div>
-                                    <label className="text-xs text-amber-400 font-bold">TASK (Tugas)</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-sm text-white focus:border-amber-500 outline-none"
-                                        placeholder={`Contoh: ${presets[jurusan].hintT}`}
-                                        value={rctf.t} onChange={e => setRctf({...rctf, t: e.target.value})}
-                                    />
+                                <div className={`flex justify-between p-2 rounded ${analysis.hasTask ? 'bg-emerald-900/30 text-emerald-400' : 'bg-red-900/30 text-red-400'}`}>
+                                    <span>Task</span> <span>{analysis.hasTask ? '✔' : '✘'}</span>
                                 </div>
-                                <div>
-                                    <label className="text-xs text-purple-400 font-bold">FORMAT (Bentuk)</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-sm text-white focus:border-purple-500 outline-none"
-                                        placeholder={`Contoh: ${presets[jurusan].hintF}`}
-                                        value={rctf.f} onChange={e => setRctf({...rctf, f: e.target.value})}
-                                    />
+                                <div className={`flex justify-between p-2 rounded ${analysis.hasFormat ? 'bg-emerald-900/30 text-emerald-400' : 'bg-red-900/30 text-red-400'}`}>
+                                    <span>Format</span> <span>{analysis.hasFormat ? '✔' : '✘'}</span>
                                 </div>
                             </div>
 
-                            <button 
-                                onClick={handleGenerate}
-                                disabled={loading}
-                                className="w-full mt-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all"
-                            >
-                                {loading ? <Activity className="animate-spin"/> : <Send size={18}/>} Generate Output AI
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* 3. Output Simulator */}
-                    <div className="bg-black/40 rounded-xl border border-slate-600 p-6 flex flex-col relative min-h-[300px]">
-                        <div className="flex items-center gap-2 mb-4 border-b border-slate-700 pb-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span className="text-xs text-slate-500 ml-2">AI Output Simulator</span>
-                        </div>
-                        
-                        {generatedOutput ? (
-                            <div className="font-mono text-sm text-slate-300 whitespace-pre-wrap animate-[fadeIn_0.5s]">
-                                <span className="text-emerald-400 font-bold">AI:</span> {generatedOutput}
+                            <div className="mt-4 p-3 bg-slate-800 rounded border border-slate-600">
+                                <p className="text-xs italic text-slate-300">"{analysis.feedback}"</p>
                             </div>
-                        ) : (
-                            <div className="flex-1 flex flex-col items-center justify-center text-slate-600">
-                                <Terminal size={48} className="mb-4 opacity-50"/>
-                                <p className="text-sm">Prompt kamu akan muncul di sini...</p>
-                            </div>
-                        )}
-
-                        <div className="mt-auto pt-4 text-[10px] text-slate-500 text-center">
-                            *Ini adalah simulasi. Di dunia nyata, hasilnya mungkin lebih panjang.
-                            <br/><span className="text-amber-500 font-bold">Ingat Integritas:</span> Gunakan output AI sebagai referensi, bukan untuk mencontek total.
                         </div>
-                    </div>
+                    ) : (
+                        <p className="text-sm text-slate-500 italic text-center mt-10">
+                            Kirim prompt untuk melihat analisis RCTF secara otomatis.
+                        </p>
+                    )}
                 </div>
             </div>
         </div>
     );
-};
+}
 
-// --- TAB 5: KUIS (Evaluasi) ---
+const LKPDSection = () => {
+    const [formData, setFormData] = useState({
+        nama: '',
+        kelas: '',
+        promptAwal: '',
+        revisi: '',
+        refleksi: ''
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        alert("Data LKPD berhasil disimpan (Simulasi). Silakan screenshot halaman ini untuk laporan.");
+    };
+
+    return (
+        <div className="container mx-auto px-4 animate-[fadeIn_0.5s]">
+            <div className="max-w-3xl mx-auto bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700">
+                <div className="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+                    <h2 className="text-2xl font-bold text-white">LKPD Digital</h2>
+                    <span className="bg-indigo-900 text-indigo-300 px-3 py-1 rounded text-xs">Pertemuan 10</span>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm text-slate-400 mb-1">Nama Siswa / Kelompok</label>
+                            <input type="text" className="w-full bg-slate-900 border border-slate-600 rounded p-2 focus:border-indigo-500 focus:outline-none text-white" 
+                                value={formData.nama} onChange={(e) => setFormData({...formData, nama: e.target.value})} required/>
+                        </div>
+                        <div>
+                            <label className="block text-sm text-slate-400 mb-1">Kelas</label>
+                            <input type="text" className="w-full bg-slate-900 border border-slate-600 rounded p-2 focus:border-indigo-500 focus:outline-none text-white" 
+                                value={formData.kelas} onChange={(e) => setFormData({...formData, kelas: e.target.value})} required/>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-slate-400 mb-1 font-bold">Tantangan 1: Prompt Awal</label>
+                        <p className="text-xs text-slate-500 mb-2">Tuliskan prompt kasar yang belum menggunakan teknik RCTF.</p>
+                        <textarea rows={3} className="w-full bg-slate-900 border border-slate-600 rounded p-2 focus:border-indigo-500 focus:outline-none text-white"
+                            value={formData.promptAwal} onChange={(e) => setFormData({...formData, promptAwal: e.target.value})}></textarea>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-slate-400 mb-1 font-bold">Tantangan 2: Iterasi (Perbaikan)</label>
+                        <p className="text-xs text-slate-500 mb-2">Ubah prompt di atas menggunakan struktur Role, Context, Task, Format.</p>
+                        <textarea rows={3} className="w-full bg-slate-900 border border-emerald-600/50 rounded p-2 focus:border-emerald-500 focus:outline-none text-white"
+                            value={formData.revisi} onChange={(e) => setFormData({...formData, revisi: e.target.value})}></textarea>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-slate-400 mb-1 font-bold">Refleksi</label>
+                        <p className="text-xs text-slate-500 mb-2">Apa perbedaan hasil output antara prompt awal dan revisi?</p>
+                        <textarea rows={2} className="w-full bg-slate-900 border border-slate-600 rounded p-2 focus:border-indigo-500 focus:outline-none text-white"
+                            value={formData.refleksi} onChange={(e) => setFormData({...formData, refleksi: e.target.value})}></textarea>
+                    </div>
+
+                    <div className="flex justify-end pt-4">
+                        <button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-bold transition-all flex items-center gap-2">
+                            <CheckCircle size={18} /> Simpan LKPD
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
+
 const QuizSection = () => {
     const [currentQ, setCurrentQ] = useState(0);
     const [score, setScore] = useState(0);
@@ -557,9 +388,9 @@ const QuizSection = () => {
                             <span className="text-5xl font-bold text-indigo-400">{score}</span>
                         </div>
                         <h3 className="text-2xl font-bold mb-2 text-white">
-                            {score === 100 ? "Master Prompt! 🎉" : score >= 80 ? "Hebat! 👍" : "Belajar Lagi Yuk! 💪"}
+                            {score === 100 ? "Luar Biasa! 🎉" : score >= 80 ? "Hebat! 👍" : "Belajar Lagi Yuk! 💪"}
                         </h3>
-                        <p className="text-slate-400 mb-8">Nilai Penguasaan Materi Anda.</p>
+                        <p className="text-slate-400 mb-8">Nilai Penguasaan Konsep Prompting Anda.</p>
                         <button onClick={resetQuiz} className="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-lg font-bold text-white transition-colors">
                             Coba Lagi
                         </button>
@@ -583,10 +414,9 @@ const Materi7: React.FC = () => {
       {/* Content */}
       <main className="min-h-[calc(100vh-200px)] relative pb-10">
         {activePage === 'home' && <HomeSection setPage={setActivePage} />}
-        {activePage === 'konsep' && <KonsepSection />}
-        {activePage === 'rctf' && <RCTFSection />}
-        {activePage === 'lanjutan' && <AdvancedSection />}
-        {activePage === 'lab' && <VocationalLab />}
+        {activePage === 'materi' && <MateriSection />}
+        {activePage === 'lab' && <LabSection />}
+        {activePage === 'lkpd' && <LKPDSection />}
         {activePage === 'kuis' && <QuizSection />}
       </main>
 

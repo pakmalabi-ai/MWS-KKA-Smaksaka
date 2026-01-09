@@ -15,11 +15,7 @@ import {
   X, 
   Minus,
   ShieldAlert,
-  HelpCircle,
-  Bird,
-  BarChart2,
-  ScanEye,
-  UserCheck
+  HelpCircle
 } from 'lucide-react';
 
 // --- COMPONENTS ---
@@ -42,7 +38,7 @@ const ModuleNav = ({ activePage, setPage }: { activePage: string, setPage: (p: s
         {[
           { id: 'home', label: 'Beranda', icon: Brain },
           { id: 'materi', label: 'Materi', icon: BookOpen },
-          { id: 'simulasi', label: 'Lab Evaluasi', icon: Search },
+          { id: 'simulasi', label: 'Simulasi', icon: Search },
           { id: 'kuis', label: 'Kuis', icon: CheckCircle },
         ].map((item) => (
           <button
@@ -68,44 +64,42 @@ const HomeSection = ({ setPage }: { setPage: (p: string) => void }) => (
   <section className="animate-[fadeIn_0.5s]">
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center relative overflow-hidden py-10">
        <div className="inline-block px-4 py-1 rounded-full bg-sky-900/30 text-sky-400 text-sm font-medium mb-6 border border-sky-800">
-        Topik: Menjadi Pengguna AI yang Kritis dan Beretika
+        Pertemuan Ke-12: Deep Learning Approach
       </div>
       <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
-        Apakah Asisten Digital Kita <br/>
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400">Selalu Jujur?</span>
+        Jangan Percaya AI <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400">100%</span>
       </h1>
       <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-        Banyak yang mengira AI itu "Ensiklopedia Pintar". Padahal, AI Generatif lebih mirip 
-        <strong className="text-sky-400"> "Burung Beo yang Sangat Cerdas"</strong>. 
-        Ia pandai meniru bicara, tapi tidak selalu paham kebenaran.
+        Kecerdasan Artifisial itu hebat, tapi bisa "berhalusinasi". 
+        Mari belajar menjadi pengguna yang kritis, cerdas, dan beretika.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full mb-12">
         <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:bg-slate-800/80 transition duration-300 group">
-          <div className="w-12 h-12 bg-sky-500/10 rounded-lg flex items-center justify-center mb-4 mx-auto md:mx-0">
-            <Bird className="text-sky-400" />
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition mx-auto md:mx-0">
+            <Leaf className="text-emerald-400" />
           </div>
           <div className="text-left">
-            <h3 className="text-xl font-bold mb-2 text-white">Cara Kerja</h3>
-            <p className="text-slate-400 text-sm">Memahami konsep "Next Token Prediction" (Probabilitas vs Kebenaran).</p>
+            <h3 className="text-xl font-bold mb-2 text-white">Mindfull</h3>
+            <p className="text-slate-400 text-sm">Belajar dengan kesadaran penuh. Fokus pada fakta, bukan sekadar kecepatan menyalin jawaban AI.</p>
           </div>
         </div>
         <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:bg-slate-800/80 transition duration-300 group">
-          <div className="w-12 h-12 bg-rose-500/10 rounded-lg flex items-center justify-center mb-4 mx-auto md:mx-0">
-            <Ghost className="text-rose-400" />
+          <div className="w-12 h-12 bg-amber-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition mx-auto md:mx-0">
+            <Lightbulb className="text-amber-400" />
           </div>
           <div className="text-left">
-            <h3 className="text-xl font-bold mb-2 text-white">Halusinasi</h3>
-            <p className="text-slate-400 text-sm">Mewaspadai Fabrikasi (ngarang) dan Konflasi (fakta tercampur).</p>
+            <h3 className="text-xl font-bold mb-2 text-white">Meaningfull</h3>
+            <p className="text-slate-400 text-sm">Pahami konsep "Halusinasi AI" dan "Bias" agar relevan dengan tantangan dunia digital nyata.</p>
           </div>
         </div>
         <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:bg-slate-800/80 transition duration-300 group">
-          <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4 mx-auto md:mx-0">
-            <UserCheck className="text-emerald-400" />
+          <div className="w-12 h-12 bg-rose-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-rose-500/20 transition mx-auto md:mx-0">
+            <Gamepad2 className="text-rose-400" />
           </div>
           <div className="text-left">
-            <h3 className="text-xl font-bold mb-2 text-white">Human-in-the-Loop</h3>
-            <p className="text-slate-400 text-sm">Menjadi "Supervisor" bagi AI, bukan sekadar pengguna pasif.</p>
+            <h3 className="text-xl font-bold mb-2 text-white">Joyfull</h3>
+            <p className="text-slate-400 text-sm">Simulasi interaktif sebagai "Detektif Fakta". Menemukan kesalahan AI dengan cara yang menyenangkan.</p>
           </div>
         </div>
       </div>
@@ -119,161 +113,71 @@ const HomeSection = ({ setPage }: { setPage: (p: string) => void }) => (
 
 // 2. MATERI SECTION
 const MateriSection = ({ setPage }: { setPage: (p: string) => void }) => {
-  const [tab, setTab] = useState(0);
-
-  const tabs = [
-    { title: "1. Cara AI Berpikir", icon: <Brain size={18}/> },
-    { title: "2. Halusinasi", icon: <Ghost size={18}/> },
-    { title: "3. Bias & Etika", icon: <Scale size={18}/> },
-    { title: "4. Metode S.A.R.I.N.G", icon: <ShieldAlert size={18}/> }
-  ];
-
   return (
     <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-            {tabs.map((t, i) => (
-                <button 
-                    key={i} 
-                    onClick={() => setTab(i)}
-                    className={`px-4 py-2 rounded-full flex items-center gap-2 text-sm font-bold transition-all ${tab === i ? 'bg-sky-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
-                >
-                    {t.icon} {t.title}
-                </button>
-            ))}
-        </div>
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold mb-8 border-l-4 border-sky-500 pl-4 text-white">Sisi Gelap Kecerdasan Artifisial</h2>
 
-        <div className="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 min-h-[400px]">
-            {/* TAB 1: CARA KERJA */}
-            {tab === 0 && (
-                <div className="animate-[fadeIn_0.3s]">
-                    <h2 className="text-3xl font-bold text-white mb-4">Bukan Memahami, Tapi Memprediksi</h2>
-                    <p className="text-slate-300 mb-6 leading-relaxed">
-                        Prinsip kerja LLM (Large Language Model) adalah <strong className="text-sky-400">Next Token Prediction</strong>. 
-                        Bayangkan fitur <em>Autocorrect</em> di HP Anda, tapi jutaan kali lebih canggih.
-                    </p>
-                    <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 mb-6">
-                        <p className="text-sm text-slate-400 mb-2 uppercase font-bold">Analogi Sederhana:</p>
-                        <p className="text-xl text-white mb-4">"Ibu kota Indonesia adalah..."</p>
-                        <div className="space-y-2">
-                            <div className="flex items-center gap-4">
-                                <div className="w-24 text-right text-emerald-400 font-mono">Jakarta</div>
-                                <div className="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden">
-                                    <div className="bg-emerald-500 h-full w-[90%]"></div>
-                                </div>
-                                <div className="w-12 text-xs text-slate-400">90%</div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="w-24 text-right text-amber-400 font-mono">Nusantara</div>
-                                <div className="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden">
-                                    <div className="bg-amber-500 h-full w-[4%]"></div>
-                                </div>
-                                <div className="w-12 text-xs text-slate-400">4%</div>
-                            </div>
+        <div className="space-y-6">
+            {/* Concept 1 */}
+            <div className="bg-slate-800/50 backdrop-blur p-6 rounded-xl border-l-4 border-l-rose-500 border border-slate-700">
+                <div className="flex items-start gap-4">
+                    <div className="p-3 bg-rose-900/30 rounded-full text-rose-400 mt-1">
+                        <Ghost size={24} />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-white mb-2">1. Halusinasi AI</h3>
+                        <p className="text-slate-300 leading-relaxed">
+                            AI Generatif bekerja berdasarkan <strong>probabilitas</strong> kata, bukan database kebenaran mutlak. Halusinasi terjadi ketika AI menjawab dengan sangat percaya diri, namun informasinya <strong>salah total</strong> atau mengarang bebas.
+                        </p>
+                        <div className="mt-4 bg-slate-900 p-4 rounded-lg text-sm border border-slate-700">
+                            <span className="text-xs text-rose-400 font-bold uppercase tracking-wider">Contoh Kasus:</span>
+                            <p className="italic text-slate-400 mt-1">"Meminta AI membuat biografi tokoh fiktif, AI malah membuatkan tanggal lahir dan nama orang tua yang seolah-olah nyata."</p>
                         </div>
-                        <p className="text-xs text-slate-500 mt-4 italic">
-                            *AI memilih "Jakarta" bukan karena dia tahu fakta geografi terbaru, tapi karena dalam miliaran data latihnya, kata "Jakarta" paling sering muncul setelah frasa tersebut.
+                    </div>
+                </div>
+            </div>
+
+            {/* Concept 2 */}
+            <div className="bg-slate-800/50 backdrop-blur p-6 rounded-xl border-l-4 border-l-amber-500 border border-slate-700">
+                <div className="flex items-start gap-4">
+                    <div className="p-3 bg-amber-900/30 rounded-full text-amber-400 mt-1">
+                        <Scale size={24} />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-white mb-2">2. Bias Algoritma</h3>
+                        <p className="text-slate-300 leading-relaxed">
+                            AI dilatih menggunakan data dari internet yang dibuat manusia. Jika data latihannya mengandung prasangka (ras, gender, budaya), maka AI akan mewarisi prasangka tersebut.
                         </p>
                     </div>
                 </div>
-            )}
+            </div>
 
-            {/* TAB 2: HALUSINASI */}
-            {tab === 1 && (
-                <div className="animate-[fadeIn_0.3s]">
-                    <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                        <Ghost className="text-rose-400"/> Fenomena Halusinasi AI
-                    </h2>
-                    <p className="text-slate-300 mb-6">
-                        Halusinasi adalah ketika AI menghasilkan respons yang terdengar <strong className="text-white">percaya diri dan logis</strong>, tetapi informasinya <strong className="text-rose-400">fiktif atau salah</strong>.
-                    </p>
-                    
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-slate-900 p-5 rounded-xl border-l-4 border-rose-500">
-                            <h3 className="text-lg font-bold text-white mb-2">1. Fabrikasi Fakta (Ngarang)</h3>
-                            <p className="text-sm text-slate-400 mb-2">Mengarang data yang sama sekali tidak ada.</p>
-                            <div className="bg-rose-900/20 p-3 rounded text-xs text-rose-200 italic">
-                                "Contoh: Meminta AI menulis biografi siswa SMK biasa, AI malah menuliskan prestasi internasional fiktif agar terlihat bagus."
-                            </div>
+            {/* Concept 3: SARING */}
+            <div className="bg-gradient-to-br from-slate-800 to-indigo-900/40 p-8 rounded-xl border border-slate-700">
+                <h3 className="text-2xl font-bold text-center mb-6 text-white">Metode Evaluasi: S.A.R.I.N.G</h3>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    {[
+                        { l: 'S', t: 'Sumber', d: '(Ada referensi?)' },
+                        { l: 'A', t: 'Akurasi', d: '(Cek angka/data)' },
+                        { l: 'R', t: 'Relevansi', d: '(Sesuai Topik?)' },
+                        { l: 'I', t: 'Independensi', d: '(Bebas Bias?)' },
+                        { l: 'N', t: 'Nalar', d: '(Masuk Akal?)' },
+                    ].map((item, idx) => (
+                        <div key={idx} className={`text-center p-4 bg-slate-900/50 rounded-lg ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}>
+                            <div className="text-2xl font-bold text-sky-400 mb-2">{item.l}</div>
+                            <div className="text-xs text-slate-300 font-bold">{item.t}</div>
+                            <div className="text-[10px] text-slate-400">{item.d}</div>
                         </div>
-                        <div className="bg-slate-900 p-5 rounded-xl border-l-4 border-orange-500">
-                            <h3 className="text-lg font-bold text-white mb-2">2. Konflasi (Campur Aduk)</h3>
-                            <p className="text-sm text-slate-400 mb-2">Menggabungkan dua fakta benar menjadi satu kesimpulan salah.</p>
-                            <div className="bg-orange-900/20 p-3 rounded text-xs text-orange-200 italic">
-                                "Contoh: Ir. Soekarno adalah penemu lampu pijar. (Salah menggabungkan Tokoh Proklamator dengan Thomas Edison)."
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mt-6 bg-slate-900 p-4 rounded-lg border border-slate-700">
-                        <h4 className="font-bold text-white text-sm mb-1">Studi Kasus Nyata: Pengacara & ChatGPT (2023)</h4>
-                        <p className="text-xs text-slate-400">Seorang pengacara menggunakan ChatGPT untuk mencari kasus hukum. ChatGPT memberikan nama kasus yang terdengar sangat meyakinkan ("Varghese v. China Southern Airlines"), padahal kasus itu <strong className="text-white">TIDAK PERNAH ADA</strong>. Pengacara tersebut akhirnya didenda.</p>
-                    </div>
+                    ))}
                 </div>
-            )}
-
-            {/* TAB 3: BIAS & ETIKA */}
-            {tab === 2 && (
-                <div className="animate-[fadeIn_0.3s]">
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3">Bias Algoritma</h3>
-                            <p className="text-slate-300 text-sm mb-4">
-                                AI tidak punya hati, tapi bisa rasis atau seksis karena <strong className="text-white">Data Latihnya berasal dari Manusia</strong>.
-                            </p>
-                            <ul className="space-y-3">
-                                <li className="bg-slate-900 p-3 rounded border border-slate-700 text-sm text-slate-300">
-                                    <strong className="text-sky-400 block">Bias Gender:</strong>
-                                    Dokter = "Dia (Laki-laki)", Perawat = "Dia (Perempuan)".
-                                </li>
-                                <li className="bg-slate-900 p-3 rounded border border-slate-700 text-sm text-slate-300">
-                                    <strong className="text-sky-400 block">Bias Representasi:</strong>
-                                    CEO atau Orang Sukses sering digambarkan sebagai pria kulit putih.
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-3">Etika: Human-in-the-Loop</h3>
-                            <p className="text-slate-300 text-sm mb-4">
-                                Teknologi terbaik bukanlah "AI menggantikan Manusia", melainkan "Manusia + AI".
-                            </p>
-                            <div className="bg-emerald-900/20 border border-emerald-500/30 p-4 rounded-xl">
-                                <h4 className="font-bold text-emerald-400 mb-2 flex items-center gap-2"><UserCheck size={16}/> Tanggung Jawab Siswa:</h4>
-                                <ul className="list-disc list-inside text-xs text-emerald-100 space-y-1">
-                                    <li><strong>Jangan Plagiat:</strong> Mengaku tulisan AI sebagai karya sendiri itu tidak etis.</li>
-                                    <li><strong>Transparansi:</strong> Sampaikan jika tugasmu dibantu AI.</li>
-                                    <li><strong>Verifikasi:</strong> Jangan sebar konten AI tanpa cek fakta (Stop Hoaks).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* TAB 4: SARING */}
-            {tab === 3 && (
-                <div className="animate-[fadeIn_0.3s]">
-                    <h2 className="text-3xl font-bold text-center mb-6 text-white">Metode S.A.R.I.N.G</h2>
-                    <p className="text-center text-slate-400 mb-8">Jadilah Detektif Digital. Terapkan prinsip <em>"Trust, but Verify"</em>.</p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                        {[
-                            { l: 'S', t: 'Sumber', d: 'Apakah ada tautan/link sumber yang valid? Cek manual di Google.' },
-                            { l: 'A', t: 'Akurasi', d: 'Cek silang data angka, tanggal, dan nama lokasi.' },
-                            { l: 'R', t: 'Relevansi', d: 'Apakah jawaban sesuai konteks? Hati-hati jawaban berputar-putar.' },
-                            { l: 'I', t: 'Independensi', d: 'Cek Bias. Apakah bahasanya netral atau memojokkan kelompok tertentu?' },
-                            { l: 'N', t: 'Nalar', d: 'Gunakan Logika (Common Sense). Gajah tidak bisa terbang dengan telinga.' },
-                        ].map((item, idx) => (
-                            <div key={idx} className="bg-slate-900 p-4 rounded-xl border border-slate-700 hover:border-sky-500 transition duration-300 group">
-                                <div className="w-10 h-10 rounded-full bg-sky-900/50 text-sky-400 font-bold text-xl flex items-center justify-center mb-3 group-hover:bg-sky-600 group-hover:text-white transition">
-                                    {item.l}
-                                </div>
-                                <h4 className="font-bold text-white mb-2">{item.t}</h4>
-                                <p className="text-xs text-slate-400 leading-relaxed">{item.d}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
+            </div>
+        </div>
+        
+        <div className="text-center mt-8">
+            <button onClick={() => setPage('simulasi')} className="px-6 py-2 border border-sky-500 text-sky-400 rounded-full hover:bg-sky-500 hover:text-white transition flex items-center gap-2 mx-auto">
+                Lanjut ke Simulasi <ArrowRight size={16} />
+            </button>
         </div>
       </div>
     </div>
@@ -282,194 +186,170 @@ const MateriSection = ({ setPage }: { setPage: (p: string) => void }) => {
 
 // 3. SIMULASI SECTION
 const SimulasiSection = () => {
-  const [mode, setMode] = useState<'visualizer' | 'detective'>('visualizer');
+  const articleData = [
+    { text: "Purbalingga adalah sebuah kota metropolitan besar di ", id: 1, isError: false },
+    { text: "Jawa Timur", id: 2, isError: true, correction: "Salah. Purbalingga berada di Provinsi Jawa Tengah." },
+    { text: " yang terkenal dengan ", id: 3, isError: false },
+    { text: "Candi Borobudur-nya.", id: 4, isError: true, correction: "Halusinasi. Candi Borobudur terletak di Magelang, bukan Purbalingga." },
+    { text: " Penduduk asli Purbalingga mayoritas bekerja sebagai ", id: 5, isError: false },
+    { text: "nelayan karena wilayahnya dikelilingi laut.", id: 6, isError: true, correction: "Salah. Purbalingga adalah wilayah daratan/pegunungan (Gunung Slamet), tidak punya laut." },
+    { text: " Industri knalpot di sana baru dimulai tahun 2020 oleh investor asing, karena ", id: 7, isError: false },
+    { text: "warga lokal kurang memiliki keterampilan logam.", id: 8, isError: true, correction: "Bias & Salah. Industri knalpot Purbalingga sudah melegenda sejak lama dan dikelola UMKM lokal yang terampil." }
+  ];
 
-  // --- SUB-COMPONENT: Visualizer ---
-  const ProbabilityVisualizer = () => {
-      const [inputStep, setInputStep] = useState(0);
-      const steps = [
-          { text: "Saya", probs: [{w: "suka", p: 40}, {w: "makan", p: 30}, {w: "pergi", p: 20}] },
-          { text: "Saya suka", probs: [{w: "nasi", p: 60}, {w: "belajar", p: 25}, {w: "tidur", p: 10}] },
-          { text: "Saya suka nasi", probs: [{w: "goreng", p: 85}, {w: "padang", p: 10}, {w: "kuning", p: 5}] },
-          { text: "Saya suka nasi goreng", probs: [{w: ".", p: 90}, {w: "pedas", p: 8}, {w: "enak", p: 2}] }
-      ];
+  const totalErrors = articleData.filter(s => s.isError).length;
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [checked, setChecked] = useState(false);
 
-      return (
-          <div className="max-w-2xl mx-auto">
-              <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 mb-6 text-center">
-                  <h3 className="text-white font-bold mb-4">Mesin Prediksi Kata (Next Token Prediction)</h3>
-                  <div className="text-2xl font-mono text-sky-400 bg-black/30 p-4 rounded-lg mb-6 min-h-[4rem] flex items-center justify-center">
-                      "{steps[inputStep]?.text || "..."}"
-                      <span className="animate-pulse ml-1">|</span>
-                  </div>
-                  
-                  {inputStep < steps.length && (
-                      <div className="space-y-3">
-                          <p className="text-xs text-slate-500 uppercase tracking-widest mb-2">Probabilitas Kata Selanjutnya:</p>
-                          {steps[inputStep].probs.map((prob, idx) => (
-                              <button 
-                                key={idx}
-                                onClick={() => setInputStep(prev => Math.min(prev + 1, steps.length))}
-                                className="w-full relative group"
-                              >
-                                  <div className="flex items-center gap-3 relative z-10 p-2 hover:bg-slate-800 rounded transition">
-                                      <div className="w-24 text-right font-bold text-slate-300 group-hover:text-white">
-                                          "{prob.w}"
-                                      </div>
-                                      <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
-                                          <div className="h-full bg-sky-500 transition-all duration-500" style={{ width: `${prob.p}%` }}></div>
-                                      </div>
-                                      <div className="w-12 text-xs text-slate-400">{prob.p}%</div>
-                                  </div>
-                              </button>
-                          ))}
-                      </div>
-                  )}
-                  {inputStep === steps.length && (
-                      <div className="text-emerald-400 font-bold py-4">
-                          Kalimat Selesai! <br/>
-                          <span className="text-xs text-slate-400 font-normal">AI menyusun ini kata demi kata berdasarkan statistik.</span>
-                          <button onClick={() => setInputStep(0)} className="block mx-auto mt-4 text-xs underline text-slate-500 hover:text-white">Ulangi</button>
-                      </div>
-                  )}
-              </div>
-              <p className="text-xs text-slate-400 text-center italic">
-                  "Inilah mengapa AI bisa berhalusinasi. Jika data latihnya salah, prediksi probabilitasnya juga akan mengarah ke kata yang salah (namun terlihat meyakinkan)."
-              </p>
-          </div>
-      );
-  }
+  const toggleSelection = (id: number) => {
+    if (checked) return;
+    setSelectedIds(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
+  };
 
-  // --- SUB-COMPONENT: Detective ---
-  const HallucinationDetector = () => {
-      const caseData = [
-          {
-              id: 1,
-              title: "Biografi Siswa",
-              aiText: "Budi adalah siswa SMK N 1 Kaligondang. Pada tahun 2024, ia memenangkan Medali Emas Olimpiade Matematika Internasional di London dan bertemu Raja Charles.",
-              errorType: "Fabrikasi",
-              correction: "Budi adalah siswa biasa. Prestasi internasional itu dikarang total oleh AI agar cerita tampak menarik.",
-              options: ["Fakta Valid", "Fabrikasi (Ngarang)", "Bias Gender"]
-          },
-          {
-              id: 2,
-              title: "Sejarah Lampu",
-              aiText: "Thomas Edison adalah pahlawan nasional Indonesia yang memproklamasikan kemerdekaan dan menemukan lampu pijar.",
-              errorType: "Konflasi",
-              correction: "AI mencampuradukkan fakta Ir. Soekarno (Proklamator) dengan Thomas Edison (Penemu Lampu).",
-              options: ["Konflasi (Campur Aduk)", "Bias Representasi", "Fakta Valid"]
-          },
-          {
-              id: 3,
-              title: "Deskripsi Profesi",
-              aiText: "Seorang CEO memimpin rapat. Dia (Laki-laki) marah kepada sekretarisnya. Dia (Perempuan) menangis di pojok ruangan.",
-              errorType: "Bias",
-              correction: "AI mengasumsikan CEO = Pria dan Sekretaris = Wanita. Ini adalah Bias Gender/Stereotip.",
-              options: ["Fabrikasi", "Bias Stereotip", "Konflasi"]
-          }
-      ];
+  const getResults = () => {
+    let correctFound = 0;
+    let wrongGuesses = 0;
+    
+    selectedIds.forEach(id => {
+        const segment = articleData.find(s => s.id === id);
+        if (segment?.isError) correctFound++;
+        else wrongGuesses++;
+    });
 
-      const [currentCase, setCurrentCase] = useState(0);
-      const [feedback, setFeedback] = useState<null | {correct: boolean, msg: string}>(null);
+    return { correctFound, wrongGuesses };
+  };
 
-      const checkAnswer = (answer: string) => {
-          const isCorrect = answer.includes(caseData[currentCase].errorType) || 
-                            (caseData[currentCase].errorType === "Bias" && answer.includes("Bias"));
-          
-          if (isCorrect) {
-              setFeedback({ correct: true, msg: "Tepat! " + caseData[currentCase].correction });
-          } else {
-              setFeedback({ correct: false, msg: "Kurang tepat. Coba analisis lagi jenis kesalahannya." });
-          }
-      };
+  const { correctFound, wrongGuesses } = getResults();
 
-      const nextCase = () => {
-          setFeedback(null);
-          setCurrentCase(prev => (prev + 1) % caseData.length);
-      };
-
-      return (
-          <div className="max-w-3xl mx-auto">
-              <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
-                  <div className="flex justify-between items-center mb-6">
-                      <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                          <Search className="text-amber-400"/> Detektif Fakta (Supervisor)
-                      </h3>
-                      <span className="text-xs bg-slate-700 px-3 py-1 rounded text-slate-300">
-                          Kasus {currentCase + 1}/{caseData.length}
-                      </span>
-                  </div>
-
-                  <div className="bg-black/30 p-6 rounded-xl border-l-4 border-indigo-500 mb-6">
-                      <h4 className="text-indigo-300 text-xs font-bold uppercase mb-2">Output AI: {caseData[currentCase].title}</h4>
-                      <p className="text-lg text-slate-200 font-serif leading-relaxed">"{caseData[currentCase].aiText}"</p>
-                  </div>
-
-                  {!feedback ? (
-                      <div>
-                          <p className="text-sm text-slate-400 mb-3 text-center">Apa jenis kesalahan AI di atas?</p>
-                          <div className="grid grid-cols-3 gap-3">
-                              {caseData[currentCase].options.map((opt, i) => (
-                                  <button 
-                                    key={i} 
-                                    onClick={() => checkAnswer(opt)}
-                                    className="py-3 px-4 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-bold text-white transition"
-                                  >
-                                      {opt}
-                                  </button>
-                              ))}
-                          </div>
-                      </div>
-                  ) : (
-                      <div className={`p-4 rounded-xl border ${feedback.correct ? 'bg-emerald-900/20 border-emerald-500' : 'bg-rose-900/20 border-rose-500'} animate-[fadeIn_0.3s]`}>
-                          <div className="flex items-start gap-3">
-                              {feedback.correct ? <CheckCircle className="text-emerald-400 shrink-0"/> : <X className="text-rose-400 shrink-0"/>}
-                              <div>
-                                  <h4 className={`font-bold ${feedback.correct ? 'text-emerald-400' : 'text-rose-400'}`}>
-                                      {feedback.correct ? "Analisis Benar!" : "Salah Identifikasi"}
-                                  </h4>
-                                  <p className="text-sm text-slate-300 mt-1">{feedback.msg}</p>
-                                  {feedback.correct && (
-                                      <button onClick={nextCase} className="mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded text-xs text-white">
-                                          Kasus Berikutnya
-                                      </button>
-                                  )}
-                                  {!feedback.correct && (
-                                      <button onClick={() => setFeedback(null)} className="mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded text-xs text-white">
-                                          Coba Lagi
-                                      </button>
-                                  )}
-                              </div>
-                          </div>
-                      </div>
-                  )}
-              </div>
-          </div>
-      );
+  const resetSimulation = () => {
+      setSelectedIds([]);
+      setChecked(false);
   }
 
   return (
     <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-        <div className="text-center mb-8">
-           <h2 className="text-3xl font-bold text-white mb-4">Laboratorium Simulasi</h2>
-           <div className="flex justify-center gap-4">
-               <button 
-                 onClick={() => setMode('visualizer')}
-                 className={`px-6 py-2 rounded-full font-bold transition ${mode === 'visualizer' ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-400'}`}
-               >
-                   1. Mesin Prediksi (Konsep)
-               </button>
-               <button 
-                 onClick={() => setMode('detective')}
-                 className={`px-6 py-2 rounded-full font-bold transition ${mode === 'detective' ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-400'}`}
-               >
-                   2. Detektif Halusinasi (Praktek)
-               </button>
-           </div>
+      <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto h-full min-h-[600px]">
+        
+        {/* Left: Instructions & Tools */}
+        <div className="bg-slate-800/50 backdrop-blur p-6 rounded-xl flex flex-col border border-slate-700 h-fit">
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                <Search className="text-sky-400" /> Misi Detektif
+            </h3>
+            <p className="text-sm text-slate-400 mb-4">
+                Anda adalah Quality Control untuk "Bot-X". Bot ini baru saja menulis artikel tentang <strong>Purbalingga</strong>, tapi penuh halusinasi dan bias.
+            </p>
+            
+            <div className="bg-indigo-900/30 p-4 rounded-lg mb-4 border border-indigo-500/30">
+                <h4 className="font-bold text-indigo-300 text-sm mb-2 flex items-center gap-2"><Database size={14}/> Database Fakta (Kunci Jawaban)</h4>
+                <ul className="text-xs space-y-2 text-slate-300 list-disc pl-4">
+                    <li>Lokasi: Jawa Tengah (Bukan Jatim).</li>
+                    <li>Landmark: Owabong, Gunung Slamet. (Borobudur di Magelang).</li>
+                    <li>Geografi: Dataran tinggi/pegunungan (Bukan laut).</li>
+                    <li>Industri: Knalpot & Bulu Mata Palsu (Sudah lama ada, UMKM lokal).</li>
+                </ul>
+            </div>
+
+            <div className="mt-auto">
+                <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-semibold text-slate-300">Status Investigasi:</span>
+                    <span className="text-xl font-bold text-sky-400">{checked ? correctFound : selectedIds.length}/{totalErrors}</span>
+                </div>
+                <div className="w-full bg-slate-700 rounded-full h-2.5 mb-4 overflow-hidden">
+                    <div 
+                        className={`h-2.5 rounded-full transition-all duration-500 ${checked ? 'bg-emerald-500' : 'bg-sky-500'}`} 
+                        style={{ width: `${(checked ? (correctFound/totalErrors) : (selectedIds.length/totalErrors)) * 100}%` }}
+                    ></div>
+                </div>
+                {!checked ? (
+                    <button onClick={() => setChecked(true)} className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg font-bold shadow-lg shadow-emerald-500/20 hover:scale-[1.02] transition text-white flex items-center justify-center gap-2">
+                        <Search size={18} /> Periksa Temuan
+                    </button>
+                ) : (
+                    <button onClick={resetSimulation} className="w-full py-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-200 transition text-sm">
+                        Reset Simulasi
+                    </button>
+                )}
+            </div>
         </div>
 
-        {mode === 'visualizer' && <ProbabilityVisualizer />}
-        {mode === 'detective' && <HallucinationDetector />}
+        {/* Right: The Document */}
+        <div className="lg:col-span-2 bg-slate-800/50 backdrop-blur p-8 rounded-xl relative overflow-y-auto border border-slate-700">
+            <div className="absolute top-4 right-4 bg-slate-900 px-3 py-1 rounded text-xs text-slate-500 font-mono border border-slate-700">
+                Generated by Bot-X v1.0
+            </div>
+
+            <h2 className="text-2xl font-serif font-bold mb-6 text-white border-b border-slate-700 pb-4">
+                Keindahan Kota Purbalingga
+            </h2>
+
+            <div className="text-lg leading-loose text-slate-300 font-serif">
+                {articleData.map((segment) => {
+                    let className = "px-0.5 rounded cursor-pointer transition ";
+                    
+                    if (checked) {
+                        if (segment.isError) {
+                            if (selectedIds.includes(segment.id)) {
+                                className += "bg-emerald-500/20 border-b-2 border-emerald-500 text-emerald-200 "; // True Positive
+                            } else {
+                                className += "bg-rose-500/10 border-b-2 border-dashed border-rose-500 text-rose-300 "; // False Negative (Missed)
+                            }
+                        } else if (selectedIds.includes(segment.id)) {
+                            className += "bg-slate-600 line-through text-slate-500 "; // False Positive (Wrong Guess)
+                        }
+                    } else {
+                        if (selectedIds.includes(segment.id)) {
+                            className += "bg-rose-500 text-white "; // Selected
+                        } else {
+                            className += "hover:bg-slate-700/50 "; // Hover
+                        }
+                    }
+
+                    return (
+                        <span 
+                            key={segment.id}
+                            onClick={() => toggleSelection(segment.id)}
+                            className={className}
+                        >
+                            {segment.text}
+                        </span>
+                    );
+                })}
+            </div>
+
+            {/* Feedback Area */}
+            {checked && (
+                <div className={`mt-6 p-6 border rounded-lg animate-[fadeIn_0.5s] ${correctFound === totalErrors && wrongGuesses === 0 ? 'bg-emerald-900/20 border-emerald-500' : 'bg-slate-900/80 border-slate-700'}`}>
+                    <h4 className="font-bold mb-4 flex items-center gap-2 text-white">
+                        {correctFound === totalErrors && wrongGuesses === 0 
+                            ? <><CheckCircle className="text-emerald-400"/> Investigasi Sempurna!</> 
+                            : <><AlertTriangle className="text-amber-400"/> Hasil Analisis</>}
+                    </h4>
+                    <ul className="space-y-3 text-sm">
+                        {articleData.filter(s => s.isError).map(s => {
+                            const isFound = selectedIds.includes(s.id);
+                            return (
+                                <li key={s.id} className={`flex items-start gap-2 ${isFound ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                    {isFound ? <CheckCircle size={16} className="mt-0.5 shrink-0"/> : <X size={16} className="mt-0.5 shrink-0"/>}
+                                    <span>
+                                        <strong>{isFound ? "Hebat!" : "Terlewat:"}</strong> "{s.text}" itu salah. {s.correction}
+                                    </span>
+                                </li>
+                            )
+                        })}
+                        {selectedIds.filter(id => !articleData.find(s => s.id === id)?.isError).map(id => {
+                             const segment = articleData.find(s => s.id === id);
+                             return (
+                                <li key={id} className="flex items-start gap-2 text-slate-400">
+                                    <Minus size={16} className="mt-0.5 shrink-0"/>
+                                    <span><strong>Kurang Tepat:</strong> "{segment?.text}" sebenarnya fakta yang benar.</span>
+                                </li>
+                             )
+                        })}
+                    </ul>
+                </div>
+            )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -484,43 +364,23 @@ const KuisSection = () => {
   const questions = [
     {
       id: 1,
-      q: "Apa prinsip utama cara kerja AI Generatif (LLM) dalam menghasilkan teks?",
+      q: "Apa yang dimaksud dengan 'Halusinasi AI'?",
       options: [
-        { id: 'a', text: "Mencari fakta kebenaran mutlak di database." },
-        { id: 'b', text: "Next Token Prediction (Memprediksi kata selanjutnya berdasarkan probabilitas)." },
-        { id: 'c', text: "Bertanya kepada manusia secara langsung." }
+        { id: 'a', text: "AI melihat hantu." },
+        { id: 'b', text: "AI menghasilkan informasi yang meyakinkan tapi faktanya salah." },
+        { id: 'c', text: "AI menolak menjawab pertanyaan." }
       ],
       correct: 'b'
     },
     {
       id: 2,
-      q: "Ketika AI menggabungkan dua fakta yang benar menjadi satu kesimpulan yang salah (Misal: Soekarno penemu lampu), ini disebut...",
+      q: "Mengapa kita perlu menerapkan metode SARING?",
       options: [
-        { id: 'a', text: "Fabrikasi" },
-        { id: 'b', text: "Konflasi" },
-        { id: 'c', text: "Akurasi" }
-      ],
-      correct: 'b'
-    },
-    {
-      id: 3,
-      q: "Apa yang dimaksud dengan konsep 'Human-in-the-Loop'?",
-      options: [
-        { id: 'a', text: "Manusia harus selalu mengawasi, memverifikasi, dan mengedit hasil AI." },
-        { id: 'b', text: "Manusia dilarang menggunakan AI sama sekali." },
-        { id: 'c', text: "Manusia menyerahkan seluruh keputusan kepada AI." }
+        { id: 'a', text: "Agar kita tidak termakan hoaks atau informasi bias dari AI." },
+        { id: 'b', text: "Agar komputer tidak cepat panas." },
+        { id: 'c', text: "Untuk membantu AI belajar lebih cepat." }
       ],
       correct: 'a'
-    },
-    {
-      id: 4,
-      q: "Mengapa AI bisa memiliki bias (seperti menganggap Dokter selalu Pria)?",
-      options: [
-        { id: 'a', text: "Karena AI membenci wanita." },
-        { id: 'b', text: "Karena data latih dari internet mencerminkan stereotip manusia (Garbage In, Garbage Out)." },
-        { id: 'c', text: "Karena AI rusak." }
-      ],
-      correct: 'b'
     }
   ];
 
@@ -531,7 +391,7 @@ const KuisSection = () => {
   const checkQuiz = () => {
       let currentScore = 0;
       questions.forEach(q => {
-          if(answers[q.id] === q.correct) currentScore += 25;
+          if(answers[q.id] === q.correct) currentScore += 50;
       });
       setScore(currentScore);
       setShowResult(true);
@@ -575,11 +435,11 @@ const KuisSection = () => {
             ) : (
                 <div className="text-center animate-[fadeIn_0.5s]">
                     <div className="text-6xl mb-4">
-                        {score === 100 ? "🎉" : score >= 75 ? "👍" : "📚"}
+                        {score === 100 ? "🎉" : "📚"}
                     </div>
                     <h3 className="text-2xl font-bold mb-2 text-white">Nilai Anda: {score}</h3>
                     <p className="text-slate-400 mb-6">
-                        {score === 100 ? "Sempurna! Anda siap menjadi pengguna AI yang kritis." : "Masih perlu belajar lagi tentang jenis halusinasi AI."}
+                        {score === 100 ? "Luar biasa! Anda siap menjadi pengguna AI yang cerdas." : "Coba pelajari lagi materinya ya, semangat!"}
                     </p>
                     <button onClick={() => window.location.reload()} className="px-6 py-2 border border-slate-500 rounded-full hover:bg-slate-800 text-slate-300 transition">
                         Ulangi Pelajaran

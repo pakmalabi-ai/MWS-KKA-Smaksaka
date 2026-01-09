@@ -12,26 +12,24 @@ import {
   CheckCircle, 
   Play, 
   Pause, 
-  ChevronRight, 
-  ArrowRight, 
-  Layout, 
-  Users, 
-  GitMerge, 
+  ChevronRight,
+  ArrowRight,
+  Layout,
+  Users,
+  ShoppingCart,
+  GitMerge,
   MessageSquare,
-  Wrench, 
-  Utensils, 
-  Calculator, 
-  Palette, 
-  Car, 
-  Hammer, 
-  Factory 
+  Search,
+  Server,
+  Key,
+  Table
 } from 'lucide-react';
 
 // --- SUB-COMPONENTS ---
 
 function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
   const [breathing, setBreathing] = useState(false);
-  const [message, setMessage] = useState("Siap merancang sistem?");
+  const [message, setMessage] = useState("Siap untuk belajar?");
 
   useEffect(() => {
     let interval: any;
@@ -45,7 +43,7 @@ function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
         setTimeout(() => setMessage("Hembuskan perlahan... (Exhale)"), 6000);
       }, 9000);
     } else {
-      setMessage("Tekan tombol untuk fokus sejenak.");
+      setMessage("Tekan tombol untuk memulai mindfulness.");
     }
     return () => clearInterval(interval);
   }, [breathing]);
@@ -55,30 +53,40 @@ function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
       {/* Hero Section */}
       <div className="text-center mb-12 pt-10">
         <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-indigo-900/30 text-indigo-400 text-sm font-medium border border-indigo-500/30">
-           Topik: Struktur Data Industri & Relasi
+           Topik: Merancang Struktur Data dengan ERD & Integrasi AI
         </div>
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-          Arsitek Data <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Dunia Kerja</span>
+          Menjadi <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Arsitek Data</span>
         </h1>
         <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          Di bengkel, di dapur hotel, atau di kantor akuntan, data yang berantakan adalah musuh. 
-          Mari belajar merancang <strong>ERD (Entity Relationship Diagram)</strong> agar aplikasi buatanmu bisa membantu pekerjaan nyata.
+          Pernahkah kalian berpikir, bagaimana <strong>TikTok</strong> tahu video apa yang kalian sukai? 
+          Atau bagaimana <strong>Shopee</strong> menyimpan jutaan barang tanpa tertukar? 
+          Atau bagaimana <strong>Mobile Legends</strong> menyimpan data Skin, Rank, dan Hero milik jutaan pemain?
         </p>
+        <div className="mt-6 p-4 bg-slate-800/50 rounded-xl border border-slate-700 max-w-2xl mx-auto">
+           <p className="text-indigo-300 font-medium">"Jawabannya bukan sihir, melainkan Basis Data (Database) yang terstruktur rapi."</p>
+        </div>
       </div>
 
-      {/* Values Section */}
-      <div className="grid md:grid-cols-3 gap-6 mb-12">
-         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-indigo-500 transition-colors">
-            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2"><Car className="text-indigo-400"/> Teknik</h3>
-            <p className="text-slate-400 text-sm">Bagaimana Gojek mencocokkan jutaan Driver dengan Penumpang tanpa tertukar?</p>
+      {/* Data vs Info Card */}
+      <div className="grid md:grid-cols-2 gap-6 mb-12">
+         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Database size={80}/></div>
+            <h3 className="text-xl font-bold text-slate-400 mb-2 flex items-center gap-2"><Server size={20}/> 1.1 Data (Mentah)</h3>
+            <p className="text-slate-500 italic mb-4">"Fakta mentah yang belum punya makna."</p>
+            <div className="bg-slate-900 p-3 rounded font-mono text-sm text-slate-400 space-y-1">
+               <p>"Malabi"</p>
+               <p>"X TJKT 1"</p>
+               <p>"SMK N 1 Kaligondang"</p>
+            </div>
          </div>
-         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 transition-colors">
-            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2"><Calculator className="text-emerald-400"/> Bisnis</h3>
-            <p className="text-slate-400 text-sm">Bagaimana Kasir Toko tahu stok barang berkurang otomatis saat discan?</p>
-         </div>
-         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
-            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2"><Palette className="text-purple-400"/> Kreatif</h3>
-            <p className="text-slate-400 text-sm">Bagaimana Netflix menyusun ribuan film agar mudah dicari sesuai genre?</p>
+         <div className="bg-gradient-to-br from-indigo-900/40 to-slate-800 p-6 rounded-xl border border-indigo-500 shadow-lg shadow-indigo-500/10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10"><Activity size={80}/></div>
+            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2"><CheckCircle size={20} className="text-emerald-400"/> 1.2 Informasi (Matang)</h3>
+            <p className="text-indigo-300 italic mb-4">"Data yang sudah diolah dan berguna."</p>
+            <div className="bg-slate-900 p-3 rounded font-mono text-sm text-white">
+               "Malabi adalah siswa kelas X TJKT 1 di SMK N 1 Kaligondang."
+            </div>
          </div>
       </div>
 
@@ -88,10 +96,11 @@ function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
               <Activity className="text-emerald-400" />
-              Zona Fokus (Mindful)
+              Zona Mindfull
             </h3>
             <p className="text-slate-400 mb-6">
-              Merancang database butuh logika yang jernih. Tenangkan pikiran sebelum masuk ke logika relasi data.
+              Sebelum merancang database yang rumit, mari tenangkan pikiran agar logika berjalan lancar.
+              Teknik STOP (Stop, Take a breath, Observe, Proceed).
             </p>
             <button 
               onClick={() => setBreathing(!breathing)}
@@ -122,16 +131,16 @@ function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
           <div className="w-12 h-12 bg-indigo-900/50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors">
             <BookOpen className="text-indigo-400 group-hover:text-white" />
           </div>
-          <h3 className="text-xl font-bold mb-2 text-white">Konsep ERD</h3>
-          <p className="text-slate-400 text-sm">Entitas, Atribut, dan Relasi dalam industri.</p>
+          <h3 className="text-xl font-bold mb-2 text-white">Bab 2: Konsep ERD</h3>
+          <p className="text-slate-400 text-sm">Entitas, Atribut, Relasi, dan Kardinalitas.</p>
         </div>
 
         <div onClick={() => changeTab('simulasi')} className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 cursor-pointer transition-all hover:-translate-y-1 group">
           <div className="w-12 h-12 bg-purple-900/50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors">
             <Share2 className="text-purple-400 group-hover:text-white" />
           </div>
-          <h3 className="text-xl font-bold mb-2 text-white">Studio Perancangan</h3>
-          <p className="text-slate-400 text-sm">Simulasi merancang DB sesuai Jurusanmu.</p>
+          <h3 className="text-xl font-bold mb-2 text-white">Bab 4: Studi Kasus</h3>
+          <p className="text-slate-400 text-sm">Simulasi Perpus, Toko, & Ekskul (M:N).</p>
         </div>
 
         <div onClick={() => changeTab('kuis')} className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 cursor-pointer transition-all hover:-translate-y-1 group">
@@ -139,7 +148,7 @@ function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
             <CheckCircle className="text-emerald-400 group-hover:text-white" />
           </div>
           <h3 className="text-xl font-bold mb-2 text-white">Tantangan</h3>
-          <p className="text-slate-400 text-sm">Uji pemahaman logika data.</p>
+          <p className="text-slate-400 text-sm">Uji pemahaman tentang struktur data.</p>
         </div>
       </div>
     </div>
@@ -151,98 +160,80 @@ function MateriSection() {
 
   const slides = [
     {
-      title: "Dari Catatan Kertas ke Database",
+      title: "Apa itu Basis Data?",
       icon: <Database className="text-indigo-400" size={32} />,
       content: (
         <div className="space-y-6">
-          <p className="text-slate-300 leading-relaxed mb-4">
-             Di tempat PKL (Praktik Kerja Lapangan), kalian mungkin melihat tumpukan kertas formulir atau buku besar.
-             Database bertugas mengubah tumpukan itu menjadi sistem digital yang rapi.
-          </p>
-          <div className="grid md:grid-cols-2 gap-4">
-             <div className="bg-slate-900 p-4 rounded-xl border border-slate-600">
-               <h4 className="text-amber-400 font-bold mb-2 flex items-center gap-2"><Hammer size={16}/> Contoh Bengkel</h4>
-               <p className="text-xs text-slate-400 mb-2">Buku Servis Manual:</p>
-               <div className="bg-white text-slate-900 p-2 rounded text-[10px] font-mono mb-2 opacity-80 rotate-1">
-                 Tgl: 12/01, Nopol: R1234, Rusak: Rem, Mekanik: Budi
-               </div>
-               <ArrowRight className="mx-auto text-slate-500 my-1 rotate-90 md:rotate-0"/>
-               <div className="bg-indigo-900/50 text-indigo-200 p-2 rounded text-[10px] font-mono border border-indigo-500/50">
-                 Tabel: [ID_Servis, Plat_No, Keluhan, ID_Mekanik]
-               </div>
-             </div>
-             
-             <div className="bg-slate-900 p-4 rounded-xl border border-slate-600">
-               <h4 className="text-emerald-400 font-bold mb-2 flex items-center gap-2"><Utensils size={16}/> Contoh Restoran</h4>
-               <p className="text-xs text-slate-400 mb-2">Bon Pesanan:</p>
-               <div className="bg-white text-slate-900 p-2 rounded text-[10px] font-mono mb-2 opacity-80 -rotate-1">
-                 Meja 5: 2 Nasi Goreng, 1 Es Teh
-               </div>
-               <ArrowRight className="mx-auto text-slate-500 my-1 rotate-90 md:rotate-0"/>
-               <div className="bg-emerald-900/50 text-emerald-200 p-2 rounded text-[10px] font-mono border border-emerald-500/50">
-                 Tabel: [No_Order, No_Meja, Menu_Item, Qty]
-               </div>
-             </div>
+          <div className="bg-slate-900 p-6 rounded-xl border border-slate-700">
+             <h4 className="text-lg font-bold text-white mb-2 flex items-center gap-2"><Layout size={20}/> Analogi: Lemari Arsip Raksasa</h4>
+             <p className="text-slate-300 leading-relaxed mb-4">
+               Bayangkan sebuah gudang. Jika kalian menumpuk kertas sembarangan, itu <strong>bukan database</strong>, itu sampah.
+               <br/><br/>
+               Database adalah saat kertas dimasukkan ke map, diberi label, dan disusun di rak sesuai abjad agar mudah dicari.
+               Definisi teknis: Kumpulan data yang terorganisir, disimpan secara digital, dan dapat diakses dengan mudah.
+             </p>
           </div>
         </div>
       )
     },
     {
-      title: "Anatomi ERD (Peta Data)",
+      title: "Membedah ERD (Entity Relationship Diagram)",
       icon: <Share2 className="text-pink-400" size={32} />,
       content: (
         <div className="space-y-4">
-          <p className="text-slate-300"><strong>ERD (Entity Relationship Diagram)</strong> adalah denah arsitek sebelum membangun aplikasi.</p>
+          <p className="text-slate-300"><strong>ERD</strong> adalah "Denah Rumah" sebelum database dibangun. Ada 3 komponen wajib:</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
             <div className="bg-slate-900 p-4 rounded border border-slate-600 text-center hover:border-indigo-500 transition-colors">
-              <div className="w-16 h-10 border-2 border-indigo-400 mx-auto mb-2 bg-indigo-900/20 flex items-center justify-center text-xs font-mono text-indigo-300">Entitas</div>
-              <h4 className="font-bold text-white">Objek Utama</h4>
-              <p className="text-xs text-slate-400 mt-1">Benda/Orang yang punya data.<br/>Cth: <strong>Mobil, Pelanggan, Barang</strong>.</p>
+              <div className="w-16 h-10 border-2 border-indigo-400 mx-auto mb-2 bg-indigo-900/20 flex items-center justify-center text-xs font-mono text-indigo-300">Persegi</div>
+              <h4 className="font-bold text-white">2.1 Entitas</h4>
+              <p className="text-xs text-indigo-300 font-bold mb-1">"KATA BENDA"</p>
+              <p className="text-xs text-slate-400 mt-1">Objek yang disimpan datanya.<br/>Contoh: <strong>Siswa, Guru, Barang</strong>.</p>
             </div>
             <div className="bg-slate-900 p-4 rounded border border-slate-600 text-center hover:border-emerald-500 transition-colors">
-              <div className="w-16 h-10 border-2 border-emerald-400 rounded-[50%] mx-auto mb-2 bg-emerald-900/20 flex items-center justify-center text-xs font-mono text-emerald-300">Atribut</div>
-              <h4 className="font-bold text-white">Detail Data</h4>
-              <p className="text-xs text-slate-400 mt-1">Ciri-ciri objek.<br/>Cth: <strong>Plat Nomor, Warna, Harga</strong>.</p>
+              <div className="w-16 h-10 border-2 border-emerald-400 rounded-[50%] mx-auto mb-2 bg-emerald-900/20 flex items-center justify-center text-xs font-mono text-emerald-300">Oval</div>
+              <h4 className="font-bold text-white">2.2 Atribut</h4>
+              <p className="text-xs text-emerald-300 font-bold mb-1">"KATA SIFAT"</p>
+              <p className="text-xs text-slate-400 mt-1">Ciri-ciri detail.<br/>Contoh: <strong>Nama, Alamat, NIS</strong>.</p>
             </div>
             <div className="bg-slate-900 p-4 rounded border border-slate-600 text-center hover:border-orange-500 transition-colors">
               <div className="w-10 h-10 border-2 border-orange-400 rotate-45 mx-auto mb-2 bg-orange-900/20 mt-1"></div>
-              <h4 className="font-bold text-white mt-2">Relasi</h4>
-              <p className="text-xs text-slate-400 mt-1">Hubungan antar objek.<br/>Cth: <strong>Memperbaiki, Membeli</strong>.</p>
+              <h4 className="font-bold text-white mt-2">2.3 Relasi</h4>
+              <p className="text-xs text-orange-300 font-bold mb-1">"KATA KERJA"</p>
+              <p className="text-xs text-slate-400 mt-1">Hubungan antar entitas.<br/>Contoh: <strong>Meminjam, Membeli</strong>.</p>
             </div>
+          </div>
+          <div className="bg-indigo-900/20 p-3 rounded border border-indigo-500/30 text-sm text-indigo-200">
+             <strong>Konsep Primary Key:</strong> Atribut unik pembeda. Bayangkan jika ada 5 siswa bernama "Budi", komputer membedakannya lewat <strong>NIS/NISN</strong>.
           </div>
         </div>
       )
     },
     {
-      title: "Logika Hubungan (Kardinalitas)",
+      title: "Bab 3: Logika Hubungan (Kardinalitas)",
       icon: <GitMerge className="text-cyan-400" size={32} />,
       content: (
         <div className="space-y-4">
-          <p className="text-slate-300">Bagaimana data saling terhubung di dunia nyata?</p>
+          <p className="text-slate-300">Bagaimana aturan main hubungan antar data?</p>
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-4 bg-slate-900 p-4 rounded-lg border border-slate-700">
-              <div className="text-2xl font-bold text-cyan-400 w-12 text-center">1:1</div>
+              <div className="text-2xl font-bold text-cyan-400 w-16 text-center">1 : 1</div>
               <div>
-                <p className="font-bold text-white">One to One (Satu lawan Satu)</p>
-                <p className="text-sm text-slate-400">1 Kepala Bengkel memimpin 1 Bengkel.</p>
+                <p className="font-bold text-white">One to One</p>
+                <p className="text-sm text-slate-400">1 Sekolah hanya punya 1 Kepala Sekolah. 1 Kepala Sekolah hanya memimpin 1 Sekolah.</p>
               </div>
             </div>
             <div className="flex items-center gap-4 bg-slate-900 p-4 rounded-lg border border-slate-700">
-              <div className="text-2xl font-bold text-cyan-400 w-12 text-center">1:N</div>
+              <div className="text-2xl font-bold text-cyan-400 w-16 text-center">1 : N</div>
               <div>
-                <p className="font-bold text-white">One to Many (Satu lawan Banyak)</p>
-                <p className="text-sm text-slate-400">1 Pelanggan bisa punya BANYAK Faktur belanja (Hari ini beli, besok beli lagi).</p>
+                <p className="font-bold text-white">One to Many</p>
+                <p className="text-sm text-slate-400">1 Kelas berisi BANYAK Siswa. Tapi 1 Siswa hanya terdaftar di 1 Kelas.</p>
               </div>
             </div>
             <div className="flex items-center gap-4 bg-slate-900 p-4 rounded-lg border-2 border-cyan-500/50">
-              <div className="text-2xl font-bold text-cyan-400 w-12 text-center">M:N</div>
+              <div className="text-2xl font-bold text-cyan-400 w-16 text-center">M : N</div>
               <div>
-                <p className="font-bold text-white">Many to Many (Banyak lawan Banyak)</p>
-                <p className="text-sm text-slate-400">
-                  1 Resep butuh BANYAK Bahan (Tepung, Telur).<br/>
-                  1 Bahan (Telur) dipakai di BANYAK Resep (Kue, Dadar).
-                  <br/><span className="text-amber-400 text-xs">(Butuh tabel penghubung!)</span>
-                </p>
+                <p className="font-bold text-white">Many to Many</p>
+                <p className="text-sm text-slate-400">1 Siswa bisa ikut Banyak Ekskul. 1 Ekskul punya Banyak Anggota. <br/><span className="text-amber-400 text-xs font-bold">--> Butuh Tabel Penghubung!</span></p>
               </div>
             </div>
           </div>
@@ -250,34 +241,21 @@ function MateriSection() {
       )
     },
     {
-      title: "Integrasi AI dalam Data",
+      title: "Bab 5: Integrasi AI (Thought Partner)",
       icon: <Brain className="text-purple-400" size={32} />,
       content: (
         <div className="space-y-4">
           <p className="text-slate-300">
-            Mengapa struktur data itu penting untuk AI?
+            Gunakan AI sebagai "Asisten Berpikir". Jangan minta AI mengerjakan 100%, tapi mintalah ide.
           </p>
           <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-            <div className="flex gap-4 items-start">
-               <div className="bg-indigo-600 p-2 rounded text-white"><Cpu size={20}/></div>
-               <div>
-                 <h4 className="font-bold text-white text-sm">AI Prediksi (Predictive AI)</h4>
-                 <p className="text-xs text-slate-400 mt-1">
-                   Jika data "Riwayat Servis" (1:N) tersusun rapi, AI bisa memprediksi: 
-                   <br/><span className="text-emerald-400 italic">"Pelanggan Budi kemungkinan besar akan ganti oli bulan depan."</span>
-                 </p>
+            <h4 className="font-bold text-white mb-2 flex items-center gap-2"><MessageSquare size={16} className="text-purple-400"/> Contoh Prompt Efektif:</h4>
+            <div className="space-y-3">
+               <div className="bg-slate-800 p-3 rounded text-sm text-indigo-300 font-mono border-l-4 border-indigo-500">
+                  "Saya ingin membuat database Bengkel Motor. Selain Nama Pelanggan dan Plat Nomor, atribut apa lagi yang penting?"
                </div>
-            </div>
-          </div>
-          <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-            <div className="flex gap-4 items-start">
-               <div className="bg-purple-600 p-2 rounded text-white"><MessageSquare size={20}/></div>
-               <div>
-                 <h4 className="font-bold text-white text-sm">AI Chatbot (Generative AI)</h4>
-                 <p className="text-xs text-slate-400 mt-1">
-                   Jika data "Resep & Bahan" (M:N) rapi, Chatbot bisa menjawab:
-                   <br/><span className="text-emerald-400 italic">"Saya punya sisa Telur dan Tepung, bisa masak apa?" -&gt; AI mencari relasi resep yang cocok.</span>
-                 </p>
+               <div className="bg-slate-800 p-3 rounded text-sm text-indigo-300 font-mono border-l-4 border-indigo-500">
+                  "Buatkan saya data dummy (palsu) dalam format CSV untuk 5 siswa dengan kolom: NIS, Nama, dan Nilai Koding."
                </div>
             </div>
           </div>
@@ -328,198 +306,341 @@ function MateriSection() {
 }
 
 function SimulationSection() {
-  const [jurusan, setJurusan] = useState<string | null>(null);
-  const [step, setStep] = useState(0); // 0: Select, 1: Define Relation, 2: Result
-  const [selectedRelation, setSelectedRelation] = useState<string | null>(null);
+  const [activeCase, setActiveCase] = useState<'library' | 'store' | 'ekskul' | 'ai'>('library');
 
-  // Vocational Scenarios
-  const scenarios: Record<string, any> = {
-    teknik: {
-      label: "Teknik (Mesin/Otomotif/Las)",
-      icon: <Wrench size={24}/>,
-      entityA: { name: "Kendaraan", attr: ["Plat No", "Merk", "Tahun"] },
-      entityB: { name: "Riwayat Servis", attr: ["Tgl Servis", "Jenis Kerusakan", "Biaya"] },
-      correctRel: "1:N",
-      explanation: "Satu Kendaraan bisa melakukan servis berulang kali (Banyak Riwayat). Tapi satu lembar riwayat servis hanya milik satu kendaraan.",
-      aiBenefit: "AI Maintenance: Memprediksi kerusakan berikutnya berdasarkan riwayat servis sebelumnya."
-    },
-    bisnis: {
-      label: "Bisnis (Akuntansi/MPLB)",
-      icon: <Calculator size={24}/>,
-      entityA: { name: "Pelanggan", attr: ["ID Pelanggan", "Nama", "Alamat"] },
-      entityB: { name: "Faktur Penjualan", attr: ["No Faktur", "Tanggal", "Total"] },
-      correctRel: "1:N",
-      explanation: "Satu Pelanggan bisa memiliki banyak Faktur (sering belanja). Tapi satu Faktur fisik hanya ditujukan untuk satu Pelanggan.",
-      aiBenefit: "AI Customer Segmentation: Mengelompokkan pelanggan setia berdasarkan frekuensi belanja."
-    },
-    kuliner: {
-      label: "Kuliner & Perhotelan",
-      icon: <Utensils size={24}/>,
-      entityA: { name: "Resep Masakan", attr: ["Nama Menu", "Cara Masak", "Harga Jual"] },
-      entityB: { name: "Bahan Baku", attr: ["Nama Bahan", "Stok", "Satuan"] },
-      correctRel: "M:N",
-      explanation: "Satu Resep butuh Banyak Bahan. Satu jenis Bahan (misal: Telur) dipakai di Banyak Resep. Butuh tabel penghubung 'Detail Resep'.",
-      aiBenefit: "AI Inventory: Otomatis menghitung sisa stok bahan berdasarkan menu yang terjual hari ini."
-    },
-    kreatif: {
-      label: "Kreatif (DKV/Grafika)",
-      icon: <Palette size={24}/>,
-      entityA: { name: "Desainer", attr: ["ID Desainer", "Nama", "Spesialisasi"] },
-      entityB: { name: "Proyek Klien", attr: ["Nama Proyek", "Deadline", "Budget"] },
-      correctRel: "M:N",
-      explanation: "Satu Desainer bisa mengerjakan Banyak Proyek. Satu Proyek besar bisa dikerjakan Banyak Desainer (Tim). Butuh tabel 'Tim Proyek'.",
-      aiBenefit: "AI Project Matching: Menyarankan desainer yang paling cocok untuk proyek baru berdasarkan riwayat proyek sebelumnya."
-    }
+  // LIBRARY STATE
+  const [libStep, setLibStep] = useState(0);
+  
+  // EKSKUL STATE
+  // Data from PDF Page 6 (Tabel 1 & Tabel 2)
+  const [students] = useState([
+    { id: '10501', name: 'Doni Tata', major: 'TKR' },
+    { id: '10502', name: 'Eka Sandi', major: 'TKJ' }
+  ]);
+  const [ekskuls] = useState([
+    { id: 'E-01', name: 'Basket', pembina: 'P. Budi' },
+    { id: 'E-02', name: 'Rohis', pembina: 'P. Ahmad' },
+    { id: 'E-03', name: 'Koding', pembina: 'P. Malabi' }
+  ]);
+  // Data for Table 3: PENDAFTARAN
+  const [junctionData, setJunctionData] = useState<{reg: string, nis: string, kode: string}[]>([]);
+
+  const handleJoinEkskul = (studentId: string, ekskulId: string) => {
+    // Check if already joined
+    if (junctionData.some(d => d.nis === studentId && d.kode === ekskulId)) return;
+
+    const newReg = `REG-0${junctionData.length + 1}`;
+    setJunctionData([...junctionData, { reg: newReg, nis: studentId, kode: ekskulId }]);
   };
 
-  const handleSelect = (key: string) => {
-    setJurusan(key);
-    setStep(1);
-    setSelectedRelation(null);
-  };
+  // AI SIM STATE
+  const [prompt, setPrompt] = useState("");
+  const [aiResponse, setAiResponse] = useState<string | null>(null);
+  const [isTyping, setIsTyping] = useState(false);
 
-  const checkAnswer = () => {
-    if (selectedRelation === scenarios[jurusan!].correctRel) {
-      setStep(2);
-    } else {
-      alert("Kurang tepat. Coba bayangkan hubungan datanya di dunia nyata lagi.");
-    }
-  };
-
-  const reset = () => {
-    setJurusan(null);
-    setStep(0);
-    setSelectedRelation(null);
+  const handleAskAI = () => {
+    if (!prompt) return;
+    setIsTyping(true);
+    setAiResponse(null);
+    
+    setTimeout(() => {
+      setIsTyping(false);
+      // Responses based on "Contoh Prompt Efektif" in PDF Page 7
+      if (prompt.toLowerCase().includes("atribut") || prompt.toLowerCase().includes("bengkel")) {
+        setAiResponse("Untuk database Bengkel Motor, selain Nama dan Plat Nomor, sebaiknya tambahkan:\n1. Tgl_Servis\n2. Jenis_Kerusakan\n3. Biaya\n4. Mekanik_ID");
+      } else if (prompt.toLowerCase().includes("dummy") || prompt.toLowerCase().includes("csv")) {
+        setAiResponse("Berikut data dummy CSV:\nNIS,Nama,Nilai\n101,Andi,85\n102,Budi,90\n103,Citra,88\n104,Dewi,92\n105,Eko,80");
+      } else if (prompt.toLowerCase().includes("relasi")) {
+          setAiResponse("Relasi Dokter dan Pasien biasanya M:N (Many to Many). Satu dokter menangani banyak pasien, dan satu pasien bisa diperiksa oleh banyak dokter (spesialis berbeda).");
+      } else {
+        setAiResponse("Pertanyaan menarik! Ingat, mintalah AI untuk mengkritisi ide atau memberikan contoh data dummy.");
+      }
+    }, 1500);
   };
 
   return (
-    <div className="max-w-5xl mx-auto pt-4 animate-[fadeIn_0.5s]">
+    <div className="max-w-6xl mx-auto pt-4 animate-[fadeIn_0.5s]">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">Studio Perancangan Data</h2>
-        <p className="text-slate-400">Pilih rumpun jurusanmu dan rancang struktur datanya.</p>
+        <h2 className="text-2xl font-bold text-white mb-2">Studio Perancangan Database (Bab 4)</h2>
+        <p className="text-slate-400">Pilih studi kasus untuk mempraktikkan teori ERD.</p>
       </div>
 
-      <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden min-h-[500px] flex flex-col shadow-2xl">
-        
-        {/* STEP 0: SELECT JURUSAN */}
-        {step === 0 && (
-          <div className="flex-1 flex flex-col items-center justify-center p-8">
-            <h3 className="text-xl font-bold text-white mb-8">Pilih Bidang Keahlian:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-              {Object.entries(scenarios).map(([key, val]) => (
-                <button 
-                  key={key}
-                  onClick={() => handleSelect(key)}
-                  className="p-6 bg-slate-900 border border-slate-700 rounded-xl hover:bg-slate-700 hover:border-indigo-500 transition-all flex flex-col items-center gap-3 group"
-                >
-                  <div className="p-3 bg-slate-800 rounded-full group-hover:bg-indigo-600 transition-colors text-white">
-                    {val.icon}
+      {/* Case Selector */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <button 
+          onClick={() => setActiveCase('library')}
+          className={`px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeCase === 'library' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 border border-slate-700'}`}
+        >
+          <BookOpen size={18}/> Kasus 1: Perpus (1:N)
+        </button>
+        <button 
+          onClick={() => setActiveCase('store')}
+          className={`px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeCase === 'store' ? 'bg-orange-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 border border-slate-700'}`}
+        >
+          <ShoppingCart size={18}/> Kasus 2: Toko (1:N)
+        </button>
+        <button 
+          onClick={() => setActiveCase('ekskul')}
+          className={`px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeCase === 'ekskul' ? 'bg-purple-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 border border-slate-700'}`}
+        >
+          <Users size={18}/> Kasus 3: Ekskul (M:N)
+        </button>
+        <button 
+          onClick={() => setActiveCase('ai')}
+          className={`px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeCase === 'ai' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 border border-slate-700'}`}
+        >
+          <Brain size={18}/> Bab 5: AI Integrasi
+        </button>
+      </div>
+
+      {/* CASE 1: LIBRARY */}
+      {activeCase === 'library' && (
+        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 animate-[fadeIn_0.3s]">
+           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><BookOpen className="text-indigo-400"/> Kasus 1: Peminjaman Buku</h3>
+           <p className="text-slate-300 mb-6">
+             Relasi: <strong>Anggota</strong> meminjam <strong>Buku</strong>. <br/>
+             Kardinalitas: <strong>One to Many</strong> (Satu transaksi memuat satu anggota, tapi satu anggota bisa ada di banyak transaksi).
+           </p>
+
+           <div className="grid md:grid-cols-3 gap-6">
+              {/* TABLE ANGGOTA */}
+              <div className="bg-slate-900 rounded-xl border border-slate-700 overflow-hidden">
+                <div className="bg-indigo-900/50 p-3 border-b border-indigo-500/30 font-bold text-indigo-300 text-center">
+                  Tabel 1: ANGGOTA (Master)
+                </div>
+                <div className="p-4 space-y-2 text-sm text-slate-300">
+                   <div className="flex justify-between border-b border-slate-800 pb-1">
+                      <span className="text-amber-400 font-mono">ID_Anggota (PK)</span>
+                      <span>Nama</span>
+                   </div>
+                   <div className="flex justify-between">
+                      <span className="font-mono">LIB-001</span>
+                      <span>Ahmad Dani</span>
+                   </div>
+                   <div className="flex justify-between">
+                      <span className="font-mono">LIB-002</span>
+                      <span>Bunga Citra</span>
+                   </div>
+                </div>
+              </div>
+
+              {/* TABLE TRANSAKSI (RELASI) */}
+              <div className="bg-slate-900 rounded-xl border-2 border-dashed border-slate-600 overflow-hidden flex flex-col justify-center items-center p-4">
+                 <div className="text-slate-500 mb-2 font-bold text-center">Tabel 3: TRANSAKSI (Relasi)</div>
+                 <ArrowRight className="text-slate-600 mb-2 rotate-90 md:rotate-0"/>
+                 <div className="text-xs text-center text-slate-400 mb-2">
+                   Mencatat "Siapa" meminjam "Apa".
+                 </div>
+                 {libStep === 0 && (
+                   <button onClick={() => setLibStep(1)} className="px-4 py-2 bg-indigo-600 rounded text-white text-sm hover:bg-indigo-500">
+                     Lihat Tabel Transaksi
+                   </button>
+                 )}
+                 {libStep === 1 && (
+                   <div className="w-full mt-2 bg-slate-800 rounded p-2 text-xs">
+                      <table className="w-full text-left">
+                        <thead className="text-slate-500"><tr><th>No_Trans</th><th>ID_Anggota(FK)</th><th>Kode_Buku(FK)</th></tr></thead>
+                        <tbody className="text-slate-300">
+                          <tr className="border-b border-slate-700"><td>TR-001</td><td className="text-indigo-400">LIB-001</td><td className="text-emerald-400">BK-A01</td></tr>
+                          <tr><td>TR-002</td><td className="text-indigo-400">LIB-002</td><td className="text-emerald-400">BK-A01</td></tr>
+                        </tbody>
+                      </table>
+                   </div>
+                 )}
+              </div>
+
+              {/* TABLE BUKU */}
+              <div className="bg-slate-900 rounded-xl border border-slate-700 overflow-hidden">
+                <div className="bg-emerald-900/50 p-3 border-b border-emerald-500/30 font-bold text-emerald-300 text-center">
+                  Tabel 2: BUKU (Master)
+                </div>
+                <div className="p-4 space-y-2 text-sm text-slate-300">
+                   <div className="flex justify-between border-b border-slate-800 pb-1">
+                      <span className="text-amber-400 font-mono">Kode_Buku (PK)</span>
+                      <span>Judul</span>
+                   </div>
+                   <div className="flex justify-between">
+                      <span className="font-mono">BK-A01</span>
+                      <span>Laskar Pelangi</span>
+                   </div>
+                   <div className="flex justify-between">
+                      <span className="font-mono">BK-B02</span>
+                      <span>Belajar Python</span>
+                   </div>
+                </div>
+              </div>
+           </div>
+           <div className="mt-4 text-xs text-center text-slate-400 italic">
+             *Perhatikan: Kita tidak menulis nama "Ahmad Dani" di tabel transaksi, cukup kodenya "LIB-001". Inilah efisiensi database.
+           </div>
+        </div>
+      )}
+
+      {/* CASE 2: STORE */}
+      {activeCase === 'store' && (
+        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 animate-[fadeIn_0.3s]">
+           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><ShoppingCart className="text-orange-400"/> Kasus 2: Inventaris Toko (SMK Mart)</h3>
+           <p className="text-slate-300 mb-6">
+             Relasi: <strong>Supplier</strong> menyuplai <strong>Barang</strong>. (1:N)
+           </p>
+
+           <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-slate-900 rounded-xl border border-slate-700 p-4">
+                  <h4 className="font-bold text-orange-400 mb-2">Tabel 1: SUPPLIER</h4>
+                  <table className="w-full text-xs text-left text-slate-300">
+                      <thead className="text-slate-500 border-b border-slate-700"><tr><th className="py-2">Kode_Supp (PK)</th><th>Nama_PT</th></tr></thead>
+                      <tbody>
+                          <tr className="border-b border-slate-800"><td className="py-2 font-mono text-amber-400">SUP-01</td><td>PT. Indofood</td></tr>
+                          <tr><td className="py-2 font-mono text-amber-400">SUP-02</td><td>CV. Alat Tulis</td></tr>
+                      </tbody>
+                  </table>
+              </div>
+
+              <div className="bg-slate-900 rounded-xl border border-slate-700 p-4 relative">
+                  <div className="absolute -left-4 top-1/2 bg-slate-700 rounded-full p-1"><ArrowRight size={16} className="text-white"/></div>
+                  <h4 className="font-bold text-emerald-400 mb-2">Tabel 2: BARANG (Inventaris)</h4>
+                  <table className="w-full text-xs text-left text-slate-300">
+                      <thead className="text-slate-500 border-b border-slate-700"><tr><th className="py-2">Kode_Brg (PK)</th><th>Nama</th><th>Kode_Supp (FK)</th></tr></thead>
+                      <tbody>
+                          <tr className="border-b border-slate-800"><td className="py-2 font-mono text-emerald-300">BRG-001</td><td>Indomie</td><td className="font-mono text-orange-400">SUP-01</td></tr>
+                          <tr className="border-b border-slate-800"><td className="py-2 font-mono text-emerald-300">BRG-002</td><td>Buku Sidu</td><td className="font-mono text-orange-400">SUP-02</td></tr>
+                          <tr><td className="py-2 font-mono text-emerald-300">BRG-003</td><td>Pop Mie</td><td className="font-mono text-orange-400">SUP-01</td></tr>
+                      </tbody>
+                  </table>
+              </div>
+           </div>
+        </div>
+      )}
+
+      {/* CASE 3: EKSKUL (M:N) */}
+      {activeCase === 'ekskul' && (
+        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 animate-[fadeIn_0.3s]">
+           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><Users className="text-purple-400"/> Kasus 3: Ekstrakurikuler (Many to Many)</h3>
+           <p className="text-slate-300 mb-6">
+             Masalah: Satu siswa ikut banyak ekskul. Satu ekskul punya banyak siswa. <br/>
+             Solusi: Kita butuh <strong>Tabel Penghubung (Junction Table)</strong> bernama "PENDAFTARAN".
+           </p>
+
+           <div className="grid md:grid-cols-3 gap-6">
+             {/* SISWA LIST */}
+             <div className="space-y-4">
+                <h4 className="font-bold text-indigo-400 text-center border-b border-indigo-500/30 pb-2">Tabel 1: SISWA</h4>
+                {students.map(s => (
+                  <div key={s.id} className="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <div className="font-mono text-amber-400 text-xs">{s.id} (PK)</div>
+                            <div className="font-bold text-white text-sm">{s.name}</div>
+                        </div>
+                        <span className="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">{s.major}</span>
+                    </div>
+                    <div className="mt-2 flex gap-1 flex-wrap">
+                       {ekskuls.map(e => (
+                         <button 
+                           key={e.id}
+                           onClick={() => handleJoinEkskul(s.id, e.id)}
+                           className="text-[10px] px-2 py-1 bg-slate-800 hover:bg-purple-600 rounded border border-slate-600 transition-colors"
+                         >
+                           + {e.name}
+                         </button>
+                       ))}
+                    </div>
                   </div>
-                  <span className="font-bold text-slate-300 group-hover:text-white">{val.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* STEP 1: INTERACTION */}
-        {step === 1 && jurusan && (
-          <div className="flex-1 p-8 flex flex-col">
-            <div className="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                {scenarios[jurusan].icon} {scenarios[jurusan].label}
-              </h3>
-              <button onClick={reset} className="text-sm text-slate-400 hover:text-white">Ganti Jurusan</button>
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
-              {/* Entity A */}
-              <div className="w-64 bg-slate-900 border-2 border-indigo-500/50 rounded-xl p-4">
-                <div className="bg-indigo-900/50 text-indigo-300 font-bold text-center py-2 rounded mb-3 border border-indigo-500/30">
-                  {scenarios[jurusan].entityA.name}
-                </div>
-                <ul className="text-sm text-slate-400 space-y-1">
-                  {scenarios[jurusan].entityA.attr.map((a: string, i: number) => (
-                    <li key={i} className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>{a}</li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Connection Lines (Visual) */}
-              <div className="flex flex-col items-center gap-2">
-                <div className="h-1 w-20 bg-slate-600 relative">
-                   <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs text-slate-500">Berhubungan dengan</div>
-                </div>
-              </div>
-
-              {/* Entity B */}
-              <div className="w-64 bg-slate-900 border-2 border-emerald-500/50 rounded-xl p-4">
-                <div className="bg-emerald-900/50 text-emerald-300 font-bold text-center py-2 rounded mb-3 border border-emerald-500/30">
-                  {scenarios[jurusan].entityB.name}
-                </div>
-                <ul className="text-sm text-slate-400 space-y-1">
-                  {scenarios[jurusan].entityB.attr.map((a: string, i: number) => (
-                    <li key={i} className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>{a}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 text-center">
-              <p className="text-white mb-4 font-medium">Apa jenis relasi yang tepat antara kedua tabel di atas?</p>
-              <div className="flex justify-center gap-4 mb-6">
-                {['1:1', '1:N', 'M:N'].map((rel) => (
-                  <button
-                    key={rel}
-                    onClick={() => setSelectedRelation(rel)}
-                    className={`px-6 py-3 rounded-lg font-bold border-2 transition-all ${
-                      selectedRelation === rel 
-                      ? 'bg-indigo-600 border-indigo-400 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)]' 
-                      : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-400'
-                    }`}
-                  >
-                    {rel}
-                  </button>
                 ))}
-              </div>
-              <button 
-                onClick={checkAnswer}
-                disabled={!selectedRelation}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                Cek Jawaban
-              </button>
-            </div>
-          </div>
-        )}
+             </div>
 
-        {/* STEP 2: RESULT */}
-        {step === 2 && jurusan && (
-          <div className="flex-1 p-8 flex flex-col items-center justify-center text-center animate-[fadeIn_0.5s]">
-            <div className="w-20 h-20 bg-emerald-900/50 rounded-full flex items-center justify-center mb-6 border-4 border-emerald-500/30">
-              <CheckCircle size={40} className="text-emerald-400" />
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Desain Database Benar!</h3>
-            <p className="text-xl text-indigo-400 font-bold mb-6">Relasi: {scenarios[jurusan].correctRel}</p>
-            
-            <div className="grid md:grid-cols-2 gap-6 w-full max-w-3xl text-left">
-              <div className="bg-slate-900 p-6 rounded-xl border border-slate-700">
-                <h4 className="text-slate-300 font-bold mb-2 text-sm uppercase">Penjelasan Logika</h4>
-                <p className="text-slate-400 text-sm leading-relaxed">{scenarios[jurusan].explanation}</p>
-              </div>
-              <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl border border-indigo-500/30">
-                <h4 className="text-white font-bold mb-2 text-sm uppercase flex items-center gap-2"><Brain size={16}/> Manfaat untuk AI</h4>
-                <p className="text-indigo-200 text-sm leading-relaxed">{scenarios[jurusan].aiBenefit}</p>
-              </div>
-            </div>
+             {/* JUNCTION TABLE VISUALIZER */}
+             <div className="flex flex-col items-center justify-center">
+                <div className="bg-purple-900/20 border-2 border-purple-500/50 p-4 rounded-xl w-full min-h-[200px]">
+                   <h4 className="font-bold text-purple-300 text-center mb-2 text-sm">Tabel 3: PENDAFTARAN (Penghubung)</h4>
+                   {junctionData.length === 0 ? (
+                     <p className="text-slate-500 text-xs text-center italic mt-10">Klik tombol di kartu siswa untuk mendaftarkan ekskul...</p>
+                   ) : (
+                     <table className="w-full text-xs text-left">
+                        <thead className="text-slate-400 border-b border-purple-500/30">
+                          <tr><th>No_Daftar</th><th>NIS (FK)</th><th>ID_Ekskul (FK)</th></tr>
+                        </thead>
+                        <tbody className="text-slate-200">
+                          {junctionData.map((d, i) => (
+                            <tr key={i} className="border-b border-purple-500/10">
+                              <td className="py-1 font-mono text-amber-400">{d.reg}</td>
+                              <td className="py-1">{d.nis}</td>
+                              <td className="py-1">{d.kode}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                     </table>
+                   )}
+                </div>
+                <div className="text-[10px] text-slate-500 mt-2 text-center">
+                    Analisis: Baris tabel di atas membuktikan Doni Tata (10501) bisa mengikuti Basket (E-01) dan Koding (E-03).
+                </div>
+             </div>
 
-            <button onClick={reset} className="mt-8 px-6 py-2 border border-slate-600 text-slate-400 rounded-full hover:bg-slate-800 hover:text-white transition-colors">
-              Coba Jurusan Lain
-            </button>
-          </div>
-        )}
+             {/* EKSKUL LIST */}
+             <div className="space-y-4">
+                <h4 className="font-bold text-emerald-400 text-center border-b border-emerald-500/30 pb-2">Tabel 2: EKSTRAKURIKULER</h4>
+                {ekskuls.map(e => (
+                  <div key={e.id} className="bg-slate-900 p-3 rounded-lg border border-slate-700 text-right">
+                    <div className="font-mono text-amber-400 text-xs">{e.id} (PK)</div>
+                    <div className="font-bold text-white text-sm">{e.name}</div>
+                    <div className="text-[10px] text-slate-500">{e.pembina}</div>
+                  </div>
+                ))}
+             </div>
+           </div>
+        </div>
+      )}
 
-      </div>
+      {/* CASE 4: AI ASSISTANT */}
+      {activeCase === 'ai' && (
+        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 animate-[fadeIn_0.3s]">
+           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><Brain className="text-emerald-400"/> Integrasi AI (Bab 5)</h3>
+           <p className="text-slate-300 mb-6">
+             Simulasi menggunakan AI sebagai "Thought Partner". Coba prompt di bawah ini untuk melihat bagaimana AI membantu merancang database.
+           </p>
+
+           <div className="flex flex-col gap-4 max-w-2xl mx-auto">
+             <div className="bg-slate-950 rounded-xl p-4 min-h-[150px] border border-slate-700 relative">
+                {aiResponse ? (
+                  <div className="text-emerald-300 text-sm whitespace-pre-line animate-[fadeIn_0.5s]">
+                    <strong className="block mb-2 text-emerald-500">AI Assistant:</strong>
+                    {aiResponse}
+                  </div>
+                ) : (
+                  <div className="text-slate-600 text-sm italic text-center mt-10">
+                    {isTyping ? "Sedang mengetik..." : "Menunggu prompt Anda..."}
+                  </div>
+                )}
+             </div>
+
+             <div className="flex gap-2">
+               <input 
+                 type="text" 
+                 value={prompt}
+                 onChange={(e) => setPrompt(e.target.value)}
+                 onKeyDown={(e) => e.key === 'Enter' && handleAskAI()}
+                 placeholder="Tulis prompt di sini..."
+                 className="flex-grow bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
+               />
+               <button 
+                 onClick={handleAskAI}
+                 disabled={!prompt}
+                 className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 rounded-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+               >
+                 Kirim
+               </button>
+             </div>
+             
+             <div className="flex flex-wrap gap-2 justify-center">
+               <button onClick={() => setPrompt("Apa atribut untuk tabel Bengkel Motor?")} className="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-slate-300">Ide Atribut</button>
+               <button onClick={() => setPrompt("Buatkan data dummy CSV siswa")} className="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-slate-300">Data Dummy</button>
+               <button onClick={() => setPrompt("Jelaskan relasi Dokter dan Pasien")} className="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-slate-300">Cari Relasi</button>
+             </div>
+           </div>
+        </div>
+      )}
+
     </div>
   );
 }
@@ -533,28 +654,28 @@ function KuisSection() {
 
   const questions = [
     {
-      q: "Dalam sistem bengkel, satu Pelanggan bisa melakukan banyak kali Servis. Apa jenis relasinya?",
+      q: "Simbol 'Belah Ketupat' pada ERD menggambarkan...",
+      options: ["Entitas (Kata Benda)", "Atribut (Kata Sifat)", "Relasi (Kata Kerja)", "Primary Key"],
+      ans: 2
+    },
+    {
+      q: "Dalam kasus Perpustakaan, 'Ahmad Dani' tidak ditulis di Tabel Peminjaman, melainkan kodenya 'LIB-001'. Ini adalah contoh penggunaan...",
+      options: ["Primary Key", "Foreign Key", "Atribut", "Entitas"],
+      ans: 1
+    },
+    {
+      q: "Relasi antara 'Kelas' dan 'Siswa' biasanya berbentuk...",
       options: ["One to One (1:1)", "One to Many (1:N)", "Many to Many (M:N)", "No Relation"],
       ans: 1
     },
     {
-      q: "Jika relasi adalah Many to Many (seperti Resep dan Bahan), apa yang wajib kita buat?",
-      options: ["Tabel Penghubung (Junction Table)", "Tabel Cadangan", "Menghapus salah satu tabel", "Membuat folder baru"],
-      ans: 0
+      q: "Apa nama tabel penghubung dalam kasus M:N Siswa dan Ekskul?",
+      options: ["Tabel Siswa", "Tabel Ekskul", "Tabel Pendaftaran", "Tabel Guru"],
+      ans: 2
     },
     {
-      q: "Simbol 'Persegi Panjang' pada ERD menggambarkan...",
-      options: ["Atribut (Sifat)", "Entitas (Objek)", "Relasi (Hubungan)", "Proses"],
-      ans: 1
-    },
-    {
-      q: "Apa manfaat struktur data yang rapi bagi Artificial Intelligence (AI)?",
-      options: ["Agar AI tidak perlu bekerja", "Agar AI bisa memprediksi pola dengan akurat", "Agar database terlihat indah", "Tidak ada manfaatnya"],
-      ans: 1
-    },
-    {
-      q: "Data mentah di kertas (formulir) harus diubah menjadi tabel digital agar...",
-      options: ["Bisa dibuang", "Bisa diolah menjadi informasi berguna", "Memenuhi lemari arsip", "Susah dicari"],
+      q: "Bagaimana cara efektif menggunakan AI untuk database?",
+      options: ["Menyuruh AI mengerjakan 100%", "Meminta AI sebagai 'Thought Partner' untuk ide atribut", "Tidak perlu pakai AI", "Menyalin jawaban teman"],
       ans: 1
     }
   ];
@@ -590,7 +711,7 @@ function KuisSection() {
             <CheckCircle size={40} className="text-indigo-400" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-4">Tantangan ERD</h2>
-          <p className="text-slate-400 mb-8">Uji pemahamanmu tentang struktur data industri. Ada 5 pertanyaan.</p>
+          <p className="text-slate-400 mb-8">Uji pemahamanmu tentang struktur data, relasi, dan integrasi AI. Ada 5 pertanyaan!</p>
           <button 
             onClick={() => setStarted(true)}
             className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all hover:scale-105 shadow-lg shadow-indigo-500/30"
@@ -618,11 +739,11 @@ function KuisSection() {
           </div>
           <div className="mb-8">
             {score === 100 ? (
-              <span className="text-emerald-400 font-bold text-lg">Sempurna! Calon Arsitek Data! 🎉</span>
+              <span className="text-emerald-400 font-bold text-lg">Luar Biasa! Sempurna! 🎉</span>
             ) : score >= 80 ? (
-              <span className="text-indigo-400 font-bold text-lg">Hebat! Sudah Paham Konsep. 👍</span>
+              <span className="text-indigo-400 font-bold text-lg">Kerja Bagus! 👍</span>
             ) : (
-              <span className="text-slate-400 text-lg">Coba pelajari lagi bagian Relasi ya. 💪</span>
+              <span className="text-slate-400 text-lg">Jangan menyerah, coba lagi ya! 💪</span>
             )}
           </div>
           <button 

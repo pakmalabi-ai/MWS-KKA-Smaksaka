@@ -11,17 +11,7 @@ import {
   Cpu, 
   Search, 
   MessageSquare,
-  ArrowRight,
-  Wrench,
-  Utensils,
-  Palette,
-  Calculator,
-  Hammer,
-  Car,
-  FileText,
-  Smile,
-  Hand,
-  Factory
+  ArrowRight
 } from 'lucide-react';
 
 // --- COMPONENTS ---
@@ -32,8 +22,7 @@ const ModuleNav = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTa
   const navItems = [
     { id: 'home', label: 'Beranda', icon: BookOpen },
     { id: 'materi', label: 'Materi', icon: Brain },
-    { id: 'simulasi', label: 'Studio Inovasi', icon: Code },
-    { id: 'refleksi', label: 'Refleksi', icon: FileText },
+    { id: 'simulasi', label: 'Lab Design', icon: Code },
     { id: 'evaluasi', label: 'Evaluasi', icon: CheckCircle },
   ];
 
@@ -84,14 +73,15 @@ const HomeView = ({ onStart }: { onStart: () => void }) => (
       
       <div className="container mx-auto px-4 relative z-10">
         <span className="inline-block py-1 px-3 rounded-full bg-slate-800/50 border border-slate-600 text-amber-400 text-xs font-bold mb-6 tracking-widest uppercase">
-          Untuk SMK Kelas X - Semua Jurusan
+          Fase E - SMK Kelas X
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
-          Inovasi Cerdas dengan <br/> <span className="text-amber-400">Design Thinking</span>
+          Merancang Masa Depan <br/> dengan <span className="text-amber-400">Kecerdasan Artifisial</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Halo para calon Teknisi, Desainer, Akuntan, dan Chef masa depan! <br/>
-          Mari belajar bagaimana menciptakan solusi teknologi yang <strong className="text-white">berguna</strong> dan <strong className="text-white">memahami manusia</strong>.
+          Selamat datang di media pembelajaran interaktif. Mari belajar dengan pendekatan 
+          <span className="font-semibold text-white"> Mindful, Meaningful, & Joyful</span>. 
+          Kembangkan solusi cerdas untuk masalah di sekitarmu.
         </p>
         <button 
           onClick={onStart}
@@ -107,16 +97,16 @@ const HomeView = ({ onStart }: { onStart: () => void }) => (
     <section className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-3 gap-8">
         {[
-          { title: "Mindful (Berkesadaran)", desc: "Melatih empati. Memahami masalah teman atau pelanggan di bengkel/dapur/kantor.", icon: <Brain className="text-indigo-500" size={32} /> },
-          { title: "Meaningful (Bermakna)", desc: "Menciptakan alat atau sistem yang benar-benar memecahkan masalah nyata di jurusanmu.", icon: <Lightbulb className="text-amber-500" size={32} /> },
-          { title: "Joyful (Menyenangkan)", desc: "Bermain dengan ide liar tanpa takut salah. Gambar sketsamu!", icon: <Award className="text-pink-500" size={32} /> },
+          { title: "Mindful", desc: "Belajar dengan kesadaran penuh dan fokus.", icon: <Brain className="text-indigo-500" size={32} /> },
+          { title: "Meaningful", desc: "Materi relevan dengan masalah nyata di sekolah.", icon: <Lightbulb className="text-amber-500" size={32} /> },
+          { title: "Joyful", desc: "Pengalaman belajar yang menyenangkan dan interaktif.", icon: <Award className="text-pink-500" size={32} /> },
         ].map((item, idx) => (
           <div key={idx} className="bg-slate-800/50 backdrop-blur p-8 rounded-2xl shadow-sm border border-slate-700 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
             <div className="bg-slate-900 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-800 transition-colors border border-slate-700">
               {item.icon}
             </div>
             <h3 className="text-xl font-bold text-slate-200 mb-3">{item.title}</h3>
-            <p className="text-slate-400 leading-relaxed text-sm">{item.desc}</p>
+            <p className="text-slate-400 leading-relaxed">{item.desc}</p>
           </div>
         ))}
       </div>
@@ -130,36 +120,36 @@ const MateriView = () => {
   const steps = [
     {
       title: "1. Empathize (Empati)",
-      desc: "Memahami Hati Pengguna.",
-      detail: "Lakukan Observasi (Lihat teman yang kesulitan di bengkel/lab), Wawancara Mendalam (Tanya perasaan, bukan cuma Ya/Tidak), dan Immerse (Ikut merasakan lelahnya). Kuncinya: 'Deep Listening'.",
+      desc: "Langkah pertama bukan coding, tapi merasakan. Pahami apa yang dirasakan pengguna.",
+      detail: "Lakukan observasi dan wawancara. Contoh: 'Kenapa antrian kantin selalu panjang?' atau 'Kenapa siswa sering lupa jadwal?'",
       icon: <Users className="text-blue-500" size={40} />,
       color: "border-blue-500/50 bg-blue-900/10"
     },
     {
       title: "2. Define (Definisi)",
-      desc: "Menentukan Akar Masalah.",
-      detail: "Gunakan Rumus POV Statement: '[PENGGUNA] membutuhkan [KEBUTUHAN] karena [INSIGHT]'. Contoh: 'Montir butuh cara cepat cari kunci pas karena pelanggan sering komplain lama'.",
+      desc: "Menentukan akar masalah dari hasil empati.",
+      detail: "Buat pernyataan masalah (Problem Statement). Contoh: 'Siswa membutuhkan cara cepat memesan makanan karena waktu istirahat sangat singkat.'",
       icon: <Search className="text-purple-500" size={40} />,
       color: "border-purple-500/50 bg-purple-900/10"
     },
     {
       title: "3. Ideate (Ideasi)",
-      desc: "Melahirkan Ide Liar.",
-      detail: "Prinsip: No Judgment & Quantity over Quality. Lakukan aktivitas 'Crazy 8s': Lipat kertas jadi 8, gambar 8 ide gila dalam 8 menit.",
+      desc: "Mencari ide solusi sebanyak mungkin tanpa batas.",
+      detail: "Brainstorming! Jangan takut salah. 'Bagaimana kalau ada chatbot?' atau 'Bagaimana kalau pakai kamera AI?'",
       icon: <Lightbulb className="text-amber-500" size={40} />,
       color: "border-amber-500/50 bg-amber-900/10"
     },
     {
       title: "4. Prototype (Purwarupa)",
-      desc: "Mewujudkan Konsep.",
-      detail: "Buat Low-Fidelity (Sketsa kertas, kardus, styrofoam) atau High-Fidelity (Desain digital di Canva/Figma). Contoh: Mockup aplikasi bengkel.",
+      desc: "Membuat model sederhana dari ide terpilih.",
+      detail: "Bisa berupa sketsa di kertas, desain di Canva, atau mockup aplikasi. Tujuannya untuk memvisualisasikan ide.",
       icon: <Code className="text-emerald-500" size={40} />,
       color: "border-emerald-500/50 bg-emerald-900/10"
     },
     {
-      title: "5. Testing (Uji Coba)",
-      desc: "Validasi dengan Feedback Grid.",
-      detail: "Uji ke teman dan catat di 4 kuadran: I Like (Apa yang disukai), Ideas (Ide baru), Questions (Apa yang membingungkan), I Wish (Kritik/Harapan).",
+      title: "5. Test (Uji Coba)",
+      desc: "Mencoba prototype kepada pengguna dan meminta feedback.",
+      detail: "Tanyakan: 'Apakah ini membantu?' atau 'Apa yang kurang?'. Gunakan feedback untuk memperbaiki solusi.",
       icon: <MessageSquare className="text-rose-500" size={40} />,
       color: "border-rose-500/50 bg-rose-900/10"
     }
@@ -172,7 +162,7 @@ const MateriView = () => {
         <p className="text-slate-400">Metode berpikir kreatif untuk menciptakan solusi Artificial Intelligence yang berdampak.</p>
       </div>
 
-      <div className="grid md:grid-cols-12 gap-8 mb-16">
+      <div className="grid md:grid-cols-12 gap-8">
         {/* Navigation Sidebar */}
         <div className="md:col-span-4 space-y-3">
           {steps.map((step, idx) => (
@@ -205,95 +195,19 @@ const MateriView = () => {
             <hr className="border-slate-700 my-6" />
             
             <div className="bg-slate-900/60 p-6 rounded-xl border border-slate-700">
-              <h4 className="font-bold text-slate-400 mb-2 uppercase text-sm tracking-wider">Aktivitas & Tips:</h4>
+              <h4 className="font-bold text-slate-400 mb-2 uppercase text-sm tracking-wider">Aktivitas & Contoh:</h4>
               <p className="text-slate-300 leading-relaxed">{steps[activeStep].detail}</p>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* AI Capabilities Table */}
-      <div className="space-y-8">
-        <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
-          <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-            <Cpu className="text-amber-500"/> Kemampuan Dasar AI
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-slate-900 p-5 rounded-xl border border-slate-700">
-              <h4 className="font-bold text-indigo-400 mb-2">Computer Vision</h4>
-              <p className="text-xs text-slate-400 mb-3">AI yang bisa "melihat".</p>
-              <ul className="text-sm text-slate-300 list-disc list-inside space-y-1">
-                <li>Absensi Wajah</li>
-                <li>Pemilah Sampah Otomatis</li>
-                <li>Deteksi Objek</li>
-              </ul>
+            <div className="mt-8 flex justify-end">
+               <button 
+                 onClick={() => setActiveStep(prev => (prev + 1) % steps.length)}
+                 className="text-sm font-semibold text-slate-400 hover:text-white flex items-center space-x-1"
+               >
+                 <span>Lanjut Langkah Berikutnya</span>
+                 <ChevronRight size={16} />
+               </button>
             </div>
-            <div className="bg-slate-900 p-5 rounded-xl border border-slate-700">
-              <h4 className="font-bold text-pink-400 mb-2">NLP (Bahasa)</h4>
-              <p className="text-xs text-slate-400 mb-3">AI yang bisa "membaca & mendengar".</p>
-              <ul className="text-sm text-slate-300 list-disc list-inside space-y-1">
-                <li>Chatbot CS</li>
-                <li>Peringkas Dokumen</li>
-                <li>Penerjemah Otomatis</li>
-              </ul>
-            </div>
-            <div className="bg-slate-900 p-5 rounded-xl border border-slate-700">
-              <h4 className="font-bold text-emerald-400 mb-2">Predictive Analytics</h4>
-              <p className="text-xs text-slate-400 mb-3">AI yang bisa "memprediksi".</p>
-              <ul className="text-sm text-slate-300 list-disc list-inside space-y-1">
-                <li>Prediksi Stok Barang</li>
-                <li>Rekomendasi Konten</li>
-                <li>Prediksi Kerusakan Mesin</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Vocational Examples */}
-        <div className="bg-gradient-to-br from-slate-900 to-indigo-950 rounded-2xl p-8 border border-indigo-500/30">
-          <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-            <Factory className="text-indigo-400"/> Contoh Penerapan di Jurusanmu
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4">
-             <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 hover:border-blue-500 transition-colors group">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="p-2 bg-blue-900/30 rounded-lg text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors"><Hammer size={18}/></div>
-                   <h4 className="font-bold text-white text-sm">Teknik Mesin & Las</h4>
-                </div>
-                <p className="text-xs text-slate-300">Menggunakan <strong>Computer Vision</strong> untuk mendeteksi keretakan mikro pada hasil pengelasan atau potongan logam yang tidak presisi.</p>
-             </div>
-             
-             <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 hover:border-red-500 transition-colors group">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="p-2 bg-red-900/30 rounded-lg text-red-400 group-hover:bg-red-600 group-hover:text-white transition-colors"><Car size={18}/></div>
-                   <h4 className="font-bold text-white text-sm">Otomotif (TKR & TSM)</h4>
-                </div>
-                <p className="text-xs text-slate-300"><strong>Predictive Maintenance:</strong> AI mendengar suara mesin mobil dan memprediksi kapan busi atau oli harus diganti sebelum mogok.</p>
-             </div>
-             
-             <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 hover:border-emerald-500 transition-colors group">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="p-2 bg-emerald-900/30 rounded-lg text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><Calculator size={18}/></div>
-                   <h4 className="font-bold text-white text-sm">Akuntansi</h4>
-                </div>
-                <p className="text-xs text-slate-300"><strong>OCR & Automation:</strong> Foto kuitansi belanja, AI otomatis membaca angkanya dan memasukkan ke buku besar Excel tanpa mengetik.</p>
-             </div>
-             
-             <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors group">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="p-2 bg-purple-900/30 rounded-lg text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-colors"><Palette size={18}/></div>
-                   <h4 className="font-bold text-white text-sm">DKV & Grafika</h4>
-                </div>
-                <p className="text-xs text-slate-300"><strong>Generative AI:</strong> Membantu brainstorming ide logo, membuat palet warna otomatis, atau mengecek plagiasi desain.</p>
-             </div>
-
-             <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 hover:border-orange-500 transition-colors group md:col-span-2">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="p-2 bg-orange-900/30 rounded-lg text-orange-400 group-hover:bg-orange-600 group-hover:text-white transition-colors"><Utensils size={18}/></div>
-                   <h4 className="font-bold text-white text-sm">Kuliner</h4>
-                </div>
-                <p className="text-xs text-slate-300"><strong>Smart Inventory:</strong> AI mendeteksi bahan makanan di kulkas yang hampir busuk dan menyarankan resep masakan untuk memanfaatkannya.</p>
-             </div>
           </div>
         </div>
       </div>
@@ -302,249 +216,250 @@ const MateriView = () => {
 };
 
 const SimulasiView = () => {
-  const [jurusan, setJurusan] = useState<string | null>(null);
-  const [phase, setPhase] = useState(0); // 0: Select, 1: Problem, 2: Solution, 3: Result
+  const [step, setStep] = useState(1);
+  const [projectData, setProjectData] = useState({
+    masalah: '',
+    user: '',
+    solusi: '',
+    teknologi: 'Chatbot (NLP)'
+  });
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const scenarios: Record<string, any> = {
-    mesin: {
-      label: "Teknik Mesin & Pengelasan",
-      icon: <Hammer size={24}/>,
-      problem: "Siswa sering lupa memakai kacamata pelindung saat mengelas, bahaya bagi mata.",
-      solutionOptions: [
-        { id: 'a', tech: 'Computer Vision', name: 'Smart Safety Cam', correct: true, desc: "Kamera AI mendeteksi apakah siswa memakai APD lengkap. Jika tidak, mesin las tidak menyala." },
-        { id: 'b', tech: 'Chatbot', name: 'Safety Bot', correct: false, desc: "Bot hanya bisa mengingatkan lewat chat, tidak bisa mencegah kecelakaan di tempat." }
-      ]
-    },
-    otomotif: {
-      label: "Teknik Otomotif (TKR & TSM)",
-      icon: <Car size={24}/>,
-      problem: "Kunci-kunci bengkel sering hilang atau tidak kembali ke tempatnya.",
-      solutionOptions: [
-        { id: 'a', tech: 'Predictive', name: 'Ramalan Kunci', correct: false, desc: "Prediksi tidak bisa melacak lokasi fisik alat secara realtime." },
-        { id: 'b', tech: 'Computer Vision', name: 'Tool Tracking AI', correct: true, desc: "Kamera mendeteksi slot kunci yang kosong dan mencatat wajah siswa yang terakhir mengambilnya." }
-      ]
-    },
-    kuliner: {
-      label: "Kuliner",
-      icon: <Utensils size={24}/>,
-      problem: "Banyak bahan makanan sisa praktik yang terbuang karena bingung mau dimasak apa.",
-      solutionOptions: [
-        { id: 'a', tech: 'NLP / Generative AI', name: 'ChefBot Resep Sisa', correct: true, desc: "Input daftar bahan sisa, AI akan men-generate resep kreatif baru agar tidak mubazir." },
-        { id: 'b', tech: 'Computer Vision', name: 'Kamera Kulkas', correct: false, desc: "Hanya melihat isi kulkas, tapi tidak memberikan solusi ide masakan." }
-      ]
-    },
-    akuntansi: {
-      label: "Akuntansi",
-      icon: <Calculator size={24}/>,
-      problem: "Sering salah ketik (human error) saat memindahkan data dari kuitansi kertas ke Excel.",
-      solutionOptions: [
-        { id: 'a', tech: 'Computer Vision (OCR)', name: 'Auto-Input Scanner', correct: true, desc: "Foto kuitansi, AI otomatis membaca teks dan memasukkannya ke kolom Excel yang tepat." },
-        { id: 'b', tech: 'Chatbot', name: 'Curhat Keuangan', correct: false, desc: "Tidak membantu proses input data." }
-      ]
-    },
-    dkv: {
-      label: "DKV & Grafika",
-      icon: <Palette size={24}/>,
-      problem: "Sulit mengecek apakah desain siswa orisinil atau menjiplak karya orang lain di internet.",
-      solutionOptions: [
-        { id: 'a', tech: 'Computer Vision', name: 'Plagiarism Checker AI', correct: true, desc: "Scan desain siswa dan bandingkan dengan jutaan gambar di internet untuk cek kemiripan." },
-        { id: 'b', tech: 'Predictive', name: 'Trend Prediksi', correct: false, desc: "Hanya memprediksi tren warna, bukan cek plagiasi." }
-      ]
-    }
+  const handleInputChange = (field: string, value: string) => {
+    setProjectData({ ...projectData, [field]: value });
   };
 
-  const handleSelectJurusan = (key: string) => {
-    setJurusan(key);
-    setPhase(1);
+  const generatePrototype = () => {
+    setIsGenerating(true);
+    setTimeout(() => {
+      setStep(4);
+      setIsGenerating(false);
+    }, 2000);
   };
 
-  const handleSolution = (isCorrect: boolean) => {
-    if (isCorrect) {
-      setPhase(3);
-    } else {
-      alert("Kurang tepat. Coba pikirkan teknologi AI mana yang paling pas untuk masalah ini.");
-    }
-  };
-
-  const reset = () => {
-    setJurusan(null);
-    setPhase(0);
+  const resetSim = () => {
+    setStep(1);
+    setProjectData({ masalah: '', user: '', solusi: '', teknologi: 'Chatbot (NLP)' });
   };
 
   return (
     <div className="container mx-auto px-4 py-8 animate-fade-in max-w-4xl">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-white mb-2">Studio Inovasi Jurusan</h2>
-        <p className="text-slate-400">Pilih jurusanmu dan rancang solusi AI untuk masalah yang ada.</p>
+        <h2 className="text-3xl font-bold text-white mb-2">Lab Design Thinking <span className="text-amber-500">AI</span></h2>
+        <p className="text-slate-400">Simulasikan perancangan solusi AI untuk masalah di sekolahmu.</p>
       </div>
 
-      <div className="bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden min-h-[500px] flex flex-col">
-        {/* PHASE 0: SELECT JURUSAN */}
-        {phase === 0 && (
-          <div className="p-8 flex-1 flex flex-col items-center justify-center">
-            <h3 className="text-xl font-bold text-white mb-6">Pilih Program Keahlian:</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl">
-              {Object.entries(scenarios).map(([key, val]) => (
+      {/* Progress Bar */}
+      <div className="flex justify-between mb-12 relative max-w-2xl mx-auto">
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-700 -z-10 transform -translate-y-1/2 rounded-full"></div>
+        {['Empathize', 'Define', 'Ideate', 'Prototype'].map((label, idx) => (
+          <div key={idx} className="flex flex-col items-center">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors duration-500 border-4 ${step > idx + 1 ? 'bg-emerald-500 text-white border-emerald-600' : step === idx + 1 ? 'bg-amber-500 text-slate-900 border-amber-600 shadow-[0_0_15px_rgba(245,158,11,0.5)]' : 'bg-slate-800 text-slate-500 border-slate-700'}`}>
+              {step > idx + 1 ? <CheckCircle size={20} /> : idx + 1}
+            </div>
+            <span className="text-xs font-semibold mt-2 text-slate-400 uppercase tracking-wide hidden sm:block">{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-slate-800/50 backdrop-blur rounded-2xl shadow-xl border border-slate-700 overflow-hidden min-h-[400px]">
+        {/* Step 1: Empathize */}
+        {step === 1 && (
+          <div className="p-8">
+            <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <Users className="mr-3 text-blue-500" /> Tahap 1: Empathize
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Siapa target penggunamu di sekolah?</label>
+                <div className="grid grid-cols-3 gap-4">
+                  {['Siswa', 'Guru', 'Staff TU'].map((role) => (
+                    <button
+                      key={role}
+                      onClick={() => handleInputChange('user', role)}
+                      className={`p-4 rounded-xl border-2 text-center transition-all ${projectData.user === role ? 'border-amber-500 bg-amber-900/20 text-amber-400 font-bold' : 'border-slate-700 bg-slate-900/50 text-slate-400 hover:border-slate-500 hover:text-white'}`}
+                    >
+                      {role}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Apa keluhan utama mereka? (Observasi)</label>
+                <textarea 
+                  className="w-full p-4 rounded-xl bg-slate-900 border border-slate-600 focus:border-amber-500 focus:outline-none h-32 resize-none text-white placeholder-slate-500"
+                  placeholder="Contoh: Siswa sering mengeluh antrian perpustakaan terlalu lama saat jam istirahat..."
+                  value={projectData.masalah}
+                  onChange={(e) => handleInputChange('masalah', e.target.value)}
+                ></textarea>
+              </div>
+              <div className="flex justify-end">
                 <button 
-                  key={key}
-                  onClick={() => handleSelectJurusan(key)}
-                  className="p-4 bg-slate-900 border border-slate-700 rounded-xl hover:bg-slate-700 hover:border-amber-500 transition-all flex flex-col items-center gap-3 group"
+                  disabled={!projectData.user || !projectData.masalah}
+                  onClick={() => setStep(2)}
+                  className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition"
                 >
-                  <div className="p-3 bg-slate-800 rounded-full group-hover:bg-amber-500 group-hover:text-slate-900 transition-colors text-slate-300">
-                    {val.icon}
-                  </div>
-                  <span className="text-sm font-bold text-slate-300 group-hover:text-white text-center">{val.label}</span>
+                  Lanjut ke Define
                 </button>
-              ))}
+              </div>
             </div>
           </div>
         )}
 
-        {/* PHASE 1: EMPATHIZE & DEFINE */}
-        {phase === 1 && jurusan && (
-          <div className="p-8 flex-1 flex flex-col">
-            <div className="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
-              <div className="p-2 bg-amber-500 rounded text-slate-900">{scenarios[jurusan].icon}</div>
-              <h3 className="text-xl font-bold text-white">Tahap 1 & 2: Empathize - Define</h3>
+        {/* Step 2: Define & Ideate Combined for Flow */}
+        {step === 2 && (
+          <div className="p-8">
+            <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <Lightbulb className="mr-3 text-amber-500" /> Tahap 2 & 3: Define & Ideate
+            </h3>
+            <div className="bg-slate-900/50 p-4 rounded-lg mb-6 border border-slate-700">
+              <p className="text-sm text-slate-500 uppercase tracking-wider font-bold mb-1">Masalah User:</p>
+              <p className="font-medium text-slate-300 italic">"{projectData.masalah}"</p>
             </div>
             
-            <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 mb-6 flex-1">
-              <h4 className="text-amber-400 font-bold mb-2 uppercase text-xs tracking-wider">Masalah Teridentifikasi (POV):</h4>
-              <p className="text-lg text-slate-200 leading-relaxed italic">
-                "{scenarios[jurusan].problem}"
-              </p>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Nama Solusi / Aplikasi AI Kamu:</label>
+                <input 
+                  type="text"
+                  className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:border-amber-500 outline-none text-white"
+                  placeholder="Contoh: KantinPintar Bot"
+                  value={projectData.solusi}
+                  onChange={(e) => handleInputChange('solusi', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Teknologi AI yang digunakan:</label>
+                <select 
+                  className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:border-amber-500 outline-none text-white"
+                  value={projectData.teknologi}
+                  onChange={(e) => handleInputChange('teknologi', e.target.value)}
+                >
+                  <option value="Chatbot (NLP)">Natural Language Processing (Chatbot/Suara)</option>
+                  <option value="Computer Vision">Computer Vision (Kamera Cerdas/Scan Wajah)</option>
+                  <option value="Data Prediction">Data Analytics (Prediksi Tren/Nilai)</option>
+                </select>
+              </div>
+              <div className="flex justify-between">
+                <button onClick={() => setStep(1)} className="text-slate-400 hover:text-white font-medium">Kembali</button>
+                <button 
+                  disabled={!projectData.solusi}
+                  onClick={() => setStep(3)}
+                  className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-500 disabled:opacity-50 transition"
+                >
+                  Lanjut ke Prototype
+                </button>
+              </div>
             </div>
+          </div>
+        )}
 
-            <div className="text-right">
-              <button onClick={() => setPhase(2)} className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 ml-auto">
-                Cari Solusi (Ideate) <ChevronRight size={18}/>
+        {/* Step 3: Loading/Generating */}
+        {step === 3 && (
+          <div className="p-12 flex flex-col items-center justify-center text-center h-[400px]">
+            {!isGenerating ? (
+               <div className="animate-fade-in w-full max-w-md">
+                 <h3 className="text-2xl font-bold text-white mb-4">Siap Membuat Prototype?</h3>
+                 <p className="text-slate-400 mb-8">Sistem akan menyusun kartu konsep berdasarkan input data yang kamu berikan.</p>
+                 <button 
+                  onClick={generatePrototype}
+                  className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-900 font-bold py-4 rounded-xl shadow-lg hover:scale-105 transition-transform flex items-center justify-center space-x-2"
+                 >
+                   <Cpu size={24} />
+                   <span>Generate Konsep AI</span>
+                 </button>
+               </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="w-16 h-16 border-4 border-amber-900/30 border-t-amber-500 rounded-full animate-spin mx-auto"></div>
+                <p className="text-amber-400 font-medium animate-pulse">Menghubungkan neuron artificial...</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Step 4: Result */}
+        {step === 4 && (
+          <div className="p-0 md:flex h-full">
+            {/* Left Side: Summary */}
+            <div className="md:w-1/2 p-8 bg-slate-900/50 border-r border-slate-700 flex flex-col justify-center">
+              <div className="mb-6">
+                <span className="inline-block px-3 py-1 bg-emerald-900/30 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-bold uppercase tracking-wide mb-2">Prototype Selesai</span>
+                <h3 className="text-3xl font-bold text-white">{projectData.solusi}</h3>
+                <p className="text-slate-400 mt-1">Solusi AI untuk {projectData.user}</p>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start">
+                  <div className="bg-slate-800 p-2 rounded shadow-sm mr-3 border border-slate-700"><Users size={16} className="text-blue-400"/></div>
+                  <div><p className="text-xs text-slate-500 uppercase">User Problem</p><p className="text-sm font-medium text-slate-300">{projectData.masalah}</p></div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-slate-800 p-2 rounded shadow-sm mr-3 border border-slate-700"><Cpu size={16} className="text-amber-400"/></div>
+                  <div><p className="text-xs text-slate-500 uppercase">Technology</p><p className="text-sm font-medium text-slate-300">{projectData.teknologi}</p></div>
+                </div>
+              </div>
+
+              <button onClick={resetSim} className="w-full border border-slate-600 text-slate-400 font-bold py-3 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                Buat Proyek Baru
               </button>
             </div>
-          </div>
-        )}
 
-        {/* PHASE 2: IDEATE */}
-        {phase === 2 && jurusan && (
-          <div className="p-8 flex-1 flex flex-col">
-            <div className="flex items-center gap-3 mb-6 border-b border-slate-700 pb-4">
-              <Lightbulb className="text-amber-400" size={24}/>
-              <h3 className="text-xl font-bold text-white">Tahap 3: Ideate (Pilih Solusi AI)</h3>
-            </div>
-            
-            <p className="text-slate-400 mb-6">Manakah teknologi AI yang paling tepat untuk memecahkan masalah di atas?</p>
+            {/* Right Side: Visual Mockup */}
+            <div className="md:w-1/2 bg-slate-900 p-8 flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+              
+              {/* Phone Mockup */}
+              <div className="bg-slate-800 border-4 border-slate-700 w-64 h-[400px] rounded-[2rem] shadow-2xl overflow-hidden relative z-10">
+                {/* Notch */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-slate-900 rounded-b-xl border-b border-x border-slate-700"></div>
+                
+                {/* Screen Content */}
+                <div className="h-full bg-slate-100 flex flex-col">
+                  {/* App Header */}
+                  <div className="bg-amber-500 h-20 flex items-center justify-center pt-4 shadow-sm">
+                    <h4 className="text-slate-900 font-bold px-2 text-center text-sm">{projectData.solusi}</h4>
+                  </div>
+                  
+                  {/* App Body */}
+                  <div className="flex-1 p-4 flex flex-col items-center justify-center space-y-4">
+                    {projectData.teknologi.includes('Chatbot') ? (
+                      <>
+                         <div className="w-full bg-white p-3 rounded-lg rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-200">Halo! Ada yang bisa saya bantu?</div>
+                         <div className="w-full bg-amber-100 p-3 rounded-lg rounded-tr-none text-xs text-slate-800 self-end text-right shadow-sm border border-amber-200">Saya mau tanya jadwal ujian.</div>
+                         <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white shadow-lg"><MessageSquare size={20}/></div>
+                      </>
+                    ) : projectData.teknologi.includes('Vision') ? (
+                      <>
+                        <div className="w-full h-32 bg-slate-200 rounded-lg flex items-center justify-center border-2 border-dashed border-slate-400 relative">
+                           <div className="absolute inset-0 flex items-center justify-center">
+                             <div className="w-16 h-16 border-2 border-green-500 rounded flex items-center justify-center animate-pulse"></div>
+                           </div>
+                           <span className="text-xs text-slate-500">Scanning Object...</span>
+                        </div>
+                        <div className="w-full bg-green-100 p-2 rounded text-center text-green-800 text-xs font-bold border border-green-200">Teridentifikasi: Seragam Lengkap</div>
+                      </>
+                    ) : (
+                      <>
+                         <div className="w-full h-24 flex items-end justify-center space-x-2 pb-2 border-b border-slate-300">
+                           <div className="w-4 h-10 bg-blue-300 rounded-t"></div>
+                           <div className="w-4 h-16 bg-blue-500 rounded-t"></div>
+                           <div className="w-4 h-8 bg-blue-400 rounded-t"></div>
+                         </div>
+                         <p className="text-center text-xs text-slate-500">Analisis Data Siswa</p>
+                      </>
+                    )}
+                  </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              {scenarios[jurusan].solutionOptions.map((opt: any) => (
-                <button 
-                  key={opt.id}
-                  onClick={() => handleSolution(opt.correct)}
-                  className="bg-slate-900 border border-slate-700 p-6 rounded-xl text-left hover:border-amber-500 hover:bg-slate-800 transition-all group"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-bold text-indigo-400 uppercase border border-indigo-500/30 px-2 py-1 rounded bg-indigo-900/20">{opt.tech}</span>
+                  {/* App Footer */}
+                  <div className="h-12 bg-slate-200 border-t border-slate-300 flex justify-around items-center">
+                    <div className="w-8 h-1 bg-slate-400 rounded-full"></div>
                   </div>
-                  <h4 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400">{opt.name}</h4>
-                  <p className="text-sm text-slate-400">{opt.desc}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* PHASE 3: PROTOTYPE & TEST */}
-        {phase === 3 && jurusan && (
-          <div className="p-0 flex-1 flex flex-col md:flex-row">
-            {/* Prototype Card */}
-            <div className="md:w-1/2 bg-slate-900 p-8 flex items-center justify-center border-r border-slate-700">
-               <div className="bg-white text-slate-900 p-6 rounded-xl shadow-2xl w-full max-w-sm rotate-1 transform hover:rotate-0 transition duration-500">
-                  <div className="flex items-center justify-between mb-4 border-b pb-2 border-slate-200">
-                    <span className="font-bold text-lg uppercase tracking-wider">Prototype</span>
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-bold">Concept</span>
-                  </div>
-                  <div className="text-center py-6">
-                    <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
-                      {scenarios[jurusan].icon}
-                    </div>
-                    <h3 className="text-2xl font-black mb-2 text-indigo-600">
-                      {scenarios[jurusan].solutionOptions.find((o:any) => o.correct).name}
-                    </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
-                      Solusi berbasis AI untuk mengatasi masalah {scenarios[jurusan].label.split('(')[0]} secara cerdas dan efisien.
-                    </p>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-slate-200 flex justify-between text-xs font-mono text-slate-500">
-                    <span>Ver: 1.0 Low-Fi</span>
-                    <span>By: Siswa KKA</span>
-                  </div>
-               </div>
-            </div>
-
-            {/* Testing Feedback */}
-            <div className="md:w-1/2 p-8 flex flex-col justify-center">
-               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                 <MessageSquare className="text-rose-400"/> Tahap 5: Testing
-               </h3>
-               <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-4 mb-6">
-                 <h4 className="font-bold text-slate-300 mb-2 text-sm uppercase">Feedback Grid Simulation:</h4>
-                 <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div className="bg-slate-800 p-2 rounded text-emerald-300">💚 <strong>I Like:</strong> "Idenya sangat membantu efisiensi!"</div>
-                    <div className="bg-slate-800 p-2 rounded text-amber-300">💡 <strong>Idea:</strong> "Bisa ditambah notifikasi WA?"</div>
-                    <div className="bg-slate-800 p-2 rounded text-blue-300">❓ <strong>Question:</strong> "Butuh internet kencang tidak?"</div>
-                    <div className="bg-slate-800 p-2 rounded text-rose-300">🔧 <strong>Wish:</strong> "Semoga alatnya tidak mahal."</div>
-                 </div>
-               </div>
-               <button onClick={reset} className="w-full py-3 border border-slate-600 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                 Coba Jurusan Lain
-               </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
-      </div>
-    </div>
-  );
-};
-
-const RefleksiView = () => {
-  return (
-    <div className="container mx-auto px-4 py-8 animate-fade-in max-w-3xl">
-      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
-        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-          <FileText className="text-amber-500"/> Lembar Refleksi (Mindful Learning)
-        </h2>
-        <p className="text-slate-400 mb-8">Luangkan waktu sejenak untuk merenung menggunakan metode 3H (Head, Heart, Hand).</p>
-
-        <div className="space-y-6">
-          <div>
-            <label className="block text-indigo-400 font-bold mb-2 flex items-center gap-2">
-              <Brain size={18}/> HEAD (Kepala)
-            </label>
-            <p className="text-xs text-slate-500 mb-2">Apa pengetahuan baru tentang AI & Design Thinking yang paling mencerahkan bagimu?</p>
-            <textarea className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-slate-300 focus:border-amber-500 focus:outline-none h-24" placeholder="Saya baru sadar bahwa..."></textarea>
-          </div>
-
-          <div>
-            <label className="block text-rose-400 font-bold mb-2 flex items-center gap-2">
-              <Smile size={18}/> HEART (Hati)
-            </label>
-            <p className="text-xs text-slate-500 mb-2">Bagaimana perasaanmu saat berusaha memahami masalah orang lain (Empati)?</p>
-            <textarea className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-slate-300 focus:border-amber-500 focus:outline-none h-24" placeholder="Saya merasa..."></textarea>
-          </div>
-
-          <div>
-            <label className="block text-emerald-400 font-bold mb-2 flex items-center gap-2">
-              <Hand size={18}/> HAND (Tangan)
-            </label>
-            <p className="text-xs text-slate-500 mb-2">Keterampilan apa (menggambar, analisis, diskusi) yang ingin kamu asah lebih lanjut?</p>
-            <textarea className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-slate-300 focus:border-amber-500 focus:outline-none h-24" placeholder="Saya ingin berlatih..."></textarea>
-          </div>
-        </div>
-
-        <div className="mt-8 text-right">
-          <button className="bg-amber-600 hover:bg-amber-500 text-slate-900 font-bold px-6 py-3 rounded-lg flex items-center gap-2 ml-auto transition">
-            <CheckCircle size={18}/> Simpan Jurnal
-          </button>
-          <p className="text-[10px] text-slate-500 mt-2">*Jurnal hanya tersimpan di sesi browser ini.</p>
-        </div>
       </div>
     </div>
   );
@@ -558,28 +473,23 @@ const EvaluasiView = () => {
 
   const questions = [
     {
-      q: "Tahapan pertama dalam Design Thinking yang bertujuan memahami perasaan pengguna adalah...",
-      options: ["Define", "Prototype", "Empathize", "Ideate"],
+      q: "Tahapan pertama dalam Design Thinking adalah...",
+      options: ["Define", "Prototype", "Empathize", "Coding"],
       correct: 2
     },
     {
-      q: "Aktivitas 'Crazy 8s' dilakukan pada tahapan...",
-      options: ["Ideate", "Testing", "Prototype", "Empathize"],
-      correct: 0
-    },
-    {
-      q: "Rumus POV Statement yang benar adalah...",
-      options: [
-        "[SOLUSI] membutuhkan [BIAYA]",
-        "[PENGGUNA] membutuhkan [KEBUTUHAN] karena [INSIGHT]",
-        "[GURU] membutuhkan [SISWA]",
-        "[AI] membutuhkan [DATA]"
-      ],
+      q: "Apa tujuan dari tahapan 'Prototype'?",
+      options: ["Menjual produk", "Membuat model visual sederhana", "Membuat kode program final", "Mencari investor"],
       correct: 1
     },
     {
-      q: "Manakah contoh penerapan AI Computer Vision di bengkel otomotif?",
-      options: ["Chatbot suku cadang", "Prediksi harga mobil", "Kamera pendeteksi kelengkapan alat (Tool Tracking)", "Excel stok barang"],
+      q: "Manakah yang merupakan contoh penerapan AI Computer Vision di sekolah?",
+      options: ["Chatbot informasi PR", "Prediksi nilai siswa", "Kamera pendeteksi masker/seragam", "Excel rumus otomatis"],
+      correct: 2
+    },
+    {
+      q: "Pendekatan 'Joyful Learning' berarti...",
+      options: ["Belajar yang menegangkan", "Belajar sambil bermain game saja", "Belajar yang menyenangkan dan bermakna", "Belajar tanpa guru"],
       correct: 2
     }
   ];
@@ -685,7 +595,6 @@ const Materi9: React.FC = () => {
         {activeTab === 'home' && <HomeView onStart={() => setActiveTab('materi')} />}
         {activeTab === 'materi' && <MateriView />}
         {activeTab === 'simulasi' && <SimulasiView />}
-        {activeTab === 'refleksi' && <RefleksiView />}
         {activeTab === 'evaluasi' && <EvaluasiView />}
       </main>
 
