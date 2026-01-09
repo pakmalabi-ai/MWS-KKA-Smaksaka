@@ -12,7 +12,7 @@ import {
   CheckCircle, 
   Play, 
   Pause, 
-  ChevronRight,
+  ChevronRight, 
   ArrowRight,
   Layout,
   Users,
@@ -233,7 +233,7 @@ function MateriSection() {
               <div className="text-2xl font-bold text-cyan-400 w-16 text-center">M : N</div>
               <div>
                 <p className="font-bold text-white">Many to Many</p>
-                <p className="text-sm text-slate-400">1 Siswa bisa ikut Banyak Ekskul. 1 Ekskul punya Banyak Anggota. <br/><span className="text-amber-400 text-xs font-bold">--> Butuh Tabel Penghubung!</span></p>
+                <p className="text-sm text-slate-400">1 Siswa bisa ikut Banyak Ekskul. 1 Ekskul punya Banyak Anggota. <br/><span className="text-amber-400 text-xs font-bold">--&gt; Butuh Tabel Penghubung!</span></p>
               </div>
             </div>
           </div>

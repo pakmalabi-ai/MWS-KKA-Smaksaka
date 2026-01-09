@@ -161,7 +161,7 @@ const MateriSection = ({ setPage }: { setPage: (p: string) => void }) => (
                 <h4 className="font-bold text-blue-400 mb-2">Pemrograman Tradisional</h4>
                 <p className="text-slate-300 text-sm mb-4">Manusia menulis aturan (Rules) secara detail.</p>
                 <div className="bg-black/30 p-3 rounded text-xs font-mono text-slate-400">
-                    "Jika ada segitiga di atas & kumis di tengah -> MAKA Kucing."
+                    "Jika ada segitiga di atas & kumis di tengah -&gt; MAKA Kucing."
                 </div>
                 <p className="mt-3 text-xs text-slate-500">Analogi: Seperti mengikuti <strong>Resep Kue</strong> yang kaku. Salah takaran sedikit, gagal.</p>
             </div>
