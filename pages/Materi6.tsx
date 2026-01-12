@@ -18,7 +18,8 @@ import {
   Fingerprint,
   Gavel,
   History,
-  FileText
+  FileText,
+  Award
 } from 'lucide-react';
 
 // --- COMPONENTS ---
@@ -43,7 +44,7 @@ const ModuleNav = ({ activePage, setPage }: { activePage: string, setPage: (p: s
           { id: 'materi', label: 'Materi', icon: BookOpen },
           { id: 'simulasi', label: 'Dilema Etis', icon: Scale },
           { id: 'debat', label: 'Studi Kasus', icon: MessageSquare },
-          { id: 'kuis', label: 'Refleksi', icon: CheckCircle },
+          { id: 'kuis', label: 'Evaluasi', icon: CheckCircle },
         ].map((item) => (
           <button
             key={item.id}
@@ -168,7 +169,7 @@ const MateriSection = () => {
 
           <div className="bg-slate-900 border border-slate-700 p-4 rounded-xl">
              <h4 className="text-white font-bold mb-2 flex items-center gap-2"><Eye className="text-blue-400"/> Ancaman Deepfake</h4>
-             <p className="text-sm text-slate-300 mb-2">Menggunakan AI untuk memanipulasi video/suara agar terlihat seperti orang lain.</p>
+             <p className="text-sm text-slate-300 mb-2">Menggunakan AI untuk memanipulasi video/suara agar terlihat asli.</p>
              <div className="grid grid-cols-3 gap-2 text-xs text-slate-400">
                 <div className="bg-slate-800 p-2 rounded">Politik (Hoaks Pejabat)</div>
                 <div className="bg-slate-800 p-2 rounded">Kriminal (Voice Cloning Penipuan)</div>
@@ -333,88 +334,102 @@ const SimulasiSection = () => {
                   className="p-4 bg-slate-800 hover:bg-red-900/30 border-2 border-slate-600 hover:border-red-500 rounded-xl transition text-center group"
                 >
                   <span className="block font-bold text-lg mb-1 text-white group-hover:text-red-400">Opsi A: Lurus Terus</span>
-                  <span className="text-sm text-slate-400">Menabrak 5 pejalan kaki yang melanggar lampu merah.</span>
+                  <span className="text-sm text-slate-400">Menabrak 5 Orang Asing. Anda Selamat.</span>
                 </button>
                 <button 
                   onClick={() => setTrolleyDecision('switch')}
-                  className="p-4 bg-slate-800 hover:bg-slate-700 border-2 border-slate-600 hover:border-slate-400 rounded-xl transition text-center group"
+                  className="p-4 bg-slate-800 hover:bg-blue-900/30 border-2 border-slate-600 hover:border-blue-500 rounded-xl transition text-center group"
                 >
-                  <span className="block font-bold text-lg mb-1 text-white group-hover:text-slate-300">Opsi B: Banting Setir</span>
-                  <span className="text-sm text-slate-400">Menabrak tembok beton. Membunuh 1 penumpang (Taat Aturan).</span>
+                  <span className="block font-bold text-lg mb-1 text-white group-hover:text-blue-400">Opsi B: Banting Setir</span>
+                  <span className="text-sm text-slate-400">Menabrak Tembok. Anda Tewas. 5 Orang Selamat.</span>
                 </button>
               </div>
             </div>
           )}
 
-          {/* BIAS SIMULATION */}
+          {/* BIAS RECRUITMENT SIMULATION */}
           {activeSim === 'bias' && (
             <div className="p-8">
-               <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white"><Scale className="text-blue-500" /> Simulasi CV Screening (Kasus Amazon)</h3>
-               <p className="text-slate-300 mb-6">Sistem ini dilatih dengan data lamaran kerja 10 tahun lalu yang didominasi Pria. Coba lihat bagaimana AI menilai kandidat.</p>
-               
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-1 text-slate-300">Jenis Kelamin</label>
-                      <select 
-                        className="w-full p-2 border border-slate-600 bg-slate-900 text-white rounded focus:border-amber-500 outline-none"
-                        value={candidate.gender}
-                        onChange={(e) => setCandidate({...candidate, gender: e.target.value})}
-                      >
-                        <option>Laki-laki</option>
-                        <option>Perempuan</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-1 text-slate-300">IPK (0-4.0)</label>
-                      <input 
-                        type="number" step="0.1" max="4"
-                        className="w-full p-2 border border-slate-600 bg-slate-900 text-white rounded focus:border-amber-500 outline-none"
-                        value={candidate.gpa}
-                        onChange={(e) => setCandidate({...candidate, gpa: parseFloat(e.target.value)})}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-1 text-slate-300">Pengalaman Kerja (Tahun)</label>
-                      <input 
-                        type="number"
-                        className="w-full p-2 border border-slate-600 bg-slate-900 text-white rounded focus:border-amber-500 outline-none"
-                        value={candidate.exp}
-                        onChange={(e) => setCandidate({...candidate, exp: parseInt(e.target.value)})}
-                      />
-                    </div>
-                    <button 
-                      onClick={calculateBias}
-                      className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
-                    >
-                      Proses CV dengan AI
-                    </button>
-                 </div>
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white"><Scale className="text-amber-500" /> Skenario: AI Perekrutan (Amazon Case)</h3>
+              <p className="text-slate-300 mb-6">
+                Anda melatih AI dengan data pelamar kerja 10 tahun terakhir. Mayoritas data pelamar yang diterima adalah Pria.
+                Coba tes AI Anda sekarang.
+              </p>
 
-                 <div className="flex flex-col items-center justify-center bg-slate-900 rounded-xl p-6 border border-slate-700">
-                    {aiScore ? (
-                      <div className="text-center animate-[fadeIn_0.5s]">
-                        <span className="text-sm text-slate-500 uppercase tracking-widest">Skor Kandidat</span>
-                        <div className={`text-6xl font-black my-4 ${Number(aiScore) > 60 ? 'text-green-500' : 'text-rose-500'}`}>
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4 bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                  <h4 className="font-bold text-slate-300 mb-2 border-b border-slate-700 pb-2">Profil Kandidat</h4>
+                  
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1">Jenis Kelamin</label>
+                    <select 
+                      value={candidate.gender}
+                      onChange={(e) => setCandidate({...candidate, gender: e.target.value})}
+                      className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-amber-500 outline-none"
+                    >
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1">IPK (GPA)</label>
+                    <input 
+                      type="number" 
+                      step="0.1"
+                      value={candidate.gpa}
+                      onChange={(e) => setCandidate({...candidate, gpa: parseFloat(e.target.value)})}
+                      className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-amber-500 outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1">Pengalaman (Tahun)</label>
+                    <input 
+                      type="number" 
+                      value={candidate.exp}
+                      onChange={(e) => setCandidate({...candidate, exp: parseInt(e.target.value)})}
+                      className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-amber-500 outline-none"
+                    />
+                  </div>
+
+                  <button 
+                    onClick={calculateBias}
+                    className="w-full bg-amber-600 hover:bg-amber-500 text-slate-900 font-bold py-2 rounded-lg transition"
+                  >
+                    Hitung Skor Kelayakan AI
+                  </button>
+                </div>
+
+                <div className="flex flex-col items-center justify-center bg-slate-900 p-6 rounded-xl h-full border border-slate-700">
+                   {aiScore ? (
+                     <div className="text-center animate-[fadeIn_0.5s]">
+                        <div className="text-sm text-slate-400 mb-2">Skor Prediksi AI</div>
+                        <div className={`text-6xl font-black mb-4 ${candidate.gender === 'Perempuan' ? 'text-rose-500' : 'text-emerald-500'}`}>
                           {aiScore}
                         </div>
-                        <div className="bg-slate-800 p-4 rounded text-left text-sm shadow-sm border border-red-500/30">
-                          <p className="font-bold text-red-400 mb-1 flex items-center gap-1"><AlertTriangle className="w-4 h-4"/> Deteksi Bias Historis:</p>
-                          <p className="text-slate-300">
-                            Algoritma ini memberikan penalti skor (-20) jika pelamar adalah <strong>Wanita</strong>, meskipun IPK dan Pengalaman sama tinggi. 
-                            <br/><br/>
-                            <em className="text-slate-400 block mt-2 border-t border-slate-700 pt-2">"Ini terjadi karena AI belajar dari pola masa lalu bahwa karyawan sukses mayoritas adalah Pria."</em>
-                          </p>
+                        <div className="p-3 bg-slate-800 rounded-lg text-xs text-slate-300">
+                          {candidate.gender === 'Perempuan' ? (
+                            <span>
+                              <strong className="text-rose-400 block mb-1">⚠️ BIAS TERDETEKSI</strong>
+                              Skor dikurangi karena gender "Perempuan". AI mempelajari pola historis bahwa "Pria lebih sering diterima" di masa lalu.
+                            </span>
+                          ) : (
+                            <span className="text-emerald-400">
+                              Skor normal. Tidak ada penalti gender.
+                            </span>
+                          )}
                         </div>
-                      </div>
-                    ) : (
-                      <div className="text-slate-500 text-center">
-                        <Cpu className="w-16 h-16 mx-auto mb-2 opacity-30" />
-                        <p>Masukkan data CV pelamar di sebelah kiri.</p>
-                      </div>
-                    )}
-                 </div>
-               </div>
+                        <button onClick={() => setAiScore(null)} className="mt-4 text-xs text-slate-500 underline">Reset</button>
+                     </div>
+                   ) : (
+                     <div className="text-center text-slate-500">
+                        <Scale size={48} className="mx-auto mb-2 opacity-20"/>
+                        <p>Masukkan data kandidat dan klik Hitung.</p>
+                     </div>
+                   )}
+                </div>
+              </div>
             </div>
           )}
 
@@ -423,230 +438,148 @@ const SimulasiSection = () => {
   );
 };
 
-// 4. DEBAT SECTION
-const DebatSection = () => {
-  const [timer, setTimer] = useState(180); // 3 minutes
-  const [isRunning, setIsRunning] = useState(false);
-
-  useEffect(() => {
-    let interval: any;
-    if (isRunning && timer > 0) {
-      interval = setInterval(() => {
-        setTimer((timer) => timer - 1);
-      }, 1000);
-    } else if (timer === 0) {
-      setIsRunning(false);
-    }
-    return () => clearInterval(interval);
-  }, [isRunning, timer]);
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
-
-  return (
-    <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-        <div className="bg-slate-800/50 backdrop-blur rounded-3xl shadow-xl overflow-hidden max-w-5xl mx-auto border border-slate-700">
-          <div className="bg-slate-900 text-white p-6 text-center border-b border-slate-700">
-            <h2 className="text-3xl font-bold">Arena Diskusi & LKPD</h2>
-            <p className="text-amber-400 mt-2 font-medium">Studi Kasus: Social Scoring di Tempat Kerja</p>
-          </div>
-
-          <div className="p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              {/* Timer Section */}
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-700 flex flex-col items-center justify-center text-center">
-                <h3 className="text-xl font-bold text-slate-300 mb-4">Pengatur Waktu Diskusi</h3>
-                <div className="text-7xl font-mono font-black text-white mb-6">
-                  {formatTime(timer)}
-                </div>
-                <div className="flex gap-4">
-                  <button 
-                    onClick={() => setIsRunning(!isRunning)}
-                    className={`w-14 h-14 rounded-full flex items-center justify-center transition ${isRunning ? 'bg-amber-900/50 text-amber-500 border border-amber-500' : 'bg-green-600 text-white hover:bg-green-500'}`}
-                  >
-                    {isRunning ? <Pause /> : <Play />}
-                  </button>
-                  <button 
-                    onClick={() => { setIsRunning(false); setTimer(180); }}
-                    className="w-14 h-14 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center hover:bg-slate-600 transition"
-                  >
-                    <RotateCcw />
-                  </button>
-                </div>
-              </div>
-
-              {/* Case Prompt */}
-              <div className="space-y-4">
-                <div className="bg-slate-900 p-5 rounded-xl border border-slate-700">
-                   <h4 className="font-bold text-white mb-2 flex items-center gap-2"><Eye className="text-blue-400"/> Kasus Nyata</h4>
-                   <p className="text-sm text-slate-300 leading-relaxed">
-                     "Sebuah pabrik memasang CCTV AI yang bisa mengukur ekspresi wajah karyawan (senyum/cemberut) dan menghitung durasi ke toilet hingga detik. Data ini dipakai untuk menentukan bonus bulanan."
-                   </p>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                   <div className="bg-emerald-900/20 p-3 rounded border border-emerald-500/30">
-                      <h5 className="font-bold text-emerald-400 text-sm mb-1">Tim Pro (Bos)</h5>
-                      <p className="text-xs text-slate-400">"Ini demi produktivitas! Karyawan jadi disiplin dan tidak malas-malasan."</p>
-                   </div>
-                   <div className="bg-rose-900/20 p-3 rounded border border-rose-500/30">
-                      <h5 className="font-bold text-rose-400 text-sm mb-1">Tim Kontra (Karyawan)</h5>
-                      <p className="text-xs text-slate-400">"Ini pelanggaran privasi berat! Kami manusia, bukan robot yang harus senyum terus."</p>
-                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reflection Prompt */}
-            <div className="border-t border-slate-700 pt-8 bg-slate-900/30 -mx-8 -mb-8 p-8">
-              <h3 className="text-xl font-bold text-white mb-2">Lembar Kerja: Cari Dasar Hukum</h3>
-              <p className="text-slate-400 text-sm mb-4">Gunakan smartphone kalian untuk mencari pasal di <strong>UU Ketenagakerjaan</strong> atau <strong>UU PDP</strong> yang relevan dengan kasus di atas.</p>
-              <textarea placeholder="Tulis hasil temuan kelompokmu di sini..." className="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-slate-300 focus:outline-none focus:border-amber-500 h-24 text-sm"></textarea>
-            </div>
-          </div>
+// 4. DEBAT / STUDI KASUS
+const DebatSection = () => (
+  <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
+     <h2 className="text-3xl font-bold text-white mb-8 text-center">Studi Kasus & Debat</h2>
+     
+     <div className="max-w-4xl mx-auto bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700">
+        <h3 className="text-2xl font-bold text-amber-400 mb-4">Topik: Deepfake di Media Sosial</h3>
+        <p className="text-slate-300 mb-6">
+          Seseorang menggunakan AI untuk mengubah wajah tokoh politik dalam video menjadi sedang melakukan tindakan kriminal (Hoaks). Video itu viral.
+        </p>
+        
+        <div className="grid md:grid-cols-2 gap-6">
+           <div className="bg-slate-900/50 p-6 rounded-xl border-l-4 border-blue-500">
+              <h4 className="font-bold text-blue-400 mb-2">Kelompok Pro-Regulasi Ketat</h4>
+              <ul className="text-sm text-slate-300 space-y-2 list-disc pl-4">
+                 <li>Pengembang AI harus bertanggung jawab.</li>
+                 <li>Wajib ada watermark "AI Generated" di setiap konten.</li>
+                 <li>Hukuman pidana bagi pembuat deepfake.</li>
+              </ul>
+           </div>
+           <div className="bg-slate-900/50 p-6 rounded-xl border-l-4 border-green-500">
+              <h4 className="font-bold text-green-400 mb-2">Kelompok Kebebasan Berkreasi</h4>
+              <ul className="text-sm text-slate-300 space-y-2 list-disc pl-4">
+                 <li>Teknologi netral, pengguna yang salah.</li>
+                 <li>Regulasi berlebihan mematikan inovasi seni/film.</li>
+                 <li>Fokus pada edukasi masyarakat, bukan pelarangan alat.</li>
+              </ul>
+           </div>
         </div>
-    </div>
-  );
-};
 
-// 5. KUIS & REFLEKSI SECTION
+        <div className="mt-8 bg-amber-900/20 p-4 rounded-xl border border-amber-500/30 text-center">
+           <p className="text-amber-200 text-sm font-semibold">
+             Diskusi Kelas: Posisi mana yang kamu pilih? Bagaimana solusinya menurut UU PDP?
+           </p>
+        </div>
+     </div>
+  </div>
+);
+
+// 5. KUIS SECTION
 const KuisSection = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [feedback, setFeedback] = useState<boolean | null>(null);
 
   const questions = [
     {
-      q: "Konsep 'Garbage In, Garbage Out' dalam AI berarti...",
-      opts: [
-        "AI bisa mendaur ulang sampah elektronik.",
-        "Jika data latih mengandung prasangka (sampah), maka keputusan AI juga akan bias.",
-        "Komputer akan rusak jika memorinya penuh sampah.",
-        "AI tidak membutuhkan data manusia."
+      q: "Apa penyebab utama 'Bias Algoritma' dalam AI?",
+      options: [
+        "Komputer membenci manusia.",
+        "Data latih (Dataset) yang tidak seimbang atau mengandung prasangka manusia.",
+        "Listrik yang tidak stabil.",
+        "Kode program terlalu panjang."
       ],
-      a: 1
+      ans: 1
     },
     {
-      q: "Apa bahaya utama dari teknologi Deepfake Voice Cloning?",
-      opts: [
-        "Membuat penyanyi kehilangan pekerjaan.",
-        "Penipuan telepon yang meniru suara anak/keluarga meminta tebusan.",
-        "Kualitas suara telepon menjadi jernih.",
-        "Baterai HP cepat habis."
-      ],
-      a: 1
+      q: "Undang-Undang di Indonesia yang melindungi privasi data kita disebut...",
+      options: ["UU ITE", "UU PDP (Perlindungan Data Pribadi)", "UUD 1945", "KUHP"],
+      ans: 1
     },
     {
-      q: "Undang-Undang di Indonesia yang melindungi privasi data warga negara adalah...",
-      opts: [
-        "UU Lalu Lintas",
-        "KUHP",
-        "UU PDP (Perlindungan Data Pribadi)",
-        "UU Cipta Kerja"
-      ],
-      a: 2
+      q: "Dalam masalah Trolley Problem, pendekatan yang mengutamakan 'Menyelamatkan jumlah nyawa terbanyak' disebut...",
+      options: ["Utilitarianisme", "Egoisme", "Deontologi (Aturan)", "Nihilisme"],
+      ans: 0
     },
     {
-      q: "Apa itu 'Consent' dalam etika data?",
-      opts: [
-        "Persetujuan yang diberikan pemilik data secara sadar sebelum datanya diambil.",
-        "Kabel untuk transfer data.",
-        "Nama sensor kamera AI.",
-        "Proses menghapus data otomatis."
-      ],
-      a: 0
+      q: "Deepfake adalah teknologi AI yang digunakan untuk...",
+      options: ["Memasak otomatis.", "Memanipulasi wajah/suara dalam video agar terlihat asli.", "Mendeteksi gempa.", "Membuat website."],
+      ans: 1
     }
   ];
 
   const handleAnswer = (idx: number) => {
-    if (idx === questions[currentQ].a) {
-      setScore(score + 25);
-    }
-    
-    if (currentQ < questions.length - 1) {
-      setCurrentQ(currentQ + 1);
-    } else {
-      setShowResult(true);
-    }
-  };
+     const isCorrect = idx === questions[currentQ].ans;
+     setFeedback(isCorrect);
+     if(isCorrect) setScore(score + 25);
+     
+     setTimeout(() => {
+        setFeedback(null);
+        if(currentQ < questions.length - 1) {
+           setCurrentQ(currentQ + 1);
+        } else {
+           setShowResult(true);
+        }
+     }, 1000);
+  }
 
   const resetQuiz = () => {
-    setCurrentQ(0);
-    setScore(0);
-    setShowResult(false);
-  };
+     setCurrentQ(0);
+     setScore(0);
+     setShowResult(false);
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8 animate-[fadeIn_0.5s]">
-      
-      {/* Journaling Section (Mindfulness) */}
-      <div className="max-w-3xl mx-auto bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700 mb-12">
-         <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><FileText className="text-amber-400"/> Lembar Refleksi (Journaling)</h3>
-         <p className="text-slate-300 italic mb-6 text-sm">"Ambil napas sejenak. Jawablah untuk dirimu sendiri."</p>
-         
-         <div className="space-y-4">
-            <div>
-               <label className="block text-slate-400 text-sm mb-2">1. Apakah kamu merasa caramu menggunakan media sosial sudah aman?</label>
-               <input type="text" className="w-full bg-slate-900 border border-slate-700 rounded p-3 text-white focus:border-amber-500 outline-none"/>
-            </div>
-            <div>
-               <label className="block text-slate-400 text-sm mb-2">2. Jika kamu jadi programmer AI, prinsip etika apa yang akan kamu pegang teguh?</label>
-               <input type="text" className="w-full bg-slate-900 border border-slate-700 rounded p-3 text-white focus:border-amber-500 outline-none"/>
-            </div>
-         </div>
-      </div>
-
-      {/* Quiz Section */}
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-gradient-to-r from-amber-600 to-orange-600 p-6 rounded-t-2xl text-white text-center">
-           <h2 className="text-2xl font-bold">Evaluasi Pemahaman</h2>
-        </div>
-        
-        <div className="bg-slate-800 p-8 rounded-b-2xl border-x border-b border-slate-700 shadow-xl">
-            {!showResult ? (
-              <div>
-                <div className="flex justify-between text-sm text-slate-400 mb-4 font-bold uppercase tracking-wider">
-                  <span>Soal {currentQ + 1} dari {questions.length}</span>
-                  <span>Skor Sementara: {score}</span>
-                </div>
-                
-                <h3 className="text-lg font-bold text-white mb-6 leading-relaxed">{questions[currentQ].q}</h3>
-                
-                <div className="space-y-3">
-                  {questions[currentQ].opts.map((opt, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleAnswer(idx)}
-                      className="w-full text-left p-4 rounded-xl border border-slate-600 hover:border-amber-500 hover:bg-amber-500/10 transition font-medium text-slate-300 hover:text-white"
-                    >
-                      {opt}
-                    </button>
+    <div className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[60vh] animate-[fadeIn_0.5s]">
+       <div className="max-w-xl w-full bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-2xl">
+          {!showResult ? (
+             <>
+               <div className="flex justify-between items-center mb-6">
+                  <span className="text-xs text-slate-400 uppercase tracking-widest">Pertanyaan {currentQ + 1}/{questions.length}</span>
+                  <span className="text-amber-400 font-bold">{score} Poin</span>
+               </div>
+               
+               <h3 className="text-xl font-bold text-white mb-8">{questions[currentQ].q}</h3>
+               
+               <div className="space-y-3">
+                  {questions[currentQ].options.map((opt, idx) => (
+                     <button 
+                        key={idx}
+                        onClick={() => handleAnswer(idx)}
+                        disabled={feedback !== null}
+                        className={`w-full text-left p-4 rounded-xl border transition-all ${
+                           feedback !== null 
+                             ? idx === questions[currentQ].ans 
+                                ? 'bg-emerald-900/40 border-emerald-500 text-emerald-400' 
+                                : 'bg-slate-800 border-slate-700 text-slate-500'
+                             : 'bg-slate-900/50 border-slate-700 text-slate-300 hover:bg-amber-600 hover:text-white hover:border-amber-500'
+                        } ${feedback === false && idx !== questions[currentQ].ans ? 'opacity-50' : ''}`}
+                     >
+                        {opt}
+                     </button>
                   ))}
+               </div>
+             </>
+          ) : (
+             <div className="text-center">
+                <div className="mb-6 inline-flex p-4 bg-amber-500/10 rounded-full border border-amber-500/30">
+                   <Award size={48} className="text-amber-400" />
                 </div>
-              </div>
-            ) : (
-              <div className="text-center animate-[fadeIn_0.5s]">
-                <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/30">
-                  <CheckCircle className="w-12 h-12 text-green-500" />
+                <h3 className="text-3xl font-bold text-white mb-2">Kuis Selesai!</h3>
+                <p className="text-slate-400 mb-6">Skor Akhir Kamu:</p>
+                <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 mb-8">
+                   {score}
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Selesai!</h3>
-                <p className="text-slate-400 mb-6">Skor Akhir Anda:</p>
-                <div className="text-6xl font-black text-white mb-8">{score}</div>
-                
-                <p className="text-sm text-slate-400 mb-8 italic">
-                  {score === 100 ? "\"Kamu telah menjadi Tuan dari Teknologi!\"" : "\"Teruslah belajar menjadi pengguna bijak.\""}
-                </p>
-                
-                <button onClick={resetQuiz} className="px-8 py-3 bg-amber-600 text-white rounded-full font-bold hover:bg-amber-500 transition">
-                  Ulangi Kuis
+                <button onClick={resetQuiz} className="bg-slate-700 hover:bg-slate-600 text-white px-8 py-3 rounded-full font-bold transition">
+                   Ulangi Kuis
                 </button>
-              </div>
-            )}
-        </div>
-      </div>
+             </div>
+          )}
+       </div>
     </div>
   );
 };
@@ -661,7 +594,7 @@ const Materi6: React.FC = () => {
   }, [activePage]);
 
   return (
-    <div className="text-slate-200 font-sans selection:bg-amber-500 selection:text-slate-900 -mt-4">
+    <div className="text-slate-200 font-sans selection:bg-amber-500 selection:text-orange-900 -mt-4">
       {/* Navigation */}
       <ModuleNav activePage={activePage} setPage={setActivePage} />
       

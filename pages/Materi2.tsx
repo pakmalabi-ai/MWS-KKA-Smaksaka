@@ -143,7 +143,7 @@ function HomeSection({ changeTab }: { changeTab: (t: string) => void }) {
           <p className="text-slate-400 text-sm">Simulasi Perpus, Toko, & Ekskul (M:N).</p>
         </div>
 
-        <div onClick={() => changeTab('kuis')} className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 cursor-pointer transition-all hover:-translate-y-1 group">
+        <div onClick={() => changeTab('evaluasi')} className="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-emerald-500 cursor-pointer transition-all hover:-translate-y-1 group">
           <div className="w-12 h-12 bg-emerald-900/50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
             <CheckCircle className="text-emerald-400 group-hover:text-white" />
           </div>
@@ -814,17 +814,22 @@ const ModuleNav = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTa
       </div>
       
       <div className="flex items-center gap-2 md:gap-4">
-        {['Home', 'Materi', 'Simulasi', 'Kuis'].map((item) => (
+        {[
+          { id: 'home', label: 'Beranda' },
+          { id: 'materi', label: 'Materi' },
+          { id: 'simulasi', label: 'Simulasi' },
+          { id: 'evaluasi', label: 'Evaluasi' }
+        ].map((item) => (
           <button 
-            key={item}
-            onClick={() => setActiveTab(item.toLowerCase())}
+            key={item.id}
+            onClick={() => setActiveTab(item.id)}
             className={`text-xs md:text-sm font-medium px-3 py-1.5 rounded-full transition-all ${
-              activeTab === item.toLowerCase() 
+              activeTab === item.id 
               ? 'bg-indigo-600 text-white' 
               : 'text-slate-300 hover:text-white hover:bg-slate-800'
             }`}
           >
-            {item}
+            {item.label}
           </button>
         ))}
       </div>
@@ -846,7 +851,7 @@ const Materi2: React.FC = () => {
         {activeTab === 'home' && <HomeSection changeTab={setActiveTab} />}
         {activeTab === 'materi' && <MateriSection />}
         {activeTab === 'simulasi' && <SimulationSection />}
-        {activeTab === 'kuis' && <KuisSection />}
+        {activeTab === 'evaluasi' && <KuisSection />}
        </div>
 
        <style>{`

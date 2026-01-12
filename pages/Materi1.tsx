@@ -17,41 +17,333 @@ import {
   MessageSquare, 
   BarChart3, 
   ScanLine, 
-  ArrowDownCircle, 
-  Search,
   Printer,
-  Send
+  Send,
+  Layers,
+  FileDigit,
+  Table as TableIcon,
+  RefreshCcw
 } from 'lucide-react';
 
 // --- DATA & CONTENT ---
 
-const QUIZ_DATA = [
+const EVALUASI_DATA = [
   {
-    question: "Dalam analogi 'Lemari', Laci khusus yang hanya berisi baju (sejenis) menggambarkan konsep...",
-    options: ["Database", "Tabel (Entitas)", "Field", "Record"],
-    answer: 1
+    id: 1,
+    question: "Dalam piramida pengetahuan (DIKW), fakta mentah seperti angka '5000' atau kata 'Merah' yang belum memiliki konteks disebut sebagai...",
+    options: ["Information (Informasi)", "Data", "Knowledge (Pengetahuan)", "Wisdom (Kebijaksanaan)", "Database"],
+    answer: 1 // B. Data
   },
   {
-    question: "Jika Pak Guru memanggil 'Budi' dan ada 5 siswa menoleh, ini disebut masalah Ambiguitas. Solusinya adalah...",
-    options: ["Memanggil nama bapaknya", "Menggunakan Primary Key (NISN)", "Menghapus 4 Budi lainnya", "Menggunakan AI"],
-    answer: 1
+    id: 2,
+    question: "Manakah pernyataan berikut yang paling tepat menggambarkan hubungan antara Data dan Informasi?",
+    options: [
+      "Data adalah informasi yang sudah diolah.",
+      "Informasi adalah data yang tidak memiliki arti.",
+      "Data adalah fakta mentah, sedangkan informasi adalah data yang sudah diberi konteks/arti.",
+      "Data dan informasi adalah hal yang sama persis.",
+      "Informasi berada di level paling bawah piramida DIKW."
+    ],
+    answer: 2 // C
   },
   {
-    question: "Apa yang terjadi jika kita memberi makan AI dengan data sampah (berantakan)?",
-    options: ["AI menjadi lebih kreatif", "Prinsip GIGO (Garbage In, Garbage Out)", "AI akan memperbaikinya otomatis", "Komputer menjadi panas"],
-    answer: 1
+    id: 3,
+    question: "Kecerdasan Artifisial (AI) membutuhkan data untuk belajar. Jika data yang dimasukkan ke dalam sistem AI berantakan atau salah, maka hasil output AI juga akan salah. Konsep ini dikenal dengan istilah...",
+    options: ["Artificial General Intelligence", "Data Mining", "Machine Learning", "Garbage In, Garbage Out", "Big Data Analysis"],
+    answer: 3 // D
   },
   {
-    question: "Satu baris data lengkap dalam tabel (misal: Data lengkap Ahmad Dhani) disebut...",
-    options: ["Field", "Record (Tuple)", "Data Value", "Primary Key"],
-    answer: 1
+    id: 4,
+    question: "Dalam analogi lemari pakaian, 'Laci' yang dikhususkan untuk menyimpan benda sejenis (misalnya khusus kaos kaki) merepresentasikan komponen basis data yaitu...",
+    options: ["Field", "Record", "Tabel", "Database", "Query"],
+    answer: 2 // C
   },
   {
-    question: "Manakah syarat utama sebuah Primary Key?",
-    options: ["Boleh kosong (Null)", "Boleh kembar", "Harus Unik dan Tidak Boleh Kosong", "Harus berupa angka saja"],
-    answer: 2
+    id: 5,
+    question: "Perhatikan data berikut: [Budi Santoso, X TJKT 1, Jl. Merdeka No. 45]. Satu kesatuan data lengkap yang memuat informasi tentang satu siswa tersebut disebut...",
+    options: ["Field", "Record", "File", "Bit", "Byte"],
+    answer: 1 // B
+  },
+  {
+    id: 6,
+    question: "Komponen basis data yang berfungsi sebagai kategori atau judul kolom (misalnya: Nama_Siswa, Harga_Barang) disebut...",
+    options: ["Record", "Tuple", "Field", "Row", "Table"],
+    answer: 2 // C
+  },
+  {
+    id: 7,
+    question: "Manakah di bawah ini yang merupakan urutan hirarki data dari yang terkecil hingga terbesar?",
+    options: [
+      "Database -> Tabel -> Record -> Field -> Bit",
+      "Bit -> Field -> Record -> Tabel -> Database",
+      "Record -> Field -> Bit -> Tabel -> Database",
+      "Tabel -> Database -> Field -> Record -> Bit",
+      "Bit -> Tabel -> Field -> Record -> Database"
+    ],
+    answer: 1 // B
+  },
+  {
+    id: 8,
+    question: "Syarat utama sebuah kolom dapat dijadikan sebagai Primary Key (Kunci Utama) adalah...",
+    options: [
+      "Datanya boleh kosong (NULL).",
+      "Datanya harus berupa angka saja.",
+      "Datanya harus unik (tidak boleh ada yang sama).",
+      "Datanya harus panjang.",
+      "Datanya harus berupa huruf."
+    ],
+    answer: 2 // C
+  },
+  {
+    id: 9,
+    question: "Dalam sebuah tabel 'Data Penduduk', manakah kolom yang paling tepat dipilih sebagai Primary Key?",
+    options: ["Nama Lengkap", "Tanggal Lahir", "Alamat Rumah", "Nomor Induk Kependudukan (NIK)", "Golongan Darah"],
+    answer: 3 // D
+  },
+  {
+    id: 10,
+    question: "Mengapa 'Nama Siswa' tidak disarankan menjadi Primary Key?",
+    options: [
+      "Karena nama siswa terlalu pendek.",
+      "Karena nama siswa mengandung huruf.",
+      "Karena nama siswa sulit diingat komputer.",
+      "Karena ada kemungkinan dua siswa memiliki nama yang sama persis.",
+      "Karena nama siswa bisa berubah setiap hari."
+    ],
+    answer: 3 // D
+  },
+  {
+    id: 11,
+    question: "Tipe data yang paling tepat untuk menyimpan 'Harga Barang' (contoh: 5000, 15000) agar bisa dilakukan perhitungan matematika adalah...",
+    options: ["VARCHAR", "TEXT", "INTEGER", "DATE", "BOOLEAN"],
+    answer: 2 // C
+  },
+  {
+    id: 12,
+    question: "Tipe data yang paling tepat untuk menyimpan 'Nomor Telepon' (contoh: 08123456789) adalah...",
+    options: [
+      "INTEGER, karena isinya angka semua.",
+      "FLOAT, karena isinya angka desimal.",
+      "BOOLEAN, karena hanya ada dua kemungkinan.",
+      "DATE, karena berhubungan dengan waktu.",
+      "VARCHAR/TEXT, karena angka '0' di depan tidak boleh hilang dan tidak digunakan untuk operasi matematika."
+    ],
+    answer: 4 // E
+  },
+  {
+    id: 13,
+    question: "Tipe data BOOLEAN digunakan untuk menyimpan data yang...",
+    options: [
+      "Berupa teks panjang.",
+      "Berupa angka desimal.",
+      "Hanya memiliki dua nilai (Benar/Salah, Ya/Tidak).",
+      "Berupa tanggal dan waktu.",
+      "Berupa gambar atau video."
+    ],
+    answer: 2 // C
+  },
+  {
+    id: 14,
+    question: "Apa yang dimaksud dengan Redundansi Data?",
+    options: [
+      "Data yang hilang dari penyimpanan.",
+      "Data yang tersimpan secara terenkripsi.",
+      "Penumpukan data yang sama (duplikasi) yang memboroskan memori.",
+      "Data yang sangat penting dan rahasia.",
+      "Proses penghapusan data secara permanen."
+    ],
+    answer: 2 // C
+  },
+  {
+    id: 15,
+    question: "Sebuah tabel basis data yang baik harus memegang prinsip 'Satu Tabel, Satu Entitas'. Maksud dari prinsip tersebut adalah...",
+    options: [
+      "Satu tabel boleh menyimpan segala jenis data (siswa, guru, barang dicampur).",
+      "Satu tabel hanya boleh memiliki satu baris data.",
+      "Satu tabel hanya boleh menyimpan data yang sejenis (misal tabel siswa hanya untuk data siswa).",
+      "Satu tabel harus disimpan dalam satu komputer saja.",
+      "Satu tabel tidak boleh memiliki Primary Key."
+    ],
+    answer: 2 // C
+  },
+  {
+    id: 16,
+    question: "Bagaimana algoritma rekomendasi YouTube atau TikTok bisa mengetahui video apa yang kamu sukai?",
+    options: [
+      "Dengan menggunakan sihir digital.",
+      "Dengan merekam suara kita secara diam-diam.",
+      "Dengan menganalisis pola data interaksi (history tontonan, like, durasi) yang tersimpan di basis data.",
+      "Dengan menebak secara acak (random).",
+      "Dengan menyewa orang untuk memantau setiap pengguna."
+    ],
+    answer: 2 // C
+  },
+  {
+    id: 17,
+    question: "Jika kamu diminta membuat tabel 'Menu Makanan', manakah tipe data yang tepat untuk kolom Apakah_Pedas?",
+    options: ["INTEGER", "VARCHAR", "DATE", "BOOLEAN", "CURRENCY"],
+    answer: 3 // D
+  },
+  {
+    id: 18,
+    question: "Dalam piramida DIKW, sebuah keputusan cerdas yang diambil berdasarkan pengetahuan (misalnya: 'Membeli barang saat diskon karena tahu pola harga') disebut...",
+    options: ["Data", "Information", "Knowledge", "Wisdom", "Database"],
+    answer: 3 // D
+  },
+  {
+    id: 19,
+    question: "Perintah atau instruksi yang dituliskan untuk meminta/mengambil data tertentu dari basis data disebut...",
+    options: ["Field", "Record", "Query", "Bug", "Hardware"],
+    answer: 2 // C
+  },
+  {
+    id: 20,
+    question: "Apa akibatnya jika sebuah tabel tidak memiliki Primary Key?",
+    options: [
+      "Tabel akan menjadi lebih cepat diakses.",
+      "Komputer akan kesulitan membedakan record yang datanya mirip atau identik.",
+      "Kapasitas penyimpanan akan bertambah.",
+      "Data akan otomatis terhapus.",
+      "Tabel akan berubah menjadi grafik."
+    ],
+    answer: 1 // B
   }
 ];
+
+// --- CUSTOM SVG ILLUSTRATIONS ---
+
+const IllustrationMessyRoom = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-auto drop-shadow-lg rounded-xl overflow-hidden bg-slate-900">
+    <defs>
+      <linearGradient id="messyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f172a" />
+      </linearGradient>
+    </defs>
+    <rect width="400" height="250" fill="url(#messyGradient)" />
+    
+    {/* Scattered Items */}
+    <g className="animate-pulse">
+        <rect x="50" y="180" width="40" height="30" rx="4" fill="#ef4444" opacity="0.7" transform="rotate(-15 70 195)" />
+        <circle cx="150" cy="200" r="15" fill="#3b82f6" opacity="0.7" />
+        <path d="M250 180 L270 220 L230 220 Z" fill="#eab308" opacity="0.7" transform="rotate(20 250 200)" />
+        <rect x="320" y="150" width="30" height="50" rx="2" fill="#10b981" opacity="0.7" transform="rotate(45 335 175)" />
+        <circle cx="100" cy="120" r="10" fill="#d946ef" opacity="0.6" />
+        <rect x="200" y="100" width="60" height="10" rx="2" fill="#64748b" transform="rotate(-10 230 105)" />
+    </g>
+    
+    <text x="200" y="50" textAnchor="middle" fill="#94a3b8" fontSize="14" fontFamily="monospace">Data Tidak Terstruktur (Chaos)</text>
+    <text x="200" y="70" textAnchor="middle" fill="#64748b" fontSize="10">Sulit dicari, AI Bingung</text>
+  </svg>
+);
+
+const IllustrationTidyCloset = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-auto drop-shadow-lg rounded-xl overflow-hidden bg-slate-900">
+    <defs>
+      <linearGradient id="tidyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#020617" />
+      </linearGradient>
+    </defs>
+    <rect width="400" height="250" fill="url(#tidyGradient)" />
+    
+    {/* Shelves */}
+    <rect x="50" y="80" width="300" height="10" rx="2" fill="#475569" />
+    <rect x="50" y="150" width="300" height="10" rx="2" fill="#475569" />
+    
+    {/* Organized Items */}
+    <g>
+        {/* Row 1: Shirts (Red) */}
+        <rect x="70" y="40" width="40" height="40" rx="4" fill="#ef4444" />
+        <rect x="120" y="40" width="40" height="40" rx="4" fill="#ef4444" />
+        <rect x="170" y="40" width="40" height="40" rx="4" fill="#ef4444" />
+        <text x="300" y="65" fill="#ef4444" fontSize="12" fontWeight="bold">Tabel Baju</text>
+        
+        {/* Row 2: Pants (Blue) */}
+        <rect x="70" y="110" width="40" height="40" rx="4" fill="#3b82f6" />
+        <rect x="120" y="110" width="40" height="40" rx="4" fill="#3b82f6" />
+        <text x="300" y="135" fill="#3b82f6" fontSize="12" fontWeight="bold">Tabel Celana</text>
+
+        {/* Row 3: Books (Green) */}
+        <rect x="70" y="180" width="10" height="40" rx="1" fill="#10b981" />
+        <rect x="85" y="180" width="10" height="40" rx="1" fill="#10b981" />
+        <rect x="100" y="180" width="10" height="40" rx="1" fill="#10b981" />
+        <text x="300" y="205" fill="#10b981" fontSize="12" fontWeight="bold">Tabel Buku</text>
+    </g>
+    
+    <text x="200" y="25" textAnchor="middle" fill="#94a3b8" fontSize="14" fontFamily="monospace">Basis Data (Terstruktur)</text>
+  </svg>
+);
+
+const IllustrationHierarchy = () => (
+    <svg viewBox="0 0 500 300" className="w-full h-auto drop-shadow-lg">
+        {/* Pyramid Steps */}
+        <g transform="translate(250, 40)">
+            {/* Database */}
+            <path d="M-40 0 L40 0 L60 40 L-60 40 Z" fill="#6366f1" />
+            <text x="0" y="25" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">DATABASE</text>
+            
+            {/* Table */}
+            <path d="M-60 45 L60 45 L80 85 L-80 85 Z" fill="#818cf8" />
+            <text x="0" y="70" textAnchor="middle" fill="#0f172a" fontSize="12" fontWeight="bold">FILE / TABEL</text>
+            
+            {/* Record */}
+            <path d="M-80 90 L80 90 L100 130 L-100 130 Z" fill="#a5b4fc" />
+            <text x="0" y="115" textAnchor="middle" fill="#0f172a" fontSize="12" fontWeight="bold">RECORD</text>
+            
+            {/* Field */}
+            <path d="M-100 135 L100 135 L120 175 L-120 175 Z" fill="#c7d2fe" />
+            <text x="0" y="160" textAnchor="middle" fill="#0f172a" fontSize="12" fontWeight="bold">FIELD</text>
+            
+            {/* Char/Byte */}
+            <path d="M-120 180 L120 180 L140 220 L-140 220 Z" fill="#e2e8f0" />
+            <text x="0" y="205" textAnchor="middle" fill="#0f172a" fontSize="12" fontWeight="bold">BYTE / CHAR</text>
+        </g>
+        
+        {/* Annotation Lines */}
+        <line x1="390" y1="60" x2="450" y2="60" stroke="#64748b" strokeDasharray="4" />
+        <text x="455" y="65" fill="#94a3b8" fontSize="10">Kumpulan Tabel</text>
+        
+        <line x1="370" y1="110" x2="450" y2="110" stroke="#64748b" strokeDasharray="4" />
+        <text x="455" y="115" fill="#94a3b8" fontSize="10">Satu Baris Data</text>
+
+        <line x1="390" y1="155" x2="450" y2="155" stroke="#64748b" strokeDasharray="4" />
+        <text x="455" y="160" fill="#94a3b8" fontSize="10">Satu Kolom</text>
+    </svg>
+);
+
+const IllustrationGIGO = () => (
+    <svg viewBox="0 0 500 200" className="w-full h-auto bg-slate-900 rounded-xl border border-slate-700">
+        {/* Input Zone */}
+        <rect x="20" y="50" width="80" height="100" rx="8" fill="#334155" stroke="#ef4444" strokeWidth="2" strokeDasharray="5,5"/>
+        <text x="60" y="105" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="bold">DATA</text>
+        <text x="60" y="125" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="bold">SAMPAH</text>
+        
+        {/* Arrow 1 */}
+        <path d="M110 100 L150 100" stroke="#94a3b8" strokeWidth="4" markerEnd="url(#arrowhead)" />
+        
+        {/* Processing Machine */}
+        <rect x="160" y="40" width="120" height="120" rx="10" fill="#1e293b" stroke="#6366f1" strokeWidth="3" />
+        <circle cx="220" cy="100" r="30" fill="none" stroke="#6366f1" strokeWidth="4" className="animate-spin origin-center"/>
+        <path d="M220 70 L220 130 M190 100 L250 100" stroke="#6366f1" strokeWidth="2" />
+        <text x="220" y="180" textAnchor="middle" fill="#6366f1" fontSize="12" fontWeight="bold">PROSES AI</text>
+        
+        {/* Arrow 2 */}
+        <path d="M290 100 L330 100" stroke="#94a3b8" strokeWidth="4" markerEnd="url(#arrowhead)" />
+        
+        {/* Output Zone */}
+        <rect x="340" y="50" width="100" height="100" rx="8" fill="#334155" stroke="#ef4444" strokeWidth="2" />
+        <text x="390" y="95" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="bold">HASIL</text>
+        <text x="390" y="115" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="bold">ERROR / BIAS</text>
+
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+            </marker>
+        </defs>
+    </svg>
+);
+
 
 // --- COMPONENTS ---
 
@@ -65,7 +357,7 @@ const ModuleNav = ({ page, setPage }: { page: string, setPage: (p: string) => vo
       </div>
       
       <div className="flex items-center gap-2 md:gap-4">
-        {['Home', 'Materi', 'Simulasi', 'LKPD', 'Kuis'].map((item) => (
+        {['Home', 'Materi', 'Simulasi', 'LKPD', 'Evaluasi'].map((item) => (
           <button 
             key={item}
             onClick={() => setPage(item.toLowerCase())}
@@ -122,11 +414,50 @@ const Materials = () => {
     <div className="pt-4 pb-12">
       <div className="container mx-auto px-4 max-w-5xl">
         
+        {/* PENGANTAR: DATA VS INFORMASI */}
+        <div className="mb-16 animate-[fadeIn_0.5s]">
+           <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl border border-slate-700">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                 <FileDigit className="text-blue-400" /> Data vs Informasi
+              </h2>
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                 <div>
+                    <p className="text-slate-300 mb-4 leading-relaxed">
+                       Sebelum masuk ke database, kita harus bisa membedakan <strong>Data</strong> dan <strong>Informasi</strong>.
+                       Seringkali kita menganggapnya sama, padahal beda level.
+                    </p>
+                    <div className="space-y-4">
+                       <div className="bg-slate-950 p-4 rounded-lg border-l-4 border-blue-500">
+                          <h4 className="text-blue-400 font-bold text-sm uppercase">Data (Mentah)</h4>
+                          <p className="text-slate-400 text-sm mt-1">Fakta kasar yang belum punya arti. <br/><em>Contoh: "5000", "Merah", "Budi".</em></p>
+                       </div>
+                       <div className="bg-slate-950 p-4 rounded-lg border-l-4 border-emerald-500">
+                          <h4 className="text-emerald-400 font-bold text-sm uppercase">Informasi (Matang)</h4>
+                          <p className="text-slate-400 text-sm mt-1">Data yang sudah diolah dan berguna. <br/><em>Contoh: "Budi membeli tas Merah seharga 5000".</em></p>
+                       </div>
+                    </div>
+                 </div>
+                 <div className="relative h-48 bg-slate-900 rounded-xl border border-slate-700 p-4 flex items-center justify-center">
+                    <div className="text-center">
+                       <div className="flex gap-4 items-center justify-center mb-2">
+                          <span className="text-2xl">🥩</span>
+                          <ArrowRight className="text-slate-500" />
+                          <span className="text-2xl">🍢</span>
+                       </div>
+                       <p className="text-xs text-slate-500 italic">
+                          "Analogi: Data itu Daging Mentah, Informasi itu Sate Kambing."
+                       </p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
         {/* KEGIATAN BELAJAR 1 */}
         <div className="mb-16 animate-[fadeIn_0.5s]">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">1</div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Mengenal Basis Data (Konsep Mindful)</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Konsep Basis Data (Mindful)</h2>
           </div>
           
           <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6 md:p-8 space-y-8">
@@ -135,87 +466,106 @@ const Materials = () => {
               <div>
                 <h3 className="text-xl font-bold text-blue-400 mb-3 flex items-center gap-2"><FolderOpen/> Analogi: Kamar Tidur vs Lemari</h3>
                 <p className="text-slate-300 leading-relaxed mb-4">
-                  Coba bayangkan kamar tidurmu. Jika kamu melempar semua bajumu, buku pelajaran, kabel charger, dan kaus kaki ke satu tumpukan besar di tengah ruangan, apa yang terjadi saat kamu butuh "Buku Matematika" dalam waktu 1 menit?
-                  <br/><span className="text-red-400 font-bold">Kamu pasti panik!</span>
+                  Bayangkan jika kamu melempar semua bajumu, buku, dan kabel ke satu tumpukan besar. Saat butuh "Buku Matematika", kamu pasti panik!
                 </p>
                 <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-600">
                   <p className="text-sm font-semibold text-white mb-2">Solusi: Basis Data (Lemari)</p>
-                  <ul className="text-sm text-slate-400 space-y-1">
-                    <li>• Ada laci khusus baju (Tabel Baju).</li>
-                    <li>• Ada rak khusus buku (Tabel Buku).</li>
-                    <li>• Ada kotak khusus kabel (Tabel Kabel).</li>
+                  <ul className="text-sm text-slate-400 space-y-1 list-disc pl-4">
+                    <li>Laci khusus baju (Tabel Baju).</li>
+                    <li>Rak khusus buku (Tabel Buku).</li>
+                    <li>Kotak khusus kabel (Tabel Kabel).</li>
                   </ul>
-                  <p className="text-xs text-emerald-400 mt-2 italic">"Saat kamu butuh buku, kamu langsung tahu harus mencari di mana."</p>
+                  <p className="text-xs text-emerald-400 mt-2 italic">"Database membuat pencarian data menjadi instan."</p>
                 </div>
               </div>
-              <div className="relative h-48 md:h-64 bg-slate-900 rounded-xl flex items-center justify-center overflow-hidden border border-slate-700 group">
-                <div className="text-center">
-                  <Database size={64} className="text-blue-500 mx-auto mb-2 opacity-80 group-hover:scale-110 transition-transform"/>
-                  <p className="text-slate-500 text-xs uppercase tracking-widest">Digital Filing System</p>
-                </div>
+              
+              {/* SVG Comparison */}
+              <div className="grid grid-cols-2 gap-2">
+                 <div className="text-center">
+                    <IllustrationMessyRoom />
+                    <p className="text-xs text-red-400 mt-2 font-bold">Tanpa Database</p>
+                 </div>
+                 <div className="text-center">
+                    <IllustrationTidyCloset />
+                    <p className="text-xs text-emerald-400 mt-2 font-bold">Dengan Database</p>
+                 </div>
               </div>
             </div>
 
             <hr className="border-slate-700"/>
 
-            {/* Anatomi Basis Data */}
+            {/* Hierarki Data */}
             <div>
-              <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2"><LayoutGrid/> Anatomi Basis Data (Struktur Meaningful)</h3>
-              <p className="text-slate-300 mb-6">Agar komputer (dan AI) bisa membaca data, kita harus menyusunnya dalam struktur baku. Struktur ini mirip dengan tabel Excel. Mari kita bedah anatominya:</p>
+               <h3 className="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2"><Layers/> Hierarki Data</h3>
+               <p className="text-slate-300 mb-6">Data disusun bertingkat seperti piramida. Mulai dari yang terkecil (huruf) hingga terbesar (kumpulan tabel).</p>
+               <div className="flex flex-col md:flex-row gap-8 items-center">
+                  <div className="w-full md:w-1/2">
+                     <IllustrationHierarchy />
+                  </div>
+                  <div className="w-full md:w-1/2 space-y-3">
+                     <div className="bg-slate-900 p-3 rounded border-l-2 border-purple-500">
+                        <strong className="text-purple-300 text-sm">1. Field (Kolom/Atribut)</strong>
+                        <p className="text-xs text-slate-400">Unit terkecil informasi yang punya makna. Contoh: Kolom 'Nama', Kolom 'Harga'.</p>
+                     </div>
+                     <div className="bg-slate-900 p-3 rounded border-l-2 border-purple-500">
+                        <strong className="text-purple-300 text-sm">2. Record (Baris)</strong>
+                        <p className="text-xs text-slate-400">Kumpulan field yang membentuk satu kesatuan data objek. Contoh: Data lengkap "Budi, X TJKT, Hadir".</p>
+                     </div>
+                     <div className="bg-slate-900 p-3 rounded border-l-2 border-purple-500">
+                        <strong className="text-purple-300 text-sm">3. Tabel (File)</strong>
+                        <p className="text-xs text-slate-400">Kumpulan record sejenis. Contoh: Tabel Siswa, Tabel Guru.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <hr className="border-slate-700"/>
+
+            {/* Anatomi Tabel */}
+            <div>
+              <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2"><LayoutGrid/> Anatomi Tabel (Meaningful)</h3>
+              <p className="text-slate-300 mb-6">Agar komputer bisa membaca data, kita menyusunnya dalam tabel. Setiap kolom punya <strong>Tipe Data</strong> khusus.</p>
               
-              {/* Visual Table from PDF */}
-              <div className="overflow-x-auto bg-slate-900 rounded-lg border border-slate-700 p-1 mb-6">
+              <div className="overflow-x-auto bg-slate-900 rounded-lg border border-slate-700 p-1 mb-6 shadow-xl">
                  <table className="w-full text-left text-sm">
                     <thead>
                       <tr className="bg-slate-800 text-slate-300 font-bold">
-                        <th className="p-3 border-b border-slate-600 w-1/4">NISN<br/><span className="text-[10px] text-amber-500 font-normal">(Field / Kunci Primer)</span></th>
-                        <th className="p-3 border-b border-slate-600 w-1/4">Nama_Siswa<br/><span className="text-[10px] text-blue-400 font-normal">(Field)</span></th>
-                        <th className="p-3 border-b border-slate-600 w-1/4">Kelas<br/><span className="text-[10px] text-blue-400 font-normal">(Field)</span></th>
-                        <th className="p-3 border-b border-slate-600 w-1/4">Jurusan<br/><span className="text-[10px] text-blue-400 font-normal">(Field)</span></th>
+                        <th className="p-3 border-b border-slate-600 w-1/4">
+                           NISN (PK)<br/>
+                           <span className="text-[10px] text-amber-500 font-mono bg-slate-900 px-1 rounded">Integer</span>
+                        </th>
+                        <th className="p-3 border-b border-slate-600 w-1/4">
+                           Nama_Siswa<br/>
+                           <span className="text-[10px] text-blue-400 font-mono bg-slate-900 px-1 rounded">Varchar (Teks)</span>
+                        </th>
+                        <th className="p-3 border-b border-slate-600 w-1/4">
+                           Tgl_Lahir<br/>
+                           <span className="text-[10px] text-emerald-400 font-mono bg-slate-900 px-1 rounded">Date</span>
+                        </th>
+                        <th className="p-3 border-b border-slate-600 w-1/4">
+                           Aktif<br/>
+                           <span className="text-[10px] text-purple-400 font-mono bg-slate-900 px-1 rounded">Boolean</span>
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-400">
                       <tr className="hover:bg-slate-800/50 border-b border-slate-800">
                         <td className="p-3 text-emerald-400 font-mono">0051234567</td>
                         <td className="p-3">Ahmad Dhani</td>
-                        <td className="p-3">X</td>
-                        <td className="p-3">TJKT</td>
+                        <td className="p-3">2008-05-12</td>
+                        <td className="p-3"><CheckCircle size={14} className="text-emerald-500"/></td>
                       </tr>
                       <tr className="hover:bg-slate-800/50 border-b border-slate-800 bg-blue-900/10">
                         <td className="p-3 text-emerald-400 font-mono">0051234568</td>
                         <td className="p-3">Budi Santoso</td>
-                        <td className="p-3">X</td>
-                        <td className="p-3">DKV</td>
-                      </tr>
-                      <tr className="hover:bg-slate-800/50">
-                        <td className="p-3 text-emerald-400 font-mono">0051234569</td>
-                        <td className="p-3">Citra Kirana</td>
-                        <td className="p-3">X</td>
-                        <td className="p-3">Akuntansi</td>
+                        <td className="p-3">2007-11-20</td>
+                        <td className="p-3"><CheckCircle size={14} className="text-emerald-500"/></td>
                       </tr>
                     </tbody>
                  </table>
-                 <div className="bg-blue-900/10 text-center text-xs text-blue-300 p-1">
-                    ⬆️ Baris berwarna biru di atas disebut <strong>1 Record</strong> ⬆️
+                 <div className="bg-blue-900/10 text-center text-xs text-blue-300 p-2">
+                    ⬆️ Baris berwarna biru disebut <strong>1 Record</strong>. Kolom NISN, Nama, dll disebut <strong>Field</strong>. ⬆️
                  </div>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-4 mt-4 text-sm">
-                <div className="bg-slate-900 p-4 rounded border border-slate-700">
-                  <strong className="text-emerald-400 block mb-2 text-lg">1. Tabel (Entitas)</strong>
-                  <p className="mb-2">Wadah spesifik untuk data sejenis.</p>
-                  <p className="text-xs text-slate-500">Analogi: Laci Lemari.<br/>Contoh: Tabel Siswa.</p>
-                </div>
-                <div className="bg-slate-900 p-4 rounded border border-slate-700">
-                  <strong className="text-blue-400 block mb-2 text-lg">2. Field (Kolom)</strong>
-                  <p className="mb-2">Judul kolom / jenis atribut.</p>
-                  <p className="text-xs text-slate-500">Analogi: Label pada map folder.<br/>Contoh: Nama, Kelas, Jurusan.</p>
-                </div>
-                <div className="bg-slate-900 p-4 rounded border border-slate-700">
-                  <strong className="text-amber-400 block mb-2 text-lg">3. Record (Baris)</strong>
-                  <p className="mb-2">Satu kesatuan data lengkap (horizontal).</p>
-                  <p className="text-xs text-slate-500">Analogi: Satu lembar formulir isian.<br/>Contoh: Data lengkap Budi Santoso.</p>
-                </div>
               </div>
             </div>
           </div>
@@ -229,55 +579,45 @@ const Materials = () => {
           </div>
 
           <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6 md:p-8">
-            <div className="bg-rose-900/20 border border-rose-500/30 p-4 rounded-xl mb-6">
-               <h3 className="text-rose-400 font-bold flex items-center gap-2 mb-2"><AlertTriangle size={20}/> Masalah "Si Budi"</h3>
-               <p className="text-slate-300">
-                 Di Indonesia, nama "Budi" atau "Siti" sangat pasaran. Bayangkan jika di SMK Negeri 1 Kaligondang ada 5 siswa bernama "Budi Santoso".
-                 <br/><br/>
-                 Jika Pak Guru berkata: <em>"Tolong panggilkan Budi Santoso!"</em>, maka 5 orang akan datang. Ini disebut <strong>Ambiguitas</strong>. 
-                 Komputer dan AI <strong className="text-white">SANGAT MEMBENCI ambiguitas</strong>. Komputer butuh kepastian 100%.
-               </p>
-            </div>
-
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1 space-y-4">
-                <h3 className="text-xl font-bold text-amber-400">Solusi: Kolom Sakti (Primary Key)</h3>
+                 <div className="bg-rose-900/20 border border-rose-500/30 p-4 rounded-xl mb-4">
+                   <h3 className="text-rose-400 font-bold flex items-center gap-2"><AlertTriangle size={20}/> Masalah "Si Budi"</h3>
+                   <p className="text-slate-300 text-sm">
+                     Jika ada 5 siswa bernama "Budi Santoso" di sekolah, dan Pak Guru memanggil "Budi!", siapa yang maju? Komputer sangat benci kebingungan (Ambiguitas) seperti ini.
+                   </p>
+                 </div>
+                
+                <h3 className="text-xl font-bold text-amber-400">Solusi: ID Card (Primary Key)</h3>
                 <p className="text-slate-300">
                   Setiap tabel WAJIB memiliki satu kolom sakti yang isinya <strong>UNIK (Tidak Boleh Kembar)</strong>.
                 </p>
                 <div className="bg-slate-900 p-4 rounded-lg border border-slate-600">
                     <h4 className="font-bold text-white mb-2">3 Syarat Primary Key:</h4>
-                    <ul className="space-y-2">
-                    <li className="flex items-center gap-2 text-slate-300"><CheckCircle size={16} className="text-emerald-500"/> <strong>Unik:</strong> Tidak ada dua baris yang isinya sama.</li>
+                    <ul className="space-y-2 text-sm">
+                    <li className="flex items-center gap-2 text-slate-300"><CheckCircle size={16} className="text-emerald-500"/> <strong>Unik:</strong> Tidak ada dua data yang sama.</li>
                     <li className="flex items-center gap-2 text-slate-300"><CheckCircle size={16} className="text-emerald-500"/> <strong>Not Null:</strong> Tidak boleh kosong.</li>
-                    <li className="flex items-center gap-2 text-slate-300"><CheckCircle size={16} className="text-emerald-500"/> <strong>Immutable:</strong> Sebaiknya tidak berubah-ubah.</li>
+                    <li className="flex items-center gap-2 text-slate-300"><CheckCircle size={16} className="text-emerald-500"/> <strong>Immutable:</strong> Jarang berubah.</li>
                     </ul>
                 </div>
               </div>
-              <div className="w-full md:w-1/2">
-                <h4 className="text-sm font-bold text-slate-400 uppercase mb-3">Contoh Primary Key Dunia Nyata:</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-3 bg-slate-900 rounded border border-slate-700">
-                    <div className="bg-amber-500/20 p-2 rounded text-amber-400"><Key size={20}/></div>
-                    <div>
-                      <div className="text-white font-bold text-sm">NISN</div>
-                      <div className="text-xs text-slate-500">Nomor Induk Siswa Nasional (Budi A dan Budi B pasti beda)</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-900 rounded border border-slate-700">
-                    <div className="bg-amber-500/20 p-2 rounded text-amber-400"><ScanLine size={20}/></div>
-                    <div>
-                      <div className="text-white font-bold text-sm">NIK</div>
-                      <div className="text-xs text-slate-500">Nomor Induk Kependudukan (Ada di KTP)</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-900 rounded border border-slate-700">
-                    <div className="bg-amber-500/20 p-2 rounded text-amber-400"><FileText size={20}/></div>
-                    <div>
-                      <div className="text-white font-bold text-sm">No. Struk Belanja</div>
-                      <div className="text-xs text-slate-500">Agar kasir Alfamart/Indomaret tidak bingung</div>
-                    </div>
-                  </div>
+
+              {/* Visual ID Card */}
+              <div className="w-full md:w-1/2 flex justify-center">
+                <div className="w-64 h-40 bg-gradient-to-br from-blue-600 to-indigo-800 rounded-xl shadow-2xl relative p-4 border border-blue-400/30 transform hover:scale-105 transition-transform">
+                   <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-center gap-2">
+                         <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"><ScanLine size={16} className="text-white"/></div>
+                         <span className="text-white font-bold text-sm tracking-wide">KARTU PELAJAR</span>
+                      </div>
+                      <div className="w-10 h-10 bg-white rounded-md"></div>
+                   </div>
+                   <div className="space-y-1">
+                      <div className="text-[10px] text-blue-200 uppercase">Nomor Induk (PK)</div>
+                      <div className="text-xl font-mono text-white font-bold tracking-widest text-shadow">10502202</div>
+                      <div className="text-xs text-white font-semibold mt-2">Budi Santoso</div>
+                   </div>
+                   <div className="absolute bottom-4 right-4 opacity-50"><Key className="text-white" size={40}/></div>
                 </div>
               </div>
             </div>
@@ -288,59 +628,30 @@ const Materials = () => {
         <div className="mb-16 animate-[fadeIn_0.5s]">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">3</div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Hubungan Data dengan AI (Joyful Learning)</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Hubungan Data dengan AI (GIGO)</h2>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800 to-emerald-900/20 rounded-2xl border border-slate-700 p-6 md:p-8">
             <h3 className="text-xl font-bold text-white mb-4">"Mengapa Saya Harus Belajar Ini?"</h3>
             <p className="text-slate-300 mb-6 text-lg">
-              Mungkin kalian berpikir ingin membuat Robot AI, kenapa harus belajar tabel?
-              <br/>Jawabannya sederhana: <strong>AI Memakan Data.</strong>
+              AI seperti ChatGPT atau TikTok Algorithm <strong>memakan data</strong>. Kualitas AI tergantung kualitas data yang kamu berikan.
             </p>
 
-            <div className="bg-slate-900 p-6 rounded-xl border border-slate-600 mb-6">
-                <h4 className="text-lg font-bold text-emerald-400 mb-2">Studi Kasus: AI Kantin Sekolah</h4>
-                <p className="text-slate-300 mb-4">Kalian ingin membuat AI yang bisa memprediksi harga jajanan di kantin.</p>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-red-900/10 p-4 rounded-lg border border-red-500/30">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Trash2 className="text-red-400" size={18}/>
-                            <strong className="text-red-400">Data Berantakan</strong>
-                        </div>
-                        <ul className="text-sm text-slate-400 italic list-disc list-inside space-y-1">
-                            <li>"Bakso enak 5 ribu"</li>
-                            <li>"Es teh manis banget 3000"</li>
-                            <li>"Gorengan anget seribuan"</li>
-                        </ul>
-                        <div className="mt-4 p-2 bg-red-900/20 rounded text-red-200 text-xs">
-                        🤖 <strong>AI Bingung:</strong> "Mana nama barang? Mana harga? Saya pusing."
-                        </div>
-                    </div>
-                    
-                    <div className="bg-emerald-900/10 p-4 rounded-lg border border-emerald-500/30">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Database className="text-emerald-400" size={18}/>
-                            <strong className="text-emerald-400">Data Terstruktur</strong>
-                        </div>
-                        <table className="w-full text-xs text-left text-slate-300 mb-2">
-                            <thead className="text-slate-500"><tr><th>Barang</th><th>Harga</th></tr></thead>
-                            <tbody>
-                                <tr><td>Bakso</td><td>5000</td></tr>
-                                <tr><td>Es Teh</td><td>3000</td></tr>
-                            </tbody>
-                        </table>
-                        <div className="mt-4 p-2 bg-emerald-900/20 rounded text-emerald-200 text-xs">
-                        🤖 <strong>AI Cerdas:</strong> "Oke! Rata-rata harga makanan adalah Rp 4.000."
-                        </div>
-                    </div>
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+                <div className="order-2 md:order-1">
+                   <IllustrationGIGO />
                 </div>
-            </div>
-
-            <div className="text-center">
-               <h4 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400 mb-1">GIGO</h4>
-               <p className="text-white font-bold text-lg">Garbage In, Garbage Out</p>
-               <p className="text-slate-400 text-sm mt-2">Masuk Sampah, Keluar Sampah. Jadi, langkah pertama menjadi ahli AI bukan belajar coding rumit, tapi belajar <strong>Merapikan Data</strong>.</p>
+                <div className="order-1 md:order-2 space-y-4">
+                   <h4 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">GIGO</h4>
+                   <p className="text-white font-bold text-xl">Garbage In, Garbage Out</p>
+                   <p className="text-slate-400 text-sm">
+                      "Masuk Sampah, Keluar Sampah". <br/>
+                      Jika data penjualan kantin kamu tulis "Bakso enak 5rb" (Teks), komputer tidak bisa menghitung rata-ratanya. Data harus rapi (Angka: 5000).
+                   </p>
+                   <div className="bg-emerald-900/30 p-3 rounded border border-emerald-500/30 text-emerald-300 text-sm font-semibold">
+                      Tips: Langkah pertama menjadi ahli AI bukan belajar coding rumit, tapi belajar <strong>Merapikan Data</strong>.
+                   </div>
+                </div>
             </div>
           </div>
         </div>
@@ -365,7 +676,6 @@ const Materials = () => {
                <p className="text-slate-300 text-sm">Bayangkan jika satu angka saja pada Primary Key itu salah ketik, masalah apa yang akan terjadi pada hidupmu?</p>
              </div>
           </div>
-          <p className="mt-8 text-lg font-serif italic text-slate-400">"Data yang rapi adalah awal dari teknologi yang cerdas."</p>
         </div>
 
       </div>
@@ -662,7 +972,7 @@ const LKPDSection = () => {
   const [identity, setIdentity] = useState({
     kelas: '',
     kelompok: '',
-    anggota: Array(7).fill('')
+    anggota: Array(6).fill('')
   });
 
   const [task1, setTask1] = useState({
@@ -789,17 +1099,43 @@ const LKPDSection = () => {
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-xs text-slate-400 mb-1">Kelas</label>
-                <input type="text" value={identity.kelas} onChange={e => setIdentity({...identity, kelas: e.target.value})} className="w-full bg-slate-900 border border-slate-600 rounded p-2 text-white focus:border-indigo-500 outline-none" placeholder="Contoh: X TJKT 1" />
+                <select 
+                  value={identity.kelas} 
+                  onChange={e => setIdentity({...identity, kelas: e.target.value})} 
+                  className="w-full bg-slate-900 border border-slate-600 rounded p-2 text-white focus:border-indigo-500 outline-none appearance-none"
+                >
+                  <option value="" disabled>Pilih Kelas...</option>
+                  <option value="X DKV 3">X DKV 3</option>
+                  <option value="X KUL">X KUL</option>
+                </select>
               </div>
               <div>
                 <label className="block text-xs text-slate-400 mb-1">Kelompok</label>
-                <input type="text" value={identity.kelompok} onChange={e => setIdentity({...identity, kelompok: e.target.value})} className="w-full bg-slate-900 border border-slate-600 rounded p-2 text-white focus:border-indigo-500 outline-none" placeholder="Nama Kelompok" />
+                <select 
+                  value={identity.kelompok} 
+                  onChange={e => setIdentity({...identity, kelompok: e.target.value})} 
+                  className="w-full bg-slate-900 border border-slate-600 rounded p-2 text-white focus:border-indigo-500 outline-none appearance-none"
+                >
+                  <option value="" disabled>Pilih Kelompok...</option>
+                  {[1, 2, 3, 4, 5, 6].map(num => (
+                    <option key={num} value={num}>Kelompok {num}</option>
+                  ))}
+                </select>
               </div>
             </div>
-            <label className="block text-xs text-slate-400 mb-1">Nama Anggota (Isi sesuai jumlah anggota)</label>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <label className="block text-xs text-slate-400 mb-2">Nama Anggota (Isi sesuai jumlah anggota)</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {identity.anggota.map((member, idx) => (
-                <input key={idx} type="text" value={member} onChange={e => updateMember(idx, e.target.value)} className="bg-slate-900 border border-slate-600 rounded p-2 text-sm text-white focus:border-indigo-500 outline-none" placeholder={`Anggota ${idx + 1}`} />
+                <div key={idx} className="flex items-center gap-2">
+                  <span className="text-xs text-slate-500 w-24">Anggota {idx + 1}</span>
+                  <input 
+                    type="text" 
+                    value={member} 
+                    onChange={e => updateMember(idx, e.target.value)} 
+                    className="flex-1 bg-slate-900 border border-slate-600 rounded p-2 text-sm text-white focus:border-indigo-500 outline-none" 
+                    placeholder={`Nama Anggota ${idx + 1}`} 
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -898,97 +1234,261 @@ const LKPDSection = () => {
 };
 
 const Quiz = () => {
-  const [currentQ, setCurrentQ] = useState(0);
+  const [userInfo, setUserInfo] = useState({ name: '', class: '' });
+  const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [answers, setAnswers] = useState<Record<number, number>>({});
   const [score, setScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [selected, setSelected] = useState<number | null>(null);
 
-  const handleAnswer = (idx: number) => {
-    setSelected(idx);
-    if (idx === QUIZ_DATA[currentQ].answer) {
-      setScore(score + 20); // 5 questions, 20 points each
+  const handleStart = () => {
+    if (userInfo.name && userInfo.class) {
+      setStarted(true);
     }
-    
-    setTimeout(() => {
-      if (currentQ < QUIZ_DATA.length - 1) {
-        setCurrentQ(currentQ + 1);
-        setSelected(null);
-      } else {
-        setShowResult(true);
+  };
+
+  const handleAnswer = (qId: number, answerIdx: number) => {
+    setAnswers(prev => ({ ...prev, [qId]: answerIdx }));
+  };
+
+  const calculateResults = () => {
+    let correctCount = 0;
+    EVALUASI_DATA.forEach(q => {
+      if (answers[q.id] === q.answer - 1) { // -1 because data is 1-based index but array options 0-based
+        correctCount++;
       }
-    }, 1000);
+    });
+    // Each question 5 points. Max 100.
+    const finalScore = correctCount * 5;
+    setScore(finalScore);
+    setFinished(true);
   };
 
-  const resetQuiz = () => {
-    setCurrentQ(0);
+  const getPredicate = (score: number) => {
+    if (score >= 91) return { label: "Sangat Baik", color: "text-emerald-400" };
+    if (score >= 81) return { label: "Baik", color: "text-blue-400" };
+    if (score >= 70) return { label: "Cukup Baik", color: "text-amber-400" };
+    return { label: "Kurang", color: "text-rose-400" };
+  };
+
+  const handlePrint = () => {
+    const predicate = getPredicate(score);
+    const win = window.open('', '', 'height=800,width=800');
+    if (!win) return;
+
+    let rowsHtml = '';
+    EVALUASI_DATA.forEach((q, idx) => {
+      const studentAnsIdx = answers[q.id];
+      const studentAnsText = studentAnsIdx !== undefined ? q.options[studentAnsIdx] : "-";
+      const isCorrect = studentAnsIdx === (q.answer - 1);
+      
+      rowsHtml += `
+        <tr>
+          <td>${idx + 1}</td>
+          <td>${q.question}</td>
+          <td>${studentAnsText} ${isCorrect ? '✅' : '❌'}</td>
+        </tr>
+      `;
+    });
+
+    const htmlContent = `
+      <html>
+        <head>
+          <title>Hasil Evaluasi - ${userInfo.name}</title>
+          <style>
+            body { font-family: sans-serif; padding: 20px; color: #000; }
+            h1, h2 { text-align: center; margin-bottom: 5px; }
+            .header { border-bottom: 2px solid #000; padding-bottom: 20px; margin-bottom: 20px; }
+            .info { margin-bottom: 20px; font-weight: bold; }
+            .score-box { text-align: center; border: 2px solid #000; padding: 10px; margin: 20px 0; }
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+            th { background-color: #f0f0f0; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>LAPORAN HASIL EVALUASI</h1>
+            <h2>Koding dan Kecerdasan Artifisial - Modul 1</h2>
+          </div>
+          
+          <div class="info">
+            <p>Nama Siswa : ${userInfo.name}</p>
+            <p>Kelas : ${userInfo.class}</p>
+            <p>Tanggal : ${new Date().toLocaleDateString('id-ID')}</p>
+          </div>
+
+          <div class="score-box">
+            <h3>NILAI AKHIR: ${score}</h3>
+            <p>Predikat: ${predicate.label}</p>
+          </div>
+
+          <h3>Rincian Jawaban:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="5%">No</th>
+                <th width="60%">Pertanyaan</th>
+                <th width="35%">Jawaban Siswa</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+          
+          <script>window.print();</script>
+        </body>
+      </html>
+    `;
+
+    win.document.write(htmlContent);
+    win.document.close();
+  };
+
+  const handleReset = () => {
+    setUserInfo({ name: '', class: '' });
+    setAnswers({});
     setScore(0);
-    setShowResult(false);
-    setSelected(null);
+    setStarted(false);
+    setFinished(false);
   };
 
-  return (
-    <div className="pt-8 pb-12 min-h-[60vh] flex items-center justify-center">
-      <div className="container mx-auto px-4 max-w-2xl">
-        {!showResult ? (
+  if (!started) {
+    return (
+      <div className="pt-8 pb-12 min-h-[60vh] flex items-center justify-center">
+        <div className="container mx-auto px-4 max-w-lg">
           <div className="bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-2xl">
-            <div className="flex justify-between items-center mb-8">
-              <span className="text-slate-400 text-sm font-bold uppercase tracking-widest">
-                Pertanyaan {currentQ + 1}/{QUIZ_DATA.length}
-              </span>
-              <span className="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-xs font-bold">
-                Kuis Analisis Data
-              </span>
-            </div>
-            
-            <h3 className="text-2xl font-bold text-white mb-8 leading-snug">
-              {QUIZ_DATA[currentQ].question}
-            </h3>
-
-            <div className="space-y-3">
-              {QUIZ_DATA[currentQ].options.map((opt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleAnswer(idx)}
-                  disabled={selected !== null}
-                  className={`w-full text-left p-5 rounded-xl border font-medium transition-all ${
-                    selected === idx 
-                      ? idx === QUIZ_DATA[currentQ].answer 
-                        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300'
-                        : 'bg-red-500/20 border-red-500 text-red-300'
-                      : 'bg-slate-900 border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-slate-500'
-                  }`}
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Identitas Peserta</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Nama Siswa</label>
+                <input 
+                  type="text" 
+                  value={userInfo.name} 
+                  onChange={e => setUserInfo({...userInfo, name: e.target.value})} 
+                  className="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:border-indigo-500 outline-none"
+                  placeholder="Masukkan nama..."
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Kelas</label>
+                <select 
+                  value={userInfo.class} 
+                  onChange={e => setUserInfo({...userInfo, class: e.target.value})} 
+                  className="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:border-indigo-500 outline-none appearance-none"
                 >
-                  <div className="flex items-center justify-between">
-                    {opt}
-                    {selected === idx && (
-                      idx === QUIZ_DATA[currentQ].answer 
-                        ? <CheckCircle className="w-5 h-5 text-emerald-500" />
-                        : <X className="w-5 h-5 text-red-500" />
-                    )}
-                  </div>
-                </button>
-              ))}
+                  <option value="" disabled>Pilih Kelas...</option>
+                  <option value="X DKV 3">X DKV 3</option>
+                  <option value="X KUL">X KUL</option>
+                </select>
+              </div>
+              <button 
+                onClick={handleStart}
+                disabled={!userInfo.name || !userInfo.class}
+                className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-bold rounded-xl mt-4 transition-all"
+              >
+                Mulai Evaluasi
+              </button>
             </div>
           </div>
-        ) : (
+        </div>
+      </div>
+    );
+  }
+
+  if (finished) {
+    const predicate = getPredicate(score);
+    return (
+      <div className="pt-8 pb-12 min-h-[60vh] flex items-center justify-center">
+        <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-slate-800 p-10 rounded-3xl border border-slate-700 shadow-2xl text-center">
             <Award className="w-20 h-20 text-amber-400 mx-auto mb-6" />
-            <h3 className="text-3xl font-bold text-white mb-2">Kuis Selesai!</h3>
-            <p className="text-slate-400 mb-8">Kamu telah menyelesaikan tantangan ini.</p>
+            <h3 className="text-3xl font-bold text-white mb-2">Evaluasi Selesai!</h3>
+            <p className="text-slate-400 mb-8">Terima kasih telah mengerjakan, {userInfo.name}.</p>
             
-            <div className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-8">
-              {score}
-              <span className="text-2xl text-slate-500 font-normal">/100</span>
+            <div className="mb-8">
+              <div className="text-6xl font-extrabold text-white mb-2">{score}</div>
+              <div className={`text-xl font-bold ${predicate.color}`}>{predicate.label}</div>
             </div>
 
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button 
+                onClick={handlePrint}
+                className="px-8 py-3 bg-indigo-600 hover:bg-white hover:text-indigo-900 text-white rounded-xl font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-lg"
+              >
+                <Printer size={18} /> Kirim Jawaban
+              </button>
+              <button 
+                onClick={handleReset}
+                className="px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all"
+              >
+                <RefreshCcw size={18} /> Ulangi Evaluasi
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="pt-8 pb-12">
+      <div className="container mx-auto px-4 max-w-3xl">
+        <div className="bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-2xl">
+          <div className="flex justify-between items-center mb-8 pb-4 border-b border-slate-700">
+            <div>
+              <h2 className="text-xl font-bold text-white">Soal Evaluasi</h2>
+              <p className="text-xs text-slate-400">Analisis Data dan Konsep Dasar Basis Data</p>
+            </div>
+            <div className="text-right">
+              <p className="text-xs text-slate-400">Peserta</p>
+              <p className="text-sm font-bold text-indigo-400">{userInfo.name}</p>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            {EVALUASI_DATA.map((q, idx) => (
+              <div key={q.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-700/50">
+                <p className="text-white font-medium mb-4"><span className="text-indigo-400 font-bold mr-2">{idx + 1}.</span> {q.question}</p>
+                <div className="space-y-2">
+                  {q.options.map((opt, optIdx) => (
+                    <label 
+                      key={optIdx} 
+                      className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-all border ${
+                        answers[q.id] === optIdx 
+                        ? 'bg-indigo-600/20 border-indigo-500' 
+                        : 'bg-slate-800 border-transparent hover:bg-slate-700'
+                      }`}
+                    >
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                        answers[q.id] === optIdx ? 'border-indigo-400' : 'border-slate-500'
+                      }`}>
+                        {answers[q.id] === optIdx && <div className="w-2.5 h-2.5 bg-indigo-400 rounded-full"></div>}
+                      </div>
+                      <input 
+                        type="radio" 
+                        name={`question-${q.id}`} 
+                        className="hidden"
+                        onChange={() => handleAnswer(q.id, optIdx)}
+                      />
+                      <span className={`text-sm ${answers[q.id] === optIdx ? 'text-white' : 'text-slate-400'}`}>{opt}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-slate-700 flex justify-end">
             <button 
-              onClick={resetQuiz}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-900/40"
+              onClick={calculateResults}
+              disabled={Object.keys(answers).length < EVALUASI_DATA.length}
+              className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold shadow-lg shadow-emerald-900/20 transition-all flex items-center gap-2"
             >
-              Ulangi Kuis
+              Selesai & Lihat Nilai <ArrowRight size={18}/>
             </button>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -1004,42 +1504,44 @@ const Materi1: React.FC = () => {
   }, [page]);
 
   return (
-    <div className="text-slate-200 font-sans selection:bg-blue-500 selection:text-white -mt-4">
+    <div className="text-slate-200 font-sans selection:bg-indigo-500 selection:text-white -mt-4">
       {/* Internal Navigation for this module */}
       <ModuleNav page={page} setPage={setPage} />
       
-      <main className="animate-[fadeIn_0.5s]">
+      <main className="min-h-[calc(100vh-200px)] relative pb-10">
         {page === 'home' && <Hero setPage={setPage} />}
         {page === 'materi' && <Materials />}
         {page === 'simulasi' && <Simulation />}
         {page === 'lkpd' && <LKPDSection />}
-        {page === 'kuis' && <Quiz />}
+        {page === 'evaluasi' && <Quiz />}
       </main>
 
-      <style>{`
+       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .typing-effect {
-          border-right: 2px solid #6366f1;
-          animation: blink 0.75s step-end infinite;
-        }
-        @keyframes blink {
-          from, to { border-color: transparent }
-          50% { border-color: #6366f1; }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
         .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
+            width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(30, 41, 59, 0.5);
+            background: #1e293b; 
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(71, 85, 105, 0.8);
-          border-radius: 10px;
+            background: #475569; 
+            border-radius: 4px;
         }
-      `}</style>
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+       `}</style>
     </div>
   );
 };

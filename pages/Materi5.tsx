@@ -28,7 +28,7 @@ const ModuleNav = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTa
         { id: 'materi', label: 'Ekosistem Karir' },
         { id: 'roadmap', label: 'Peta Jalan SMK' },
         { id: 'simulasi', label: 'Studi Kasus' },
-        { id: 'kuis', label: 'Refleksi' },
+        { id: 'kuis', label: 'Evaluasi' },
     ];
 
     return (
@@ -415,7 +415,7 @@ const QuizSection = () => {
             <div className="max-w-3xl mx-auto">
                 <div className="bg-slate-800/50 backdrop-blur p-8 rounded-2xl border border-slate-700 mb-8">
                     <h2 className="text-2xl font-bold mb-4 text-white flex items-center gap-2">
-                        <GraduationCap className="text-indigo-400"/> Lembar Refleksi (Mindfulness)
+                        <GraduationCap className="text-indigo-400"/> Lembar Evaluasi (Mindfulness)
                     </h2>
                     <p className="text-slate-300 italic mb-4">
                         "Ambil napas sejenak. Tanyakan pada dirimu: Dari ketiga profesi di atas (Engineer, Scientist, Ethicist), mana yang 'Gue Banget'? Kenapa?"

@@ -107,7 +107,7 @@ const ModuleNav = ({ activePage, setPage }: { activePage: string, setPage: (p: s
           { id: PAGES.HOME, label: 'Beranda', icon: Database },
           { id: PAGES.MATERI, label: 'Materi', icon: BookOpen },
           { id: PAGES.SIMULASI, label: 'Lab SQL', icon: Terminal },
-          { id: PAGES.ASESMEN, label: 'Kuis', icon: Award },
+          { id: PAGES.ASESMEN, label: 'Evaluasi', icon: Award },
         ].map((item) => (
           <button
             key={item.id}
