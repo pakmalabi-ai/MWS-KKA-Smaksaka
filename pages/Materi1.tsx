@@ -22,7 +22,8 @@ import {
   Layers,
   FileDigit,
   Table as TableIcon,
-  RefreshCcw
+  RefreshCcw,
+  Download
 } from 'lucide-react';
 
 // --- DATA & CONTENT ---
@@ -404,6 +405,14 @@ const Hero = ({ setPage }: { setPage: (p: string) => void }) => (
         >
           <BrainCircuit className="w-5 h-5" /> Lab Data
         </button>
+        <a 
+          href="https://drive.google.com/file/d/1fX4zEWyuMi5hYwzq7CL1Io4gJknhrdui/view?usp=drive_link" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold shadow-lg shadow-emerald-900/50 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+        >
+          <Download className="w-5 h-5" /> Download Materi
+        </a>
       </div>
     </div>
   </section>
@@ -1497,7 +1506,7 @@ const Quiz = () => {
 // --- MAIN COMPONENT ---
 
 const Materi1: React.FC = () => {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('beranda');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1509,7 +1518,7 @@ const Materi1: React.FC = () => {
       <ModuleNav page={page} setPage={setPage} />
       
       <main className="min-h-[calc(100vh-200px)] relative pb-10">
-        {page === 'home' && <Hero setPage={setPage} />}
+        {page === 'beranda' && <Hero setPage={setPage} />}
         {page === 'materi' && <Materials />}
         {page === 'simulasi' && <Simulation />}
         {page === 'lkpd' && <LKPDSection />}
