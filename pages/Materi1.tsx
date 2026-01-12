@@ -33,7 +33,7 @@ const EVALUASI_DATA = [
     id: 1,
     question: "Dalam piramida pengetahuan (DIKW), fakta mentah seperti angka '5000' atau kata 'Merah' yang belum memiliki konteks disebut sebagai...",
     options: ["Information (Informasi)", "Data", "Knowledge (Pengetahuan)", "Wisdom (Kebijaksanaan)", "Database"],
-    answer: 1 // B. Data
+    answer: 2 // B. Data
   },
   {
     id: 2,
@@ -45,31 +45,31 @@ const EVALUASI_DATA = [
       "Data dan informasi adalah hal yang sama persis.",
       "Informasi berada di level paling bawah piramida DIKW."
     ],
-    answer: 2 // C
+    answer: 3 // C. Data adalah fakta mentah...
   },
   {
     id: 3,
     question: "Kecerdasan Artifisial (AI) membutuhkan data untuk belajar. Jika data yang dimasukkan ke dalam sistem AI berantakan atau salah, maka hasil output AI juga akan salah. Konsep ini dikenal dengan istilah...",
     options: ["Artificial General Intelligence", "Data Mining", "Machine Learning", "Garbage In, Garbage Out", "Big Data Analysis"],
-    answer: 3 // D
+    answer: 4 // D. Garbage In, Garbage Out
   },
   {
     id: 4,
     question: "Dalam analogi lemari pakaian, 'Laci' yang dikhususkan untuk menyimpan benda sejenis (misalnya khusus kaos kaki) merepresentasikan komponen basis data yaitu...",
     options: ["Field", "Record", "Tabel", "Database", "Query"],
-    answer: 2 // C
+    answer: 3 // C. Tabel
   },
   {
     id: 5,
     question: "Perhatikan data berikut: [Budi Santoso, X TJKT 1, Jl. Merdeka No. 45]. Satu kesatuan data lengkap yang memuat informasi tentang satu siswa tersebut disebut...",
     options: ["Field", "Record", "File", "Bit", "Byte"],
-    answer: 1 // B
+    answer: 2 // B. Record
   },
   {
     id: 6,
     question: "Komponen basis data yang berfungsi sebagai kategori atau judul kolom (misalnya: Nama_Siswa, Harga_Barang) disebut...",
     options: ["Record", "Tuple", "Field", "Row", "Table"],
-    answer: 2 // C
+    answer: 3 // C. Field
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ const EVALUASI_DATA = [
       "Tabel -> Database -> Field -> Record -> Bit",
       "Bit -> Tabel -> Field -> Record -> Database"
     ],
-    answer: 1 // B
+    answer: 2 // B. Bit -> Field -> Record -> Tabel -> Database
   },
   {
     id: 8,
@@ -93,13 +93,13 @@ const EVALUASI_DATA = [
       "Datanya harus panjang.",
       "Datanya harus berupa huruf."
     ],
-    answer: 2 // C
+    answer: 3 // C. Datanya harus unik
   },
   {
     id: 9,
     question: "Dalam sebuah tabel 'Data Penduduk', manakah kolom yang paling tepat dipilih sebagai Primary Key?",
     options: ["Nama Lengkap", "Tanggal Lahir", "Alamat Rumah", "Nomor Induk Kependudukan (NIK)", "Golongan Darah"],
-    answer: 3 // D
+    answer: 4 // D. NIK
   },
   {
     id: 10,
@@ -111,13 +111,13 @@ const EVALUASI_DATA = [
       "Karena ada kemungkinan dua siswa memiliki nama yang sama persis.",
       "Karena nama siswa bisa berubah setiap hari."
     ],
-    answer: 3 // D
+    answer: 4 // D. Kemungkinan nama sama
   },
   {
     id: 11,
     question: "Tipe data yang paling tepat untuk menyimpan 'Harga Barang' (contoh: 5000, 15000) agar bisa dilakukan perhitungan matematika adalah...",
     options: ["VARCHAR", "TEXT", "INTEGER", "DATE", "BOOLEAN"],
-    answer: 2 // C
+    answer: 3 // C. INTEGER
   },
   {
     id: 12,
@@ -129,7 +129,7 @@ const EVALUASI_DATA = [
       "DATE, karena berhubungan dengan waktu.",
       "VARCHAR/TEXT, karena angka '0' di depan tidak boleh hilang dan tidak digunakan untuk operasi matematika."
     ],
-    answer: 4 // E
+    answer: 5 // E. VARCHAR/TEXT
   },
   {
     id: 13,
@@ -141,7 +141,7 @@ const EVALUASI_DATA = [
       "Berupa tanggal dan waktu.",
       "Berupa gambar atau video."
     ],
-    answer: 2 // C
+    answer: 3 // C. Hanya memiliki dua nilai
   },
   {
     id: 14,
@@ -153,7 +153,7 @@ const EVALUASI_DATA = [
       "Data yang sangat penting dan rahasia.",
       "Proses penghapusan data secara permanen."
     ],
-    answer: 2 // C
+    answer: 3 // C. Penumpukan data yang sama
   },
   {
     id: 15,
@@ -165,7 +165,7 @@ const EVALUASI_DATA = [
       "Satu tabel harus disimpan dalam satu komputer saja.",
       "Satu tabel tidak boleh memiliki Primary Key."
     ],
-    answer: 2 // C
+    answer: 3 // C. Satu tabel sejenis
   },
   {
     id: 16,
@@ -177,25 +177,25 @@ const EVALUASI_DATA = [
       "Dengan menebak secara acak (random).",
       "Dengan menyewa orang untuk memantau setiap pengguna."
     ],
-    answer: 2 // C
+    answer: 3 // C. Menganalisis pola data
   },
   {
     id: 17,
     question: "Jika kamu diminta membuat tabel 'Menu Makanan', manakah tipe data yang tepat untuk kolom Apakah_Pedas?",
     options: ["INTEGER", "VARCHAR", "DATE", "BOOLEAN", "CURRENCY"],
-    answer: 3 // D
+    answer: 4 // D. BOOLEAN
   },
   {
     id: 18,
     question: "Dalam piramida DIKW, sebuah keputusan cerdas yang diambil berdasarkan pengetahuan (misalnya: 'Membeli barang saat diskon karena tahu pola harga') disebut...",
     options: ["Data", "Information", "Knowledge", "Wisdom", "Database"],
-    answer: 3 // D
+    answer: 4 // D. Wisdom
   },
   {
     id: 19,
     question: "Perintah atau instruksi yang dituliskan untuk meminta/mengambil data tertentu dari basis data disebut...",
     options: ["Field", "Record", "Query", "Bug", "Hardware"],
-    answer: 2 // C
+    answer: 3 // C. Query
   },
   {
     id: 20,
@@ -207,7 +207,7 @@ const EVALUASI_DATA = [
       "Data akan otomatis terhapus.",
       "Tabel akan berubah menjadi grafik."
     ],
-    answer: 1 // B
+    answer: 2 // B. Kesulitan membedakan record
   }
 ];
 
@@ -1262,11 +1262,12 @@ const Quiz = () => {
   const calculateResults = () => {
     let correctCount = 0;
     EVALUASI_DATA.forEach(q => {
-      if (answers[q.id] === q.answer - 1) { // -1 because data is 1-based index but array options 0-based
+      // Data answer is 1-based (A=1, B=2...), array index is 0-based
+      if (answers[q.id] === q.answer - 1) { 
         correctCount++;
       }
     });
-    // Each question 5 points. Max 100.
+    // Each question 5 points. 20 Questions * 5 = 100 Max.
     const finalScore = correctCount * 5;
     setScore(finalScore);
     setFinished(true);
@@ -1289,12 +1290,15 @@ const Quiz = () => {
       const studentAnsIdx = answers[q.id];
       const studentAnsText = studentAnsIdx !== undefined ? q.options[studentAnsIdx] : "-";
       const isCorrect = studentAnsIdx === (q.answer - 1);
+      const correctAnswerText = q.options[q.answer - 1];
       
       rowsHtml += `
         <tr>
           <td>${idx + 1}</td>
           <td>${q.question}</td>
-          <td>${studentAnsText} ${isCorrect ? '✅' : '❌'}</td>
+          <td>${studentAnsText}</td>
+          <td>${correctAnswerText}</td>
+          <td>${isCorrect ? '✅ Benar' : '❌ Salah'}</td>
         </tr>
       `;
     });
@@ -1302,16 +1306,18 @@ const Quiz = () => {
     const htmlContent = `
       <html>
         <head>
-          <title>Hasil Evaluasi - ${userInfo.name}</title>
+          <title>Laporan Evaluasi - ${userInfo.name}</title>
           <style>
             body { font-family: sans-serif; padding: 20px; color: #000; }
             h1, h2 { text-align: center; margin-bottom: 5px; }
             .header { border-bottom: 2px solid #000; padding-bottom: 20px; margin-bottom: 20px; }
             .info { margin-bottom: 20px; font-weight: bold; }
-            .score-box { text-align: center; border: 2px solid #000; padding: 10px; margin: 20px 0; }
+            .score-box { text-align: center; border: 2px solid #000; padding: 15px; margin: 20px 0; background-color: #f9f9f9; }
             table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
-            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-            th { background-color: #f0f0f0; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+            th { background-color: #f0f0f0; font-weight: bold; }
+            .correct { color: green; font-weight: bold; }
+            .wrong { color: red; font-weight: bold; }
           </style>
         </head>
         <body>
@@ -1327,8 +1333,8 @@ const Quiz = () => {
           </div>
 
           <div class="score-box">
-            <h3>NILAI AKHIR: ${score}</h3>
-            <p>Predikat: ${predicate.label}</p>
+            <h3>NILAI AKHIR: ${score} / 100</h3>
+            <p>Predikat: <strong>${predicate.label}</strong></p>
           </div>
 
           <h3>Rincian Jawaban:</h3>
@@ -1336,8 +1342,10 @@ const Quiz = () => {
             <thead>
               <tr>
                 <th width="5%">No</th>
-                <th width="60%">Pertanyaan</th>
-                <th width="35%">Jawaban Siswa</th>
+                <th width="40%">Pertanyaan</th>
+                <th width="20%">Jawaban Kamu</th>
+                <th width="20%">Kunci Jawaban</th>
+                <th width="15%">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -1345,6 +1353,12 @@ const Quiz = () => {
             </tbody>
           </table>
           
+          <div style="margin-top: 30px; text-align: right;">
+            <p>Tanda Tangan Guru,</p>
+            <br/><br/><br/>
+            <p>( .................................... )</p>
+          </div>
+
           <script>window.print();</script>
         </body>
       </html>
@@ -1367,7 +1381,7 @@ const Quiz = () => {
       <div className="pt-8 pb-12 min-h-[60vh] flex items-center justify-center">
         <div className="container mx-auto px-4 max-w-lg">
           <div className="bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-2xl">
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">Identitas Peserta</h2>
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Data Identitas</h2>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm text-slate-400 mb-1">Nama Siswa</label>
@@ -1376,7 +1390,7 @@ const Quiz = () => {
                   value={userInfo.name} 
                   onChange={e => setUserInfo({...userInfo, name: e.target.value})} 
                   className="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:border-indigo-500 outline-none"
-                  placeholder="Masukkan nama..."
+                  placeholder="Masukkan nama lengkap..."
                 />
               </div>
               <div>
@@ -1425,7 +1439,7 @@ const Quiz = () => {
                 onClick={handlePrint}
                 className="px-8 py-3 bg-indigo-600 hover:bg-white hover:text-indigo-900 text-white rounded-xl font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-lg"
               >
-                <Printer size={18} /> Kirim Jawaban
+                <Printer size={18} /> Kirim Jawaban (PDF)
               </button>
               <button 
                 onClick={handleReset}
@@ -1506,7 +1520,7 @@ const Quiz = () => {
 // --- MAIN COMPONENT ---
 
 const Materi1: React.FC = () => {
-  const [page, setPage] = useState('beranda');
+  const [page, setPage] = useState('home');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1518,7 +1532,7 @@ const Materi1: React.FC = () => {
       <ModuleNav page={page} setPage={setPage} />
       
       <main className="min-h-[calc(100vh-200px)] relative pb-10">
-        {page === 'beranda' && <Hero setPage={setPage} />}
+        {page === 'home' && <Hero setPage={setPage} />}
         {page === 'materi' && <Materials />}
         {page === 'simulasi' && <Simulation />}
         {page === 'lkpd' && <LKPDSection />}
